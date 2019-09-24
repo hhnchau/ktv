@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:bind="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="soundCloud"
+            type="com.vk2.touchsreentab.model.SoundCloud" />
+    </data>
+
+    <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/song"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/imgSong"
+            android:layout_width="@dimen/dp_42"
+            android:layout_height="@dimen/sp_42"
+            android:layout_margin="@dimen/dp_5"
+            android:contentDescription="@string/img"
+            android:scaleType="fitXY"
+            android:src="@drawable/song1"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/tvSongName"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            bind:urlSongImage="@{soundCloud.image}" />
+
+        <TextView
+            android:id="@+id/tvSongName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp_8"
+            android:layout_marginEnd="@dimen/dp_8"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="@{soundCloud.songName}"
+            android:textColor="@color/white"
+            android:textSize="@dimen/sp_16"
+            app:layout_constraintEnd_toStartOf="@id/imgMore"
+            app:layout_constraintStart_toEndOf="@id/imgSong"
+            app:layout_constraintTop_toTopOf="@id/imgSong" />
+
+        <ImageView
+            android:id="@+id/imgMore"
+            android:layout_width="@dimen/dp_35"
+            android:layout_height="@dimen/dp_35"
+            android:background="@drawable/more"
+            android:clickable="true"
+            android:contentDescription="@string/img"
+            android:focusable="true"
+            android:scaleType="fitCenter"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/tvSongName"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvSingerName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@{soundCloud.singerName}"
+            android:textColor="@color/white"
+            android:textSize="@dimen/sp_13"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/tvSongName"
+            app:layout_constraintStart_toStartOf="@id/tvSongName"
+            app:layout_constraintTop_toBottomOf="@id/tvSongName" />
+
+    </android.support.constraint.ConstraintLayout>
+
+</layout>

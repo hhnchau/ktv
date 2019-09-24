@@ -1,0 +1,1 @@
+package com.vk2.touchsreentab.setting;public class SettingManager {}

@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <SurfaceView
+            android:id="@+id/surfaceView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="visible" />
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/dp_20">
+
+            <ImageView
+                android:id="@+id/control"
+                android:layout_width="@dimen/dp_51"
+                android:layout_height="@dimen/dp_51"
+                android:src="@drawable/control" />
+
+            <TextView
+                android:id="@+id/title_control"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/control"
+                android:text="@string/title_control"
+                android:textColor="@color/white"
+                android:textSize="@dimen/font_size_home" />
+
+
+            <ImageView
+                android:id="@+id/feeling"
+                android:layout_width="@dimen/dp_51"
+                android:layout_height="@dimen/dp_51"
+                android:layout_marginLeft="@dimen/dp_28"
+                android:layout_toRightOf="@+id/control"
+                android:scaleType="center"
+                android:src="@mipmap/fun" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/feeling"
+                android:layout_marginLeft="@dimen/dp_30"
+                android:layout_toRightOf="@+id/title_control"
+                android:text="@string/title_feel"
+                android:textColor="@color/white"
+                android:textSize="@dimen/font_size_home" />
+
+            <ImageView
+                android:id="@+id/zoom"
+                android:layout_width="@dimen/dp_51"
+                android:layout_height="@dimen/dp_51"
+                android:layout_alignParentRight="true"
+                android:layout_gravity="center"
+                android:src="@drawable/fullscreen" />
+
+            <TextView
+                android:id="@+id/duration"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:text="00:55"
+                android:textColor="@color/white"
+                android:textSize="@dimen/font_size_home" />
+
+            <ProgressBar
+                android:id="@+id/progress"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_marginLeft="@dimen/dp_10"
+                android:layout_toRightOf="@+id/duration"
+                android:max="100"
+                android:progress="45" />
+        </RelativeLayout>
+    </FrameLayout>
+</android.support.constraint.ConstraintLayout>

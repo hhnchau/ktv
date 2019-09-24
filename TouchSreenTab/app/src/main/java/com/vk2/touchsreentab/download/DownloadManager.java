@@ -1,0 +1,1 @@
+package com.vk2.touchsreentab.download;public class DownloadManager {}

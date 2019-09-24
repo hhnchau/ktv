@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:bind="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="singer"
+            type="com.vk2.touchsreentab.database.entity.Singer" />
+    </data>
+
+    <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/artist"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dp_40"
+        android:layout_marginTop="@dimen/dp_14"
+        android:layout_marginEnd="@dimen/dp_40"
+        android:layout_marginBottom="@dimen/dp_14">
+
+        <ImageView
+            android:id="@+id/imgArtists"
+            android:layout_width="@dimen/dp_110"
+            android:layout_height="@dimen/dp_110"
+            android:contentDescription="@string/img"
+            android:scaleType="fitXY"
+            android:src="@drawable/artists1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            bind:urlSingerImage="@{singer.image}" />
+
+        <com.vk2.touchsreentab.view.SourceHanSansSCLight
+            android:id="@+id/tvArtists"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{singer.name}"
+            android:textColor="@color/grey"
+            android:textSize="@dimen/sp_16"
+            android:textStyle="normal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/imgArtists" />
+    </android.support.constraint.ConstraintLayout>
+</layout>

@@ -1,0 +1,1 @@
+package com.vk2.touchsreentab.anylistic;public class EvenObject  {}

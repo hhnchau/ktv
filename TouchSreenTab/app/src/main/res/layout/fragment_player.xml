@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <include
+        android:id="@+id/footer"
+        layout="@layout/item_player"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft ="@dimen/dp_10"
+        android:layout_marginRight="@dimen/dp_10"
+        android:layout_marginTop="@dimen/dp_10"
+        android:layout_alignParentBottom="true" />
+</android.support.constraint.ConstraintLayout>

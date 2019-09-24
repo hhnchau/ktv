@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <com.yarolegovich.discretescrollview.DiscreteScrollView
+        android:id="@+id/rcvAlbums"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_99"
+        android:layout_margin="@dimen/dp_10"
+        app:dsv_orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@id/rcvArtists"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rcvArtists"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dp_10"
+        android:layout_marginTop="@dimen/dp_10"
+        app:cardPreventCornerOverlap="false"
+        app:cardUseCompatPadding="true"
+        app:layout_constraintBottom_toTopOf="@id/rcvSongs"
+        app:layout_constraintEnd_toEndOf="@id/rcvAlbums"
+        app:layout_constraintStart_toStartOf="@id/rcvAlbums"
+        app:layout_constraintTop_toBottomOf="@id/rcvAlbums" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rcvSongs"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dp_10"
+        android:layout_marginRight="@dimen/dp_10"
+        android:layout_marginBottom="@dimen/dp_10"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/rcvAlbums"
+        app:layout_constraintStart_toStartOf="@id/rcvAlbums"
+        app:layout_constraintTop_toBottomOf="@id/rcvArtists" />
+</android.support.constraint.ConstraintLayout>
+
