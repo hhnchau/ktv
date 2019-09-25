@@ -1,29 +1,35 @@
 package com.vk2.touchsreentab.fragment;
 
+import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.vk2.touchsreentab.R;
 import com.vk2.touchsreentab.fragment.fragmentcontroller.Fragmentez;
-import com.vk2.touchsreentab.view.MyEditText;
+import com.vk2.touchsreentab.model.viewmodel.SearchInputViewModel;
 import com.vk2.touchsreentab.view.MyKeyboard;
 
 
 public class ControlFragment extends BaseFragment implements View.OnClickListener {
     private View view;
-    private MyEditText edtSearch;
+    private EditText edtSearch;
+    private PageFragment pageFragment;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_control, container, false);
+        pageFragment = (PageFragment) getFragmentByTag(PageFragment.class.getName());
         initView();
 
 
@@ -31,6 +37,9 @@ public class ControlFragment extends BaseFragment implements View.OnClickListene
     }
 
     private void initView() {
+        edtSearch = view.findViewById(R.id.edtSearch);
+        final ImageView imgClear = view.findViewById(R.id.imgClear);
+        imgClear.setOnClickListener(this);
         view.findViewById(R.id.vocal).setOnClickListener(this);
         view.findViewById(R.id.replay).setOnClickListener(this);
         view.findViewById(R.id.play).setOnClickListener(this);
@@ -58,7 +67,7 @@ public class ControlFragment extends BaseFragment implements View.OnClickListene
             }
         });
 
-        edtSearch = view.findViewById(R.id.edtSearch);
+
         edtSearch.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -67,7 +76,15 @@ public class ControlFragment extends BaseFragment implements View.OnClickListene
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                Toast.makeText(getActivity(), charSequence, Toast.LENGTH_SHORT).show();
+                if (TextUtils.isEmpty(charSequence)) {
+                    imgClear.setVisibility(View.GONE);
+                    showRecommendFragment();
+                    submitSearchInput("");
+                } else {
+                    imgClear.setVisibility(View.VISIBLE);
+                    showSearchComplexFragment();
+                    submitSearchInput(charSequence);
+                }
             }
 
             @Override
@@ -77,6 +94,20 @@ public class ControlFragment extends BaseFragment implements View.OnClickListene
         });
     }
 
+    private void submitSearchInput(CharSequence s) {
+        if (getActivity() == null) return;
+        SearchInputViewModel searchInputViewModel = ViewModelProviders.of(getActivity()).get(SearchInputViewModel.class);
+        searchInputViewModel.setSearchInput(s.toString());
+    }
+
+
+    private void showSearchComplexFragment() {
+        if (pageFragment != null) pageFragment.onFragmentChange(Fragmentez.SEARCH_COMPLEX_FRAGMENT);
+    }
+
+    private void showRecommendFragment() {
+        if (pageFragment != null) pageFragment.onFragmentChange(Fragmentez.RECOMMEND_FRAGMENT);
+    }
 
     @Override
     public void onClick(View view) {
@@ -84,11 +115,6 @@ public class ControlFragment extends BaseFragment implements View.OnClickListene
             case R.id.vocal:
                 Toast.makeText(getActivity(), "Button vocal click!",
                         Toast.LENGTH_LONG).show();
-                if (getActivity() != null) {
-                    PageFragment pageFragment = (PageFragment) getActivity().getSupportFragmentManager().findFragmentByTag(PageFragment.class.getName());
-                    if (pageFragment != null)
-                        pageFragment.onFragmentChange(Fragmentez.SEARCH_COMPLEX_FRAGMENT);
-                }
                 break;
             case R.id.replay:
                 Toast.makeText(getActivity(), "Button replay click!",
@@ -114,12 +140,8 @@ public class ControlFragment extends BaseFragment implements View.OnClickListene
                 Toast.makeText(getActivity(), "Button other click!",
                         Toast.LENGTH_LONG).show();
                 break;
-            case R.id.edtSearch:
-                if (getActivity() != null) {
-                    PageFragment pageFragment = (PageFragment) getActivity().getSupportFragmentManager().findFragmentByTag(PageFragment.class.getName());
-                    if (pageFragment != null)
-                        pageFragment.onFragmentChange(Fragmentez.SONG_FRAGMENT);
-                }
+            case R.id.imgClear:
+                edtSearch.setText("");
                 break;
         }
     }

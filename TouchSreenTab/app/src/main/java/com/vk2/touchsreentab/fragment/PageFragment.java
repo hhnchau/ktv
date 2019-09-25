@@ -3,6 +3,8 @@ package com.vk2.touchsreentab.fragment;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
+import android.support.v4.content.res.ResourcesCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,6 +25,8 @@ public class PageFragment extends BaseFragment implements View.OnClickListener {
     private View view;
     public static List<Fragmentoz> lstFrg;
     private LinearLayout boxRecommend, boxSongArtist, boxPlaylist, boxSearch;
+    private View[] listArrow;
+    private View[] listBackground;
 
     @Nullable
     @Override
@@ -36,6 +40,10 @@ public class PageFragment extends BaseFragment implements View.OnClickListener {
     public void onFragmentChange(Fragmentez frgez) {
         Fragmentcz.addFragment(lstFrg, getFragmentManager(), frgez, false, R.id.layout_container, null, Fragmentcz.NONE);
         Fragmenttz.setToolbar(getActivity(), frgez, boxRecommend, boxSongArtist, boxPlaylist, boxSearch);
+        if (frgez == Fragmentez.SEARCH_COMPLEX_FRAGMENT)
+            setActiveBackground(3);
+        else if (frgez == Fragmentez.PLAYLIST_FRAGMENT)
+            setActiveBackground(0);
     }
 
 
@@ -63,8 +71,6 @@ public class PageFragment extends BaseFragment implements View.OnClickListener {
         setOnclickView();
     }
 
-    View[] listPosition;
-
     private void setOnclickView() {
         //header
         view.findViewById(R.id.logo).setOnClickListener(this);
@@ -82,17 +88,42 @@ public class PageFragment extends BaseFragment implements View.OnClickListener {
         view.findViewById(R.id.tvYoutube).setOnClickListener(this);
         view.findViewById(R.id.imgPrevious).setOnClickListener(this);
         view.findViewById(R.id.imgNext).setOnClickListener(this);
-        listPosition = new View[]{view.findViewById(R.id.position_recommended), view.findViewById(R.id.position_song), view.findViewById(R.id.position_artists), view.findViewById(R.id.position_playlist)};
+        view.findViewById(R.id.imgBack).setOnClickListener(this);
+        listArrow = new View[]{
+                view.findViewById(R.id.position_recommended),
+                view.findViewById(R.id.position_song),
+                view.findViewById(R.id.position_artists),
+                view.findViewById(R.id.position_playlist)
+        };
+        listBackground = new View[]{
+                view.findViewById(R.id.tvPlaylist),
+                view.findViewById(R.id.tvHistory),
+                view.findViewById(R.id.tvDownload),
+                view.findViewById(R.id.tvComplex),
+                view.findViewById(R.id.tvSoundCloud),
+                view.findViewById(R.id.tvMixCloud),
+                view.findViewById(R.id.tvYoutube),
+        };
     }
 
     private void showPositionFocus(int positionVisibility) {
-        if (positionVisibility >= listPosition.length)
+        if (positionVisibility >= listArrow.length)
             return;
-        for (int i = 0; i < listPosition.length; i++) {
+        for (int i = 0; i < listArrow.length; i++) {
             if (i == positionVisibility) {
-                listPosition[i].setVisibility(View.VISIBLE);
+                listArrow[i].setVisibility(View.VISIBLE);
             } else {
-                listPosition[i].setVisibility(View.GONE);
+                listArrow[i].setVisibility(View.GONE);
+            }
+        }
+    }
+
+    private void setActiveBackground(int type) {
+        for (int i = 0; i < listBackground.length; i++) {
+            if (type == i) {
+                listBackground[i].setBackgroundResource(R.drawable.rectangle);
+            } else {
+                listBackground[i].setBackgroundResource(0);
             }
         }
     }
@@ -131,19 +162,26 @@ public class PageFragment extends BaseFragment implements View.OnClickListener {
             case R.id.usb:
                 break;
             case R.id.tvPlaylist:
+                setActiveBackground(0);
                 break;
             case R.id.tvHistory:
+                setActiveBackground(1);
                 break;
             case R.id.tvDownload:
+                setActiveBackground(2);
                 break;
             case R.id.tvComplex:
+                setActiveBackground(3);
                 onFragmentChange(Fragmentez.SEARCH_COMPLEX_FRAGMENT);
                 break;
             case R.id.tvSoundCloud:
+                setActiveBackground(4);
                 break;
             case R.id.tvMixCloud:
+                setActiveBackground(5);
                 break;
             case R.id.tvYoutube:
+                setActiveBackground(6);
                 onFragmentChange(Fragmentez.SEARCH_YOUTUBE_FRAGMENT);
                 break;
             case R.id.imgPrevious:
@@ -151,6 +189,9 @@ public class PageFragment extends BaseFragment implements View.OnClickListener {
                 break;
             case R.id.imgNext:
                 pageControl(Fragmentcz.getCurrentFragment(), PageControl.NEXT);
+                break;
+            case R.id.imgBack:
+                onFragmentChange(Fragmentez.RECOMMEND_FRAGMENT);
                 break;
         }
     }
