@@ -21,6 +21,11 @@ public class SongViewModel extends ViewModel {
     public SongViewModel() {
     }
 
+    public void getAllSong(SongDao songDao) {
+        PagedList.Config config = new PagedList.Config.Builder().setPageSize(LIMIT).build();
+        listSong = new LivePagedListBuilder<>(songDao.getAlLSong(), config).build();
+    }
+
 
     public void getSongData(final SongDao songDao) {
         final PagedList.Config config = new PagedList.Config.Builder().setPageSize(LIMIT).build();

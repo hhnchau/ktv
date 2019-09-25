@@ -59,6 +59,7 @@ public class MultiViewAdapter extends PagedListAdapter<Song, RecyclerView.ViewHo
             ((RecyclerViewHolder) viewHolder).recyclerViewBinding.rcvItem.setLayoutManager(new LinearLayoutManager(context, LinearLayout.HORIZONTAL, false));
             ((RecyclerViewHolder) viewHolder).recyclerViewBinding.rcvItem.setAdapter(artistAdapter);
             SingerVewModel singerVewModel = ViewModelProviders.of((FragmentActivity) context).get(SingerVewModel.class);
+            singerVewModel.search.setValue("My Tam");
             singerVewModel.getSingerData(MyApplication.appDatabase.singerDao());
             singerVewModel.listSinger.observe((LifecycleOwner) context, new Observer<PagedList<Singer>>() {
                 @Override
