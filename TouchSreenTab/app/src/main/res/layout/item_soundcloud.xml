@@ -5,7 +5,7 @@
     <data>
         <variable
             name="soundCloud"
-            type="com.vk2.touchsreentab.model.SoundCloud" />
+            type="com.vk2.touchsreentab.model.Song" />
     </data>
 
     <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -16,14 +16,13 @@
 
         <ImageView
             android:id="@+id/imgSong"
-            android:layout_width="@dimen/dp_42"
-            android:layout_height="@dimen/sp_42"
+            android:layout_width="@dimen/dp_134"
+            android:layout_height="@dimen/dp_102"
             android:layout_margin="@dimen/dp_5"
             android:contentDescription="@string/img"
             android:scaleType="fitXY"
             android:src="@drawable/song1"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/tvSongName"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             bind:urlSongImage="@{soundCloud.image}" />
@@ -41,7 +40,9 @@
             android:textSize="@dimen/sp_16"
             app:layout_constraintEnd_toStartOf="@id/imgMore"
             app:layout_constraintStart_toEndOf="@id/imgSong"
-            app:layout_constraintTop_toTopOf="@id/imgSong" />
+            android:layout_marginTop="@dimen/dp_40"
+            app:layout_constraintTop_toTopOf="parent"
+            />
 
         <ImageView
             android:id="@+id/imgMore"
@@ -54,7 +55,6 @@
             android:scaleType="fitCenter"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/tvSongName"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
@@ -64,7 +64,7 @@
             android:text="@{soundCloud.singerName}"
             android:textColor="@color/white"
             android:textSize="@dimen/sp_13"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:singleLine="true"
             app:layout_constraintEnd_toEndOf="@id/tvSongName"
             app:layout_constraintStart_toStartOf="@id/tvSongName"
             app:layout_constraintTop_toBottomOf="@id/tvSongName" />

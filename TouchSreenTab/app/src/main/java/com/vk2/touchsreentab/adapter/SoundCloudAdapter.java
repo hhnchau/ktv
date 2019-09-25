@@ -9,14 +9,15 @@ import android.view.ViewGroup;
 
 import com.vk2.touchsreentab.R;
 import com.vk2.touchsreentab.databinding.ItemSoundcloudBinding;
+import com.vk2.touchsreentab.model.Song;
 import com.vk2.touchsreentab.model.SoundCloud;
 
 import java.util.List;
 
 public class SoundCloudAdapter extends RecyclerView.Adapter<SoundCloudAdapter.MyViewHolder> {
-    private List<SoundCloud> lists;
+    private List<Song> lists;
 
-    public SoundCloudAdapter(List<SoundCloud> lists) {
+    public SoundCloudAdapter(List<Song> lists) {
         this.lists = lists;
     }
 
@@ -29,7 +30,7 @@ public class SoundCloudAdapter extends RecyclerView.Adapter<SoundCloudAdapter.My
 
     @Override
     public void onBindViewHolder(@NonNull final MyViewHolder holder, final int position) {
-        final SoundCloud soundCloud = lists.get(holder.getAdapterPosition());
+        final Song soundCloud = lists.get(holder.getAdapterPosition());
         if (soundCloud == null) return;
         holder.binding.setSoundCloud(soundCloud);
 
@@ -64,7 +65,7 @@ public class SoundCloudAdapter extends RecyclerView.Adapter<SoundCloudAdapter.My
 
 
     public interface OnItemClick {
-        void onItemClick(SoundCloud soundCloud);
+        void onItemClick(Song soundCloud);
 
         void onIconClick();
     }

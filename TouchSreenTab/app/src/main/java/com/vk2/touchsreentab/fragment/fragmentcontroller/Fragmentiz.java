@@ -9,6 +9,7 @@ import com.vk2.touchsreentab.fragment.PlayerFragment;
 import com.vk2.touchsreentab.fragment.PlaylistFragment;
 import com.vk2.touchsreentab.fragment.RecommendFragment;
 import com.vk2.touchsreentab.fragment.SearchComplexFragment;
+import com.vk2.touchsreentab.fragment.SearchSoundCloundFragment;
 import com.vk2.touchsreentab.fragment.SearchYoutubeFragment;
 import com.vk2.touchsreentab.fragment.SettingFragment;
 import com.vk2.touchsreentab.fragment.SingerFragment;
@@ -33,6 +34,8 @@ public class Fragmentiz {
                 return new SearchComplexFragment();
             case SEARCH_YOUTUBE_FRAGMENT:
                 return new SearchYoutubeFragment();
+            case SEARCH_SOUNDCLOUND_FRAGMENT:
+                return new SearchSoundCloundFragment();
             case SINGER_FRAGMENT:
                 return new SingerFragment();
             case SONG_FRAGMENT:

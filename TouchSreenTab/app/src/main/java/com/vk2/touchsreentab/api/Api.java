@@ -14,6 +14,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class Api {
     public static ApiService apiService;
     private static Api instance = null;
+    private static Retrofit retrofit;
 
     public static Api getInstance() {
         if (instance == null) {
@@ -22,7 +23,7 @@ public class Api {
         return instance;
     }
 
-    public ApiService create() {
+    public ApiService create(String baseUrl) {
         OkHttpClient.Builder builder = new OkHttpClient.Builder();
         builder.interceptors().add(new RequestInterceptor());
         builder.connectTimeout(60, TimeUnit.SECONDS)
@@ -31,9 +32,8 @@ public class Api {
         OkHttpClient okHttpClient = builder.build();
 
         try {
-
-            Retrofit retrofit = new Retrofit.Builder()
-                    .baseUrl(Host.URL)
+            retrofit = new Retrofit.Builder()
+                    .baseUrl(baseUrl)
                     .addConverterFactory(GsonConverterFactory.create(new GsonBuilder().serializeNulls().create()))
                     .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                     .client(okHttpClient)

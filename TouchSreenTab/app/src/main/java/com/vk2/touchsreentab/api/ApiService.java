@@ -1,8 +1,10 @@
 package com.vk2.touchsreentab.api;
 
+import com.vk2.touchsreentab.model.ResultSoundCloud;
 import com.vk2.touchsreentab.model.YouTubeApiObject;
 
 import io.reactivex.Observable;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
 
@@ -15,4 +17,11 @@ public interface ApiService {
                                                   @Query("apiKey") String apiKey,
                                                   @Query("quota") int quota,
                                                   @Query("sign") String sign);
+
+    @GET("tracks?")
+    Observable<ResultSoundCloud> searchSongs(@Query("q") String query,
+                                             @Query("client_id") String client_id,
+                                             @Query("limit") String limit,
+                                             @Query("linked_partitioning") String linked_partitioning,
+                                             @Query("offset") String offset);
 }

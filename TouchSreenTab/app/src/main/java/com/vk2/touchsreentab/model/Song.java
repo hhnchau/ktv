@@ -4,7 +4,6 @@ import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Ignore;
 import android.databinding.BindingAdapter;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.v7.util.DiffUtil;
 import android.widget.ImageView;
 
@@ -12,10 +11,11 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestOptions;
+import com.vk2.touchsreentab.R;
 
 public class Song {
     @ColumnInfo(name = "_id")
-    private int id;
+    private String id;
     @Ignore
     private String image = "https://api.androidhive.info/images/nature/1.jpg";
     @ColumnInfo(name = "nameSong")
@@ -44,11 +44,11 @@ public class Song {
         this.type = type;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -88,6 +88,7 @@ public class Song {
     public static void loadImage(ImageView view, String imageUrl) {
         Glide.with(view.getContext())
                 .load(imageUrl)
+                .placeholder(R.drawable.song1)
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .apply(RequestOptions.bitmapTransform(new RoundedCorners(4)))
                 .into(view);
