@@ -76,6 +76,7 @@ public class MultiViewAdapter extends PagedListAdapter<Song, RecyclerView.ViewHo
                 @Override
                 public void onChanged(@Nullable String s) {
                     textSearch = s;
+                    Log.d("TAG - TextSearch: " , textSearch);
                     singerVewModel.search.setValue(s);
                 }
             });

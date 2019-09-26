@@ -21,7 +21,8 @@ public class ApiController {
         }
         return instance;
     }
-    public static void getKeyApiYouTube(final Context context, int quota) {
+
+    public void getKeyApiYouTube(final Context context, int quota) {
 
         String ktvId = "98851";
         String smartListId = "sl6a9s72";

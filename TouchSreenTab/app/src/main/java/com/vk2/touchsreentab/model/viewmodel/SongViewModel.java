@@ -39,7 +39,7 @@ public class SongViewModel extends ViewModel {
                     ).build();
                 else
                     return new LivePagedListBuilder<>(
-                            songDao.getSongBySearch(input), config
+                            songDao.getSongBySearch("%" + input + "%", input), config
                     ).build();
             }
         });
