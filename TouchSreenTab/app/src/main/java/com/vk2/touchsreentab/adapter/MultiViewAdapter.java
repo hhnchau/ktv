@@ -82,6 +82,7 @@ public class MultiViewAdapter extends PagedListAdapter<Song, RecyclerView.ViewHo
 
         } else {
             ((SongViewHolder) viewHolder).songBinding.setSong(song);
+            ((SongViewHolder) viewHolder).songBinding.setTextSearch(textSearch);
         }
     }
 

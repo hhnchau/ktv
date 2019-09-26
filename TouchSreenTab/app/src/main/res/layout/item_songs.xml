@@ -11,6 +11,10 @@
             type="boolean" />
 
         <variable
+            name="textSearch"
+            type="String" />
+
+        <variable
             name="song"
             type="com.vk2.touchsreentab.database.entity.Song" />
     </data>
@@ -43,7 +47,8 @@
             android:layout_marginEnd="@dimen/dp_8"
             android:ellipsize="end"
             android:maxLines="1"
-            android:text="@{song.songName}"
+            bind:string="@{song.songName}"
+            bind:character="@{textSearch}"
             android:textColor="@color/white"
             android:textSize="@dimen/sp_16"
             app:layout_constraintEnd_toStartOf="@+id/imgMore"

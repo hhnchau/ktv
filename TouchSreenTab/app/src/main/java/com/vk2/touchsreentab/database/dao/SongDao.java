@@ -11,6 +11,6 @@ public interface SongDao {
     @Query("SELECT * FROM song")
     DataSource.Factory<Integer, Song> getAlLSong();
 
-    @Query("SELECT * FROM (SELECT * FROM song LIMIT 1) UNION ALL SELECT * FROM song WHERE SongNamePinyin LIKE '%'+:keyword +'%' OR PyCode LIKE :keyword LIMIT 300")
+    @Query("SELECT * FROM (SELECT * FROM song LIMIT 1) UNION ALL SELECT * FROM song WHERE SongNamePinyin LIKE '%'+:keyword +'%' OR PyCode LIKE :keyword OR NamePinyin LIKE '%' + :keyword + '%' OR Spell LIKE :keyword")
     DataSource.Factory<Integer, Song> getSongBySearch(String keyword);
 }

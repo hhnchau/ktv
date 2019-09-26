@@ -10,7 +10,6 @@ import android.view.ViewGroup;
 import com.vk2.touchsreentab.R;
 import com.vk2.touchsreentab.databinding.ItemSoundcloudBinding;
 import com.vk2.touchsreentab.model.Song;
-import com.vk2.touchsreentab.model.SoundCloud;
 
 import java.util.List;
 

@@ -5,9 +5,13 @@ import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.PrimaryKey;
 import android.databinding.BindingAdapter;
+import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.v7.util.DiffUtil;
+import android.text.SpannableString;
+import android.text.style.ForegroundColorSpan;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
@@ -60,15 +64,20 @@ public class Song {
     private Integer freq;
     @ColumnInfo(name = "SongNamePinyin")
     private String songNamePinyin;
+    @ColumnInfo(name = "Spell")
+    private String spell;
+    @ColumnInfo(name = "NamePinyin")
+    private String namePinyin;
 
     public Song() {
     }
 
+    @NonNull
     public String getFileName() {
         return fileName;
     }
 
-    public void setFileName(String fileName) {
+    public void setFileName(@NonNull String fileName) {
         this.fileName = fileName;
     }
 
@@ -232,6 +241,22 @@ public class Song {
         this.songNamePinyin = songNamePinyin;
     }
 
+    public String getSpell() {
+        return spell;
+    }
+
+    public void setSpell(String spell) {
+        this.spell = spell;
+    }
+
+    public String getNamePinyin() {
+        return namePinyin;
+    }
+
+    public void setNamePinyin(String namePinyin) {
+        this.namePinyin = namePinyin;
+    }
+
     @Ignore
     private String image = "https://api.androidhive.info/images/nature/2.jpg";
 
@@ -249,6 +274,18 @@ public class Song {
                 .load(imageUrl)
                 .apply(RequestOptions.bitmapTransform(new RoundedCorners(4)))
                 .into(view);
+    }
+
+    @BindingAdapter({"bind:string", "bind:character"})
+    public static void spannable(TextView textView, String string, String character) {
+        if (string != null && !string.equals("") && character != null && !character.equals("") && character.length() <= string.length()) {
+            SpannableString spannableString = new SpannableString(string);
+            int start = string.toLowerCase().indexOf(character.toLowerCase());
+            int end = start + character.length();
+            if (start > -1)
+                spannableString.setSpan(new ForegroundColorSpan(Color.RED), start, end, 0);
+            textView.setText(spannableString);
+        }
     }
 
     public static DiffUtil.ItemCallback<Song> DIFF_CALLBACK = new DiffUtil.ItemCallback<Song>() {
