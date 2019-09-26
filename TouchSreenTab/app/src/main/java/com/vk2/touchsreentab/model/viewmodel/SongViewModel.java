@@ -14,23 +14,23 @@ import com.vk2.touchsreentab.database.entity.Song;
 
 public class SongViewModel extends ViewModel {
     public LiveData<PagedList<Song>> listSong;
+    public LiveData<PagedList<Song>> listSearchSong;
     public MutableLiveData<String> search = new MutableLiveData<>();
+    private PagedList.Config config;
 
     private static final int LIMIT = 20;
 
     public SongViewModel() {
+        config = new PagedList.Config.Builder().setPageSize(LIMIT).build();
     }
 
-    public void getAllSong(SongDao songDao) {
-        PagedList.Config config = new PagedList.Config.Builder().setPageSize(LIMIT).build();
+    public void getAllSong(final SongDao songDao) {
         listSong = new LivePagedListBuilder<>(songDao.getAlLSong(), config).build();
     }
 
-
-    public void getSongData(final SongDao songDao) {
+    public void getSearchSong(final SongDao songDao) {
         final PagedList.Config config = new PagedList.Config.Builder().setPageSize(LIMIT).build();
-
-        listSong = Transformations.switchMap(search, new Function<String, LiveData<PagedList<Song>>>() {
+        listSearchSong = Transformations.switchMap(search, new Function<String, LiveData<PagedList<Song>>>() {
             @Override
             public LiveData<PagedList<Song>> apply(String input) {
                 if (input == null || input.equals("") || input.equals("%%"))

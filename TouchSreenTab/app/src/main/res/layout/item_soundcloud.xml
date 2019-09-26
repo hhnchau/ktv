@@ -5,7 +5,7 @@
     <data>
         <variable
             name="soundCloud"
-            type="com.vk2.touchsreentab.database.entity.Song" />
+            type="com.vk2.touchsreentab.model.Song" />
     </data>
 
     <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -61,7 +61,7 @@
             android:id="@+id/tvSingerName"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="@{soundCloud.singerName1}"
+            android:text="@{soundCloud.singerName}"
             android:textColor="@color/white"
             android:textSize="@dimen/sp_13"
             android:singleLine="true"

@@ -6,7 +6,7 @@
 
         <variable
             name="song"
-            type="com.vk2.touchsreentab.database.entity.Song" />
+            type="com.vk2.touchsreentab.model.Song" />
     </data>
 
     <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"

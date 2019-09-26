@@ -176,7 +176,6 @@ public class PageFragment extends BaseFragment implements View.OnClickListener {
                 break;
             case R.id.tvSoundCloud:
                 setActiveBackground(4);
-                onFragmentChange(Fragmentez.SEARCH_SOUNDCLOUND_FRAGMENT);
                 break;
             case R.id.tvMixCloud:
                 setActiveBackground(5);

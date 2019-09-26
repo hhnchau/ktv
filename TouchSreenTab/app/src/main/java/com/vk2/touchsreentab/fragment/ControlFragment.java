@@ -2,6 +2,7 @@ package com.vk2.touchsreentab.fragment;
 
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.text.Editable;
@@ -79,7 +80,6 @@ public class ControlFragment extends BaseFragment implements View.OnClickListene
                 if (TextUtils.isEmpty(charSequence)) {
                     imgClear.setVisibility(View.GONE);
                     showRecommendFragment();
-                    submitSearchInput("");
                 } else {
                     imgClear.setVisibility(View.VISIBLE);
                     showSearchComplexFragment();
@@ -94,10 +94,15 @@ public class ControlFragment extends BaseFragment implements View.OnClickListene
         });
     }
 
-    private void submitSearchInput(CharSequence s) {
-        if (getActivity() == null) return;
-        SearchInputViewModel searchInputViewModel = ViewModelProviders.of(getActivity()).get(SearchInputViewModel.class);
-        searchInputViewModel.setSearchInput(s.toString());
+    private void submitSearchInput(final CharSequence s) {
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                if (getActivity() == null) return;
+                SearchInputViewModel searchInputViewModel = ViewModelProviders.of(getActivity()).get(SearchInputViewModel.class);
+                searchInputViewModel.setSearchInput(s.toString());
+            }
+        }, 500);
     }
 
 
