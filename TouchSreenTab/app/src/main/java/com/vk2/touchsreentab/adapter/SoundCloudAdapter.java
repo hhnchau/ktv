@@ -8,8 +8,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.vk2.touchsreentab.R;
+import com.vk2.touchsreentab.database.entity.Song;
 import com.vk2.touchsreentab.databinding.ItemSoundcloudBinding;
-import com.vk2.touchsreentab.model.Song;
 
 import java.util.List;
 

@@ -69,6 +69,9 @@ public class Song {
     @ColumnInfo(name = "NamePinyin")
     private String namePinyin;
 
+    @Ignore
+    private String videoPath;
+
     public Song() {
     }
 
@@ -266,6 +269,14 @@ public class Song {
 
     public void setImage(String image) {
         this.image = image;
+    }
+
+    public String getVideoPath() {
+        return videoPath;
+    }
+
+    public void setVideoPath(String videoPath) {
+        this.videoPath = videoPath;
     }
 
     @BindingAdapter("urlSongImage")

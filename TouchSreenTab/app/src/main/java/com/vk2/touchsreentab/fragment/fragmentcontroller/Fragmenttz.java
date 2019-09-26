@@ -39,6 +39,9 @@ public class Fragmenttz {
             case SEARCH_YOUTUBE_FRAGMENT:
                 ll4.setVisibility(View.VISIBLE);
                 break;
+            case SEARCH_SOUNDCLOUND_FRAGMENT:
+                ll4.setVisibility(View.VISIBLE);
+                break;
             case SINGER_FRAGMENT:
 
                 break;
