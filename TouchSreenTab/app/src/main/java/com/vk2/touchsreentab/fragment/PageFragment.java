@@ -1,5 +1,7 @@
 package com.vk2.touchsreentab.fragment;
 
+import android.arch.lifecycle.Observer;
+import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -12,11 +14,13 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.vk2.touchsreentab.R;
+import com.vk2.touchsreentab.database.entity.Song;
 import com.vk2.touchsreentab.fragment.fragmentcontroller.Fragmentcz;
 import com.vk2.touchsreentab.fragment.fragmentcontroller.Fragmentez;
 import com.vk2.touchsreentab.fragment.fragmentcontroller.Fragmentoz;
 import com.vk2.touchsreentab.fragment.fragmentcontroller.Fragmenttz;
 import com.vk2.touchsreentab.model.PageControl;
+import com.vk2.touchsreentab.model.viewmodel.PlaylistModelView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,6 +31,7 @@ public class PageFragment extends BaseFragment implements View.OnClickListener {
     private LinearLayout boxRecommend, boxSongArtist, boxPlaylist, boxSearch;
     private View[] listArrow;
     private View[] listBackground;
+    private TextView tvNumber;
 
     @Nullable
     @Override
@@ -64,6 +69,7 @@ public class PageFragment extends BaseFragment implements View.OnClickListener {
 
     private void initView() {
         lstFrg = new ArrayList<>();
+        tvNumber = view.findViewById(R.id.tvNumber);
         boxRecommend = view.findViewById(R.id.boxRecommend);
         boxSongArtist = view.findViewById(R.id.boxSongArtist);
         boxPlaylist = view.findViewById(R.id.boxPlaylist);
@@ -104,6 +110,16 @@ public class PageFragment extends BaseFragment implements View.OnClickListener {
                 view.findViewById(R.id.tvMixCloud),
                 view.findViewById(R.id.tvYoutube),
         };
+
+        if (getActivity() == null) return;
+        PlaylistModelView playlistModelView = ViewModelProviders.of(getActivity()).get(PlaylistModelView.class);
+        playlistModelView.getPlaylist().observe(getActivity(), new Observer<List<Song>>() {
+            @Override
+            public void onChanged(List<Song> songs) {
+                tvNumber.setText(String.valueOf(songs.size()));
+            }
+        });
+
     }
 
     private void showPositionFocus(int positionVisibility) {

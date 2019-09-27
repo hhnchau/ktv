@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:bind="http://schemas.android.com/tools">
+<layout>
 
     <data>
 
         <import type="android.view.View" />
 
         <variable
-            name="hasImage"
-            type="java.lang.Boolean" />
+            name="number"
+            type="String" />
 
         <variable
             name="song"
@@ -26,7 +26,7 @@
             android:layout_height="@dimen/sp_42"
             android:layout_margin="@dimen/dp_5"
             android:gravity="center"
-            android:text="01"
+            android:text="@{number}"
             android:textColor="@color/grey_8"
             android:textSize="@dimen/sp_18"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -53,38 +53,41 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintBottom_toBottomOf="@id/tvNumber"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
                 android:id="@+id/imgCancel"
-                android:layout_width="@dimen/dp_35"
-                android:layout_height="@dimen/dp_35"
+                android:layout_width="@dimen/dp_45"
+                android:layout_height="@dimen/dp_45"
                 android:background="@mipmap/cancel"
                 android:clickable="true"
                 android:contentDescription="@string/img"
                 android:focusable="true"
+                android:layout_margin="@dimen/dp_8"
                 android:scaleType="fitCenter" />
 
             <ImageView
                 android:id="@+id/imgMove"
-                android:layout_width="@dimen/dp_35"
-                android:layout_height="@dimen/dp_35"
+                android:layout_width="@dimen/dp_45"
+                android:layout_height="@dimen/dp_45"
                 android:background="@mipmap/move"
                 android:clickable="true"
                 android:contentDescription="@string/img"
                 android:focusable="true"
+                android:layout_margin="@dimen/dp_8"
                 android:scaleType="fitCenter" />
 
             <ImageView
                 android:id="@+id/imgMore"
-                android:layout_width="@dimen/dp_35"
-                android:layout_height="@dimen/dp_35"
+                android:layout_width="@dimen/dp_45"
+                android:layout_height="@dimen/dp_45"
                 android:background="@drawable/more"
                 android:clickable="true"
                 android:contentDescription="@string/img"
                 android:focusable="true"
+                android:layout_margin="@dimen/dp_8"
                 android:scaleType="fitCenter" />
 
         </LinearLayout>
@@ -94,10 +97,10 @@
             android:id="@+id/imgType"
             android:layout_width="@dimen/dp_26"
             android:layout_height="@dimen/dp_13"
+            android:layout_margin="@dimen/dp_8"
             android:contentDescription="@string/img"
             android:scaleType="fitCenter"
             android:src="@mipmap/k4"
-            android:layout_margin="@dimen/dp_8"
             app:layout_constraintBottom_toBottomOf="@id/tvNameArtistSong"
             app:layout_constraintStart_toEndOf="@id/tvNumber"
             app:layout_constraintTop_toTopOf="@id/tvNameArtistSong" />

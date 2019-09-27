@@ -4,12 +4,14 @@ import android.arch.paging.PagedListAdapter;
 import android.databinding.DataBindingUtil;
 import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import com.vk2.touchsreentab.R;
 import com.vk2.touchsreentab.adapter.viewholder.SongViewHolder;
 import com.vk2.touchsreentab.database.entity.Song;
 import com.vk2.touchsreentab.databinding.ItemSongsBinding;
+import com.vk2.touchsreentab.utils.OnSingleClickListener;
 
 
 public class SongAdapter extends PagedListAdapter<Song, SongViewHolder> {
@@ -33,12 +35,29 @@ public class SongAdapter extends PagedListAdapter<Song, SongViewHolder> {
         if (song == null) return;
         songViewHolder.songBinding.setHasImage(hasImage);
         songViewHolder.songBinding.setSong(song);
+
+
+        songViewHolder.songBinding.song.setOnClickListener(new OnSingleClickListener() {
+            @Override
+            public void onSingleClick(View v) {
+                if (onItemClick != null) onItemClick.onItemClick(song);
+                enable();
+            }
+        });
+
+        songViewHolder.songBinding.imgMore.setOnClickListener(new OnSingleClickListener() {
+            @Override
+            public void onSingleClick(View v) {
+                if (onItemClick != null) onItemClick.onIconClick(song);
+                enable();
+            }
+        });
     }
 
     public interface OnItemClick {
         void onItemClick(Song song);
 
-        void onIconClick();
+        void onIconClick(Song song);
     }
 
     private OnItemClick onItemClick;

@@ -34,6 +34,7 @@ public class PlaylistAdapter extends RecyclerView.Adapter<PlaylistViewHolder> {
         final Song song = lists.get(holder.getAdapterPosition());
         if (song == null) return;
         holder.playlistBinding.setSong(song);
+        holder.playlistBinding.setNumber(String.valueOf(position+1));
 
         holder.playlistBinding.playList.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -50,14 +51,14 @@ public class PlaylistAdapter extends RecyclerView.Adapter<PlaylistViewHolder> {
         holder.playlistBinding.imgMove.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (onItemClick != null) onItemClick.onInsertClick(song);
+                if (onItemClick != null) onItemClick.onMoveClick(song);
             }
         });
 
         holder.playlistBinding.imgMore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (onItemClick != null) onItemClick.onIconClick();
+                if (onItemClick != null) onItemClick.onIconClick(song);
             }
         });
     }
@@ -73,15 +74,21 @@ public class PlaylistAdapter extends RecyclerView.Adapter<PlaylistViewHolder> {
 
         void onRemoveClick(Song song);
 
-        void onInsertClick(Song song);
+        void onMoveClick(Song song);
 
-        void onIconClick();
+        void onIconClick(Song song);
     }
 
     private OnItemClick onItemClick;
 
     public void setOnItemClick(OnItemClick onItemClick) {
         this.onItemClick = onItemClick;
+    }
+
+    public void update(List<Song> songs) {
+        lists.clear();
+        lists.addAll(songs);
+        notifyDataSetChanged();
     }
 
 }
