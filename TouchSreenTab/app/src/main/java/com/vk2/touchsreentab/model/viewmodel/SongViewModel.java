@@ -29,7 +29,6 @@ public class SongViewModel extends ViewModel {
     }
 
     public void getSearchSong(final SongDao songDao) {
-        final PagedList.Config config = new PagedList.Config.Builder().setPageSize(LIMIT).build();
         listSearchSong = Transformations.switchMap(search, new Function<String, LiveData<PagedList<Song>>>() {
             @Override
             public LiveData<PagedList<Song>> apply(String input) {

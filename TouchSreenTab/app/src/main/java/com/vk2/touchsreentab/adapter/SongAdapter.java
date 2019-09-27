@@ -15,11 +15,9 @@ import com.vk2.touchsreentab.utils.OnSingleClickListener;
 
 
 public class SongAdapter extends PagedListAdapter<Song, SongViewHolder> {
-    private boolean hasImage;
 
-    public SongAdapter(boolean hasImage) {
+    public SongAdapter() {
         super(Song.DIFF_CALLBACK);
-        this.hasImage = hasImage;
     }
 
     @NonNull
@@ -33,7 +31,6 @@ public class SongAdapter extends PagedListAdapter<Song, SongViewHolder> {
     public void onBindViewHolder(@NonNull SongViewHolder songViewHolder, int i) {
         final Song song = getItem(i);
         if (song == null) return;
-        songViewHolder.songBinding.setHasImage(hasImage);
         songViewHolder.songBinding.setSong(song);
 
 

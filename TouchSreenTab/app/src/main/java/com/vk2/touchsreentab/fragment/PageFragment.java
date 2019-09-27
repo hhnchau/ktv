@@ -32,6 +32,7 @@ public class PageFragment extends BaseFragment implements View.OnClickListener {
     private View[] listArrow;
     private View[] listBackground;
     private TextView tvNumber;
+    private ControlFragment controlFragment;
 
     @Nullable
     @Override
@@ -39,15 +40,19 @@ public class PageFragment extends BaseFragment implements View.OnClickListener {
         view = inflater.inflate(R.layout.fragment_page, container, false);
         initView();
         onFragmentChange(Fragmentez.RECOMMEND_FRAGMENT);
+        controlFragment = (ControlFragment) getFragmentByTag(ControlFragment.class.getName());
         return view;
     }
 
     public void onFragmentChange(Fragmentez frgez) {
         Fragmentcz.addFragment(lstFrg, getFragmentManager(), frgez, false, R.id.layout_container, null, Fragmentcz.NONE);
         Fragmenttz.setToolbar(getActivity(), frgez, boxRecommend, boxSongArtist, boxPlaylist, boxSearch);
-        if (frgez == Fragmentez.SEARCH_COMPLEX_FRAGMENT)
+        if (frgez == Fragmentez.SEARCH_COMPLEX_FRAGMENT) {
             setActiveBackground(3);
-        else if (frgez == Fragmentez.PLAYLIST_FRAGMENT)
+            if (controlFragment != null) {
+                controlFragment.hideButtonEnter();
+            }
+        } else if (frgez == Fragmentez.PLAYLIST_FRAGMENT)
             setActiveBackground(0);
     }
 
@@ -189,10 +194,16 @@ public class PageFragment extends BaseFragment implements View.OnClickListener {
             case R.id.tvComplex:
                 setActiveBackground(3);
                 onFragmentChange(Fragmentez.SEARCH_COMPLEX_FRAGMENT);
+                if (controlFragment != null) {
+                    controlFragment.hideButtonEnter();
+                }
                 break;
             case R.id.tvSoundCloud:
                 setActiveBackground(4);
                 onFragmentChange(Fragmentez.SEARCH_SOUNDCLOUND_FRAGMENT);
+                if (controlFragment != null) {
+                    controlFragment.showButtonEnter();
+                }
                 break;
             case R.id.tvMixCloud:
                 setActiveBackground(5);
@@ -200,6 +211,9 @@ public class PageFragment extends BaseFragment implements View.OnClickListener {
             case R.id.tvYoutube:
                 setActiveBackground(6);
                 onFragmentChange(Fragmentez.SEARCH_YOUTUBE_FRAGMENT);
+                if (controlFragment != null) {
+                    controlFragment.showButtonEnter();
+                }
                 break;
             case R.id.imgPrevious:
                 pageControl(Fragmentcz.getCurrentFragment(), PageControl.PREVIOUS);

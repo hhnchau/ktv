@@ -9,6 +9,8 @@ import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.v7.util.DiffUtil;
 import android.text.SpannableString;
+import android.text.Spanned;
+import android.text.style.BackgroundColorSpan;
 import android.text.style.ForegroundColorSpan;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -296,6 +298,8 @@ public class Song {
             if (start > -1)
                 spannableString.setSpan(new ForegroundColorSpan(Color.RED), start, end, 0);
             textView.setText(spannableString);
+        } else {
+            textView.setText(string);
         }
     }
 

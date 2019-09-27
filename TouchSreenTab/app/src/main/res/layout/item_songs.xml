@@ -7,7 +7,7 @@
         <import type="android.view.View" />
 
         <variable
-            name="hasImage"
+            name="noImage"
             type="boolean" />
 
         <variable
@@ -33,7 +33,7 @@
             android:contentDescription="@string/img"
             android:scaleType="fitXY"
             android:src="@drawable/song1"
-            android:visibility="@{hasImage ? View.VISIBLE : View.VISIBLE}"
+            android:visibility="@{noImage ? View.GONE : View.VISIBLE}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"

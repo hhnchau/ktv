@@ -24,6 +24,7 @@ import com.vk2.touchsreentab.view.MyKeyboard;
 public class ControlFragment extends BaseFragment implements View.OnClickListener {
     private View view;
     private EditText edtSearch;
+    private ImageView imgEnter;
     private PageFragment pageFragment;
 
     @Nullable
@@ -39,6 +40,8 @@ public class ControlFragment extends BaseFragment implements View.OnClickListene
 
     private void initView() {
         edtSearch = view.findViewById(R.id.edtSearch);
+        imgEnter = view.findViewById(R.id.imgEnter);
+        imgEnter.setOnClickListener(this);
         final ImageView imgClear = view.findViewById(R.id.imgClear);
         imgClear.setOnClickListener(this);
         view.findViewById(R.id.vocal).setOnClickListener(this);
@@ -77,13 +80,15 @@ public class ControlFragment extends BaseFragment implements View.OnClickListene
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                if (TextUtils.isEmpty(charSequence)) {
-                    imgClear.setVisibility(View.GONE);
-                    showRecommendFragment();
-                } else {
-                    imgClear.setVisibility(View.VISIBLE);
-                    showSearchComplexFragment();
-                    submitSearchInput(charSequence);
+                if (imgEnter.getVisibility() == View.GONE) {
+                    if (TextUtils.isEmpty(charSequence)) {
+                        imgClear.setVisibility(View.GONE);
+                        showRecommendFragment();
+                    } else {
+                        imgClear.setVisibility(View.VISIBLE);
+                        showSearchComplexFragment();
+                        submitSearchInput(charSequence);
+                    }
                 }
             }
 
@@ -102,7 +107,7 @@ public class ControlFragment extends BaseFragment implements View.OnClickListene
                 SearchInputViewModel searchInputViewModel = ViewModelProviders.of(getActivity()).get(SearchInputViewModel.class);
                 searchInputViewModel.setSearchInput(s.toString());
             }
-        }, 500);
+        }, 300);
     }
 
 
@@ -112,6 +117,14 @@ public class ControlFragment extends BaseFragment implements View.OnClickListene
 
     private void showRecommendFragment() {
         if (pageFragment != null) pageFragment.onFragmentChange(Fragmentez.RECOMMEND_FRAGMENT);
+    }
+
+    public void showButtonEnter() {
+        if (getActivity() != null && imgEnter != null) imgEnter.setVisibility(View.VISIBLE);
+    }
+
+    public void hideButtonEnter() {
+        if (getActivity() != null && imgEnter != null) imgEnter.setVisibility(View.GONE);
     }
 
     @Override
@@ -147,6 +160,9 @@ public class ControlFragment extends BaseFragment implements View.OnClickListene
                 break;
             case R.id.imgClear:
                 edtSearch.setText("");
+                break;
+            case R.id.imgEnter:
+                Toast.makeText(getActivity(), edtSearch.getText(), Toast.LENGTH_SHORT).show();
                 break;
         }
     }

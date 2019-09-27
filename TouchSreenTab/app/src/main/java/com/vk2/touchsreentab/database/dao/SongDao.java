@@ -8,6 +8,9 @@ import com.vk2.touchsreentab.database.entity.Song;
 
 @Dao
 public interface SongDao {
+    @Query("SELECT * FROM (SELECT * FROM song LIMIT 1) UNION ALL SELECT * FROM song WHERE SingerID1 = :id")
+    DataSource.Factory<Integer, Song> getAlLSongBySinger(Integer id);
+
     @Query("SELECT * FROM song")
     DataSource.Factory<Integer, Song> getAlLSong();
 
