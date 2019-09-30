@@ -28,13 +28,15 @@ import com.vk2.touchsreentab.database.entity.Singer;
 import com.vk2.touchsreentab.database.entity.Song;
 import com.vk2.touchsreentab.databinding.ItemRecyclerviewBinding;
 import com.vk2.touchsreentab.databinding.ItemSongsBinding;
-import com.vk2.touchsreentab.model.viewmodel.SearchInputViewModel;
+import com.vk2.touchsreentab.fragment.fragmentcontroller.Fragmentez;
+import com.vk2.touchsreentab.model.TextSearch;
+import com.vk2.touchsreentab.model.viewmodel.TextSearchViewModel;
 import com.vk2.touchsreentab.model.viewmodel.SingerVewModel;
 
 
 public class MultiViewComplexAdapter extends PagedListAdapter<Song, RecyclerView.ViewHolder> {
     private Context context;
-    private String textSearch = "";
+    private String search = "";
 
     public MultiViewComplexAdapter() {
         super(Song.DIFF_CALLBACK);
@@ -66,24 +68,26 @@ public class MultiViewComplexAdapter extends PagedListAdapter<Song, RecyclerView
             singerVewModel.listSearchSinger.observe((LifecycleOwner) context, new Observer<PagedList<Singer>>() {
                 @Override
                 public void onChanged(@Nullable PagedList<Singer> singers) {
-                    if (!TextUtils.isEmpty(textSearch))
+                    if (!TextUtils.isEmpty(search))
                         artistAdapter.submitList(singers);
                 }
             });
 
-            SearchInputViewModel searchInputViewModel = ViewModelProviders.of((FragmentActivity) context).get(SearchInputViewModel.class);
-            searchInputViewModel.getSearchInput().observe((LifecycleOwner) context, new Observer<String>() {
+            TextSearchViewModel textSearchViewModel = ViewModelProviders.of((FragmentActivity) context).get(TextSearchViewModel.class);
+            textSearchViewModel.getTextSearch().observe((LifecycleOwner) context, new Observer<TextSearch>() {
                 @Override
-                public void onChanged(@Nullable String s) {
-                    textSearch = s;
-                    Log.d("TAG - TextSearch: " , textSearch);
-                    singerVewModel.search.setValue(s);
+                public void onChanged(TextSearch textSearch) {
+                    if (textSearch.getFrg() == Fragmentez.SEARCH_COMPLEX_FRAGMENT) {
+                        search = textSearch.getTextSearch();
+                        Log.d("TAG - TextSearch: ", search);
+                        singerVewModel.search.setValue(search);
+                    }
                 }
             });
 
         } else {
             ((SongViewHolder) viewHolder).songBinding.setSong(song);
-            ((SongViewHolder) viewHolder).songBinding.setTextSearch(textSearch);
+            ((SongViewHolder) viewHolder).songBinding.setTextSearch(search);
         }
     }
 

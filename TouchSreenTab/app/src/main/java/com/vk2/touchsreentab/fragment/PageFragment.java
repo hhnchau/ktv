@@ -154,10 +154,12 @@ public class PageFragment extends BaseFragment implements View.OnClickListener {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.logo:
+                clearSearch();
                 onFragmentChange(Fragmentez.RECOMMEND_FRAGMENT);
                 showPositionFocus(0);
                 break;
             case R.id.songs:
+                clearSearch();
                 SongFragment songFragment = (SongFragment) getFragmentByTag(SongFragment.class.getName());
                 if (songFragment != null) {
                     onPageChange(songFragment.getCurrentPage(), songFragment.getTotalPage());
@@ -166,6 +168,7 @@ public class PageFragment extends BaseFragment implements View.OnClickListener {
                 showPositionFocus(1);
                 break;
             case R.id.artists:
+                clearSearch();
                 ArtistFragment artistFragment = (ArtistFragment) getFragmentByTag(ArtistFragment.class.getName());
                 if (artistFragment != null) {
                     onPageChange(artistFragment.getCurrentPage(), artistFragment.getTotalPage());
@@ -174,6 +177,7 @@ public class PageFragment extends BaseFragment implements View.OnClickListener {
                 showPositionFocus(2);
                 break;
             case R.id.playList:
+                clearSearch();
                 onFragmentChange(Fragmentez.PLAYLIST_FRAGMENT);
                 showPositionFocus(3);
                 break;
@@ -225,6 +229,11 @@ public class PageFragment extends BaseFragment implements View.OnClickListener {
                 onFragmentChange(Fragmentez.RECOMMEND_FRAGMENT);
                 break;
         }
+    }
+
+    private void clearSearch() {
+        if (controlFragment != null && !controlFragment.isHidden())
+            controlFragment.clearSearch();
     }
 
 }

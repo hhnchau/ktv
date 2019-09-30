@@ -1,35 +1,19 @@
 package com.vk2.touchsreentab.adapter;
 
-import android.arch.lifecycle.LifecycleOwner;
-import android.arch.lifecycle.Observer;
-import android.arch.lifecycle.ViewModelProviders;
-import android.arch.paging.PagedList;
 import android.arch.paging.PagedListAdapter;
 import android.content.Context;
 import android.databinding.DataBindingUtil;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.app.FragmentActivity;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 
 import com.vk2.touchsreentab.R;
-import com.vk2.touchsreentab.adapter.viewholder.RecyclerViewHolder;
 import com.vk2.touchsreentab.adapter.viewholder.SingerDescriptionViewHolder;
 import com.vk2.touchsreentab.adapter.viewholder.SongViewHolder;
-import com.vk2.touchsreentab.aplication.MyApplication;
-import com.vk2.touchsreentab.database.entity.Singer;
 import com.vk2.touchsreentab.database.entity.Song;
 import com.vk2.touchsreentab.databinding.ItemDescriptionBinding;
-import com.vk2.touchsreentab.databinding.ItemRecyclerviewBinding;
 import com.vk2.touchsreentab.databinding.ItemSongsBinding;
-import com.vk2.touchsreentab.model.viewmodel.SearchInputViewModel;
-import com.vk2.touchsreentab.model.viewmodel.SingerVewModel;
 
 
 public class MultiViewSingerAdapter extends PagedListAdapter<Song, RecyclerView.ViewHolder> {
@@ -71,7 +55,7 @@ public class MultiViewSingerAdapter extends PagedListAdapter<Song, RecyclerView.
 //                }
 //            });
 //
-//            SearchInputViewModel searchInputViewModel = ViewModelProviders.of((FragmentActivity) context).get(SearchInputViewModel.class);
+//            TextSearchViewModel searchInputViewModel = ViewModelProviders.of((FragmentActivity) context).get(TextSearchViewModel.class);
 //            searchInputViewModel.getSearchInput().observe((LifecycleOwner) context, new Observer<String>() {
 //                @Override
 //                public void onChanged(@Nullable String s) {

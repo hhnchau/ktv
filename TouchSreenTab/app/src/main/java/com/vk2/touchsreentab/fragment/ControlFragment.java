@@ -16,8 +16,10 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.vk2.touchsreentab.R;
+import com.vk2.touchsreentab.fragment.fragmentcontroller.Fragmentcz;
 import com.vk2.touchsreentab.fragment.fragmentcontroller.Fragmentez;
-import com.vk2.touchsreentab.model.viewmodel.SearchInputViewModel;
+import com.vk2.touchsreentab.model.TextSearch;
+import com.vk2.touchsreentab.model.viewmodel.TextSearchViewModel;
 import com.vk2.touchsreentab.view.MyKeyboard;
 
 
@@ -26,6 +28,8 @@ public class ControlFragment extends BaseFragment implements View.OnClickListene
     private EditText edtSearch;
     private ImageView imgEnter;
     private PageFragment pageFragment;
+    private TextSearchViewModel textSearchViewModel;
+    private TextSearch textSearch;
 
     @Nullable
     @Override
@@ -39,6 +43,9 @@ public class ControlFragment extends BaseFragment implements View.OnClickListene
     }
 
     private void initView() {
+        if (getActivity() == null) return;
+        textSearchViewModel = ViewModelProviders.of(getActivity()).get(TextSearchViewModel.class);
+        textSearch = new TextSearch();
         edtSearch = view.findViewById(R.id.edtSearch);
         imgEnter = view.findViewById(R.id.imgEnter);
         imgEnter.setOnClickListener(this);
@@ -103,9 +110,10 @@ public class ControlFragment extends BaseFragment implements View.OnClickListene
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                if (getActivity() == null) return;
-                SearchInputViewModel searchInputViewModel = ViewModelProviders.of(getActivity()).get(SearchInputViewModel.class);
-                searchInputViewModel.setSearchInput(s.toString());
+                if (textSearchViewModel == null || textSearch == null) return;
+                textSearch.setFrg(Fragmentcz.getCurrentFragment());
+                textSearch.setTextSearch(s.toString());
+                textSearchViewModel.setTextSearch(textSearch);
             }
         }, 300);
     }
@@ -125,6 +133,11 @@ public class ControlFragment extends BaseFragment implements View.OnClickListene
 
     public void hideButtonEnter() {
         if (getActivity() != null && imgEnter != null) imgEnter.setVisibility(View.GONE);
+    }
+
+    public void clearSearch() {
+        edtSearch.setText("");
+        imgEnter.setVisibility(View.GONE);
     }
 
     @Override
@@ -162,7 +175,7 @@ public class ControlFragment extends BaseFragment implements View.OnClickListene
                 edtSearch.setText("");
                 break;
             case R.id.imgEnter:
-                Toast.makeText(getActivity(), edtSearch.getText(), Toast.LENGTH_SHORT).show();
+                submitSearchInput(edtSearch.getText());
                 break;
         }
     }
