@@ -20,6 +20,7 @@ public class SingerVewModel extends ViewModel {
     public LiveData<PagedList<Song>> listSongBySinger;
     public LiveData<PagedList<Singer>> listSearchSinger;
     public MutableLiveData<String> search = new MutableLiveData<>();
+    public MutableLiveData<Integer> idSinger = new MutableLiveData<>();
     private PagedList.Config config;
 
     public SingerVewModel() {
@@ -30,8 +31,13 @@ public class SingerVewModel extends ViewModel {
         listSinger = new LivePagedListBuilder<>(singerDao.getAlLSinger(), config).build();
     }
 
-    public void getAllSongBySinger(SongDao songDao, Integer id) {
-        listSongBySinger = new LivePagedListBuilder<>(songDao.getAlLSongBySinger(id), config).build();
+    public void getAllSongBySinger(final SongDao songDao) {
+        listSongBySinger = Transformations.switchMap(idSinger, new Function<Integer, LiveData<PagedList<Song>>>() {
+            @Override
+            public LiveData<PagedList<Song>> apply(Integer input) {
+                return new LivePagedListBuilder<>(songDao.getAlLSongBySinger(input), config).build();
+            }
+        });
     }
 
 
