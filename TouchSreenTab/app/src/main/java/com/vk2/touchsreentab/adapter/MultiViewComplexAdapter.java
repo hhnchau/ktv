@@ -16,6 +16,7 @@ import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
@@ -32,6 +33,7 @@ import com.vk2.touchsreentab.fragment.fragmentcontroller.Fragmentez;
 import com.vk2.touchsreentab.model.TextSearch;
 import com.vk2.touchsreentab.model.viewmodel.TextSearchViewModel;
 import com.vk2.touchsreentab.model.viewmodel.SingerVewModel;
+import com.vk2.touchsreentab.utils.OnSingleClickListener;
 
 
 public class MultiViewComplexAdapter extends PagedListAdapter<Song, RecyclerView.ViewHolder> {
@@ -85,9 +87,40 @@ public class MultiViewComplexAdapter extends PagedListAdapter<Song, RecyclerView
                 }
             });
 
+            artistAdapter.setOnItemClick(new ArtistAdapter.OnItemClick() {
+                @Override
+                public void onClick(Singer singer) {
+                    if (onItemClick != null) onItemClick.onImageSinger(singer);
+                }
+            });
+
         } else {
             ((SongViewHolder) viewHolder).songBinding.setSong(song);
             ((SongViewHolder) viewHolder).songBinding.setTextSearch(search);
+
+            ((SongViewHolder) viewHolder).songBinding.imgSong.setOnClickListener(new OnSingleClickListener() {
+                @Override
+                public void onSingleClick(View v) {
+                    if (onItemClick != null) onItemClick.onImageClick(song);
+                    enable();
+                }
+            });
+
+            ((SongViewHolder) viewHolder).songBinding.song.setOnClickListener(new OnSingleClickListener() {
+                @Override
+                public void onSingleClick(View v) {
+                    if (onItemClick != null) onItemClick.onItemClick(song);
+                    enable();
+                }
+            });
+
+            ((SongViewHolder) viewHolder).songBinding.imgMore.setOnClickListener(new OnSingleClickListener() {
+                @Override
+                public void onSingleClick(View v) {
+                    if (onItemClick != null) onItemClick.onIconClick(song);
+                    enable();
+                }
+            });
         }
     }
 
@@ -95,4 +128,21 @@ public class MultiViewComplexAdapter extends PagedListAdapter<Song, RecyclerView
     public int getItemViewType(int position) {
         return position;
     }
+
+    public interface OnItemClick {
+        void onImageSinger(Singer singer);
+
+        void onImageClick(Song song);
+
+        void onItemClick(Song song);
+
+        void onIconClick(Song song);
+    }
+
+    private OnItemClick onItemClick;
+
+    public void setOnItemClick(OnItemClick onItemClick) {
+        this.onItemClick = onItemClick;
+    }
+
 }
