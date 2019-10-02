@@ -2,7 +2,12 @@ package com.vk2.touchsreentab.model.viewmodel;
 
 import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModel;
+import android.content.Context;
+import android.os.AsyncTask;
+import android.support.annotation.NonNull;
+import android.widget.Toast;
 
+import com.vk2.touchsreentab.aplication.MyApplication;
 import com.vk2.touchsreentab.database.entity.Song;
 
 import java.util.ArrayList;
@@ -24,16 +29,28 @@ public class PlaylistModelView extends ViewModel {
         return lstPlaylist;
     }
 
-    public void setValue(Song song, int type) {
+    public void setValue(Context context, Song song, int type) {
+        for (Song s : lst) {
+            if (song != null && s.getFileName().equals(song.getFileName())) {
+                Toast.makeText(context, "Da ton tai", Toast.LENGTH_SHORT).show();
+                return;
+            }
+        }
+
         switch (type) {
             case ADD:
                 lst.add(song);
+                if (song != null)
+                    new selected().execute(song.getFileName());
                 break;
             case REMOVE:
                 lst.remove(song);
+                if (song != null)
+                    new unSelected().execute(song.getFileName());
                 break;
             case EMPTY:
                 lst.clear();
+                new clearSelected().execute();
                 break;
             case RANDOM:
                 Collections.shuffle(lst);
@@ -49,5 +66,29 @@ public class PlaylistModelView extends ViewModel {
                 break;
         }
         this.lstPlaylist.setValue(lst);
+    }
+
+    static class selected extends AsyncTask<String, Void, Void> {
+        @Override
+        protected Void doInBackground(String... fileName) {
+            MyApplication.appDatabase.songDao().setSelected(1, fileName[0]);
+            return null;
+        }
+    }
+
+    static class unSelected extends AsyncTask<String, Void, Void> {
+        @Override
+        protected Void doInBackground(String... fileName) {
+            MyApplication.appDatabase.songDao().setSelected(0, fileName[0]);
+            return null;
+        }
+    }
+
+    static class clearSelected extends AsyncTask<Void, Void, Void> {
+        @Override
+        protected Void doInBackground(Void... voids) {
+            MyApplication.appDatabase.songDao().clearSelected();
+            return null;
+        }
     }
 }

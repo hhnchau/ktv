@@ -30,37 +30,11 @@ public abstract class AppDatabase extends RoomDatabase {
                     .addMigrations(new Migration(1, 2) {
                         @Override
                         public void migrate(@NonNull SupportSQLiteDatabase database) {
+                            database.execSQL("ALTER TABLE song ADD COLUMN Selected INTEGER DEFAULT 0");
                             database.execSQL("ALTER TABLE song ADD COLUMN Spell TEXT");
                             database.execSQL("ALTER TABLE song ADD COLUMN NamePinyin TEXT");
                             database.execSQL("UPDATE song SET Spell = (SELECT singer.Spell FROM singer WHERE singer.ID = song.SingerID1) WHERE EXISTS (SELECT singer.Spell FROM singer WHERE singer.ID = song.SingerID1)");
                             database.execSQL("UPDATE song SET NamePinyin = (SELECT singer.NamePinyin FROM singer WHERE singer.ID = song.SingerID1) WHERE EXISTS (SELECT singer.Spell FROM singer WHERE singer.ID = song.SingerID1)");
-//                            database.execSQL("CREATE TABLE tbl (" +
-//                                    "FileName TEXT PRIMARY KEY, " +
-//                                    "SongName TEXT, " +
-//                                    "WordNum INTEGER, " +
-//                                    "PyCode TEXT," +
-//                                    "SingerName1 TEXT," +
-//                                    "SingerName2 TEXT," +
-//                                    "Lang INTERGER," +
-//                                    "MType INTERGER," +
-//                                    "yTrack INTERGER," +
-//                                    "bTrack INTERGER," +
-//                                    "yVolur INTERGER," +
-//                                    "bVolume INTERGER," +
-//                                    "SongTypeID INTERGER," +
-//                                    "NewSong INTERGER," +
-//                                    "Address INTERGER," +
-//                                    "SingerID1 INTERGER," +
-//                                    "SingerID2 INTERGER," +
-//                                    "style INTERGER," +
-//                                    "freq INTERGER," +
-//                                    "SongNamePinyin TEXT" +
-//                                    ")");
-////                            database.execSQL("INSERT INTO tbl (FileName, SongName, WordNum, PyCode, SingerName1, SingerName2, Lang, MType, yTrack, bTrack, yVolur, bVolume, SongTypeID, NewSong, Address, SingerID1, SingerID2, style, freq, SongNamePinyin) " +
-////                                    "SELECT FileName, SongName, WordNum, PyCode, SingerName1, SingerName2, Lang, MType, yTrack, bTrack, yVolur, bVolume, SongTypeID, NewSong, Address, SingerID1, SingerID2, style, freq, SongNamePinyin FROM song");
-//
-//                            database.execSQL("DROP TABLE song");
-//                            database.execSQL("ALTER TABLE tbl RENAME TO song");
                         }
                     })
                     .build();

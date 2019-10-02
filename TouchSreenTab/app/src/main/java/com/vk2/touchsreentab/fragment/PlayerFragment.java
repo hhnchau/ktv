@@ -12,30 +12,32 @@ import com.vk2.touchsreentab.activity.MainActivity;
 
 public class PlayerFragment extends BaseFragment implements View.OnClickListener {
     private View view;
+    private int count = 0;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_player, container, false);
-        initView(view);
+        initView();
         return view;
     }
-    private void initView(View view){
+
+    private void initView() {
         view.findViewById(R.id.zoom).setOnClickListener(this);
         view.findViewById(R.id.control).setOnClickListener(this);
         view.findViewById(R.id.feeling).setOnClickListener(this);
     }
-    int count = 0;
+
     @Override
     public void onClick(View view) {
-        switch (view.getId()){
+        switch (view.getId()) {
             case R.id.zoom:
-                if(count % 2 == 0 ){
+                if (count % 2 == 0) {
                     ((MainActivity) getActivity()).playerFullScreen();
-                }else {
+                } else {
                     ((MainActivity) getActivity()).playerSmallScreen();
                 }
-                count ++;
+                count++;
                 break;
             case R.id.control:
                 break;

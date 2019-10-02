@@ -9,8 +9,6 @@ import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.v7.util.DiffUtil;
 import android.text.SpannableString;
-import android.text.Spanned;
-import android.text.style.BackgroundColorSpan;
 import android.text.style.ForegroundColorSpan;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -70,6 +68,8 @@ public class Song {
     private String spell;
     @ColumnInfo(name = "NamePinyin")
     private String namePinyin;
+    @ColumnInfo(name = "Selected")
+    private Integer selected;
 
     @Ignore
     private String videoPath;
@@ -281,6 +281,14 @@ public class Song {
         this.videoPath = videoPath;
     }
 
+    public Integer getSelected() {
+        return selected;
+    }
+
+    public void setSelected(Integer selected) {
+        this.selected = selected;
+    }
+
     @BindingAdapter("urlSongImage")
     public static void loadImage(ImageView view, String imageUrl) {
         Glide.with(view.getContext())
@@ -305,13 +313,13 @@ public class Song {
 
     public static DiffUtil.ItemCallback<Song> DIFF_CALLBACK = new DiffUtil.ItemCallback<Song>() {
         @Override
-        public boolean areItemsTheSame(@NonNull Song song, @NonNull Song t1) {
-            return song.fileName.equals(t1.fileName);
+        public boolean areItemsTheSame(@NonNull Song song, @NonNull Song song1) {
+            return song.fileName.equals(song1.fileName);
         }
 
         @Override
-        public boolean areContentsTheSame(@NonNull Song song, @NonNull Song t1) {
-            return song.equals(t1);
+        public boolean areContentsTheSame(@NonNull Song song, @NonNull Song song1) {
+            return song.equals(song1);
         }
     };
 
@@ -319,6 +327,6 @@ public class Song {
     public boolean equals(Object obj) {
         if (obj == this) return true;
         Song song = (Song) obj;
-        return song.fileName.equals(this.fileName) && song.songName.equals(this.songName);
+        return song.selected.equals(this.selected);
     }
 }
