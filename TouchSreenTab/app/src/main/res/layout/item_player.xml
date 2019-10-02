@@ -25,15 +25,29 @@
                 android:layout_height="@dimen/dp_51"
                 android:src="@drawable/control" />
 
-            <TextView
-                android:id="@+id/title_control"
+            <RelativeLayout
+                android:id="@+id/layout_title_control"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/control"
-                android:text="@string/title_control"
-                android:textColor="@color/white"
-                android:textSize="@dimen/font_size_home" />
+                android:layout_below="@+id/control">
 
+                <TextView
+                    android:id="@+id/title_control"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:text="@string/title_control"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/font_size_home" />
+
+                <ImageView
+                    android:id="@+id/img_arrow"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/title_control"
+                    android:layout_centerInParent="true"
+                    android:src="@mipmap/arrow" />
+            </RelativeLayout>
 
             <ImageView
                 android:id="@+id/feeling"
@@ -49,10 +63,180 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/feeling"
                 android:layout_marginLeft="@dimen/dp_30"
-                android:layout_toRightOf="@+id/title_control"
+                android:layout_toRightOf="@+id/layout_title_control"
                 android:text="@string/title_feel"
                 android:textColor="@color/white"
                 android:textSize="@dimen/font_size_home" />
+            <!--Layout-Setting-->
+            <LinearLayout
+                android:id="@+id/layout_setting"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/layout_title_control"
+                android:background="@drawable/custom_rounded_border_dialog"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:paddingStart="14dp"
+                android:paddingTop="14dp"
+                android:paddingEnd="14dp">
+                <!--Layout-Song-Vol-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Song Vol"
+                        android:textColor="@color/white"
+                        android:textSize="16sp" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:gravity="center">
+
+                        <ImageView
+                            android:id="@+id/btn_decr_vol"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="10dp"
+                            android:src="@mipmap/minus" />
+
+                        <SeekBar
+                            android:id="@+id/seekbar_vol"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:progress="0" />
+
+                        <ImageView
+                            android:id="@+id/btn_incr_vol"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:src="@mipmap/plus" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/tv_vol_value"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="0"
+                        android:textColor="@color/white"
+                        android:textSize="16sp" />
+                </LinearLayout>
+                <!--Layout-Tone-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Tone"
+                        android:textColor="@color/white"
+                        android:textSize="16sp" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:gravity="center">
+
+                        <ImageView
+                            android:id="@+id/btn_decr_tone"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="10dp"
+                            android:src="@mipmap/minus" />
+
+                        <SeekBar
+                            android:id="@+id/seekbar_tone"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:progress="0" />
+
+                        <ImageView
+                            android:id="@+id/btn_incr_tone"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:src="@mipmap/plus" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/tv_tone_value"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="0"
+                        android:textColor="@color/white"
+                        android:textSize="16sp" />
+                </LinearLayout>
+                <!--Layout-Tone-Preset-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="15dp"
+                        android:text="Tone Preset"
+                        android:textColor="@color/white"
+                        android:textSize="16sp" />
+                    <!--Layout-Buttons-Tone-Preset-->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:weightSum="3">
+
+                        <Button
+                            android:id="@+id/btn_tone_preset_default"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="15dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/custom_rounded_border_selected_button"
+                            android:text="Default"
+                            android:textSize="16sp" />
+
+                        <Button
+                            android:id="@+id/btn_tone_preset_treble"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="15dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/custom_rounded_border_unselected_button"
+                            android:text="Treble"
+                            android:textSize="16sp" />
+
+                        <Button
+                            android:id="@+id/btn_tone_preset_bass"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:background="@drawable/custom_rounded_border_unselected_button"
+                            android:text="Bass"
+                            android:textSize="16sp" />
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
 
             <ImageView
                 android:id="@+id/zoom"
@@ -69,7 +253,8 @@
                 android:layout_alignParentBottom="true"
                 android:text="00:55"
                 android:textColor="@color/white"
-                android:textSize="@dimen/font_size_home" />
+                android:textSize="@dimen/font_size_home"
+                android:visibility="gone" />
 
             <ProgressBar
                 android:id="@+id/progress"
@@ -80,7 +265,8 @@
                 android:layout_marginLeft="@dimen/dp_10"
                 android:layout_toRightOf="@+id/duration"
                 android:max="100"
-                android:progress="45" />
+                android:progress="45"
+                android:visibility="gone" />
         </RelativeLayout>
     </FrameLayout>
 </android.support.constraint.ConstraintLayout>

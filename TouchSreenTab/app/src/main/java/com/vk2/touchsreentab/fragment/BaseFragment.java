@@ -19,6 +19,7 @@ import com.vk2.touchsreentab.model.viewmodel.PlaylistModelView;
 import com.vk2.touchsreentab.model.viewmodel.SingerVewModel;
 import com.vk2.touchsreentab.model.viewmodel.SongViewModel;
 import com.vk2.touchsreentab.model.viewmodel.TextSearchViewModel;
+import com.vk2.touchsreentab.view.CustomSongDialog;
 
 public abstract class BaseFragment extends Fragment {
     private PageControlViewModel pageControlViewModel;
@@ -103,7 +104,18 @@ public abstract class BaseFragment extends Fragment {
     }
 
     protected void showDialog(Song song) {
-        Toast.makeText(getActivity(), "Show Dialog Song", Toast.LENGTH_SHORT).show();
+        CustomSongDialog dialog = new CustomSongDialog(getContext(), song, new CustomSongDialog.OnButtonDialogClick() {
+            @Override
+            public void onSelected() {
+                Toast.makeText(getContext(), "onSelected", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onInsertedTop() {
+                Toast.makeText(getContext(), "onInsertedTop", Toast.LENGTH_SHORT).show();
+            }
+        });
+        dialog.show();
     }
 
     protected void updatePlaylist(Song song, int type) {
