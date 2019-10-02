@@ -9,8 +9,6 @@ import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.v7.util.DiffUtil;
 import android.text.SpannableString;
-import android.text.Spanned;
-import android.text.style.BackgroundColorSpan;
 import android.text.style.ForegroundColorSpan;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -18,6 +16,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestOptions;
+import com.google.gson.annotations.SerializedName;
 
 
 @Entity(tableName = "song")
@@ -26,6 +25,7 @@ public class Song {
     @ColumnInfo(name = "FileName")
     @NonNull
     private String fileName = "0";
+    @SerializedName("songname")
     @ColumnInfo(name = "SongName")
     private String songName;
     @ColumnInfo(name = "WordNum")
@@ -34,6 +34,7 @@ public class Song {
     private String pyCode;
     @ColumnInfo(name = "Stroke")
     private String stroke;
+    @SerializedName("singername1")
     @ColumnInfo(name = "SingerName1")
     private String singerName1;
     @ColumnInfo(name = "SingerName2")
@@ -263,7 +264,7 @@ public class Song {
     }
 
     @Ignore
-    private String image = "https://api.androidhive.info/images/nature/2.jpg";
+    private String image = "https://api.androidhive.info/images/nature/8.jpg";
 
     public String getImage() {
         return image;

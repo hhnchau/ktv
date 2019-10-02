@@ -49,6 +49,7 @@ public class SongAdapter extends PagedListAdapter<Song, SongViewHolder> {
                 enable();
             }
         });
+        songViewHolder.songBinding.executePendingBindings();
     }
 
     public interface OnItemClick {

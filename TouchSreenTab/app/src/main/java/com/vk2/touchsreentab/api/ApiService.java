@@ -1,10 +1,11 @@
 package com.vk2.touchsreentab.api;
 
+import com.vk2.touchsreentab.model.ResultSinger;
+import com.vk2.touchsreentab.model.ResultSong;
 import com.vk2.touchsreentab.model.ResultSoundCloud;
 import com.vk2.touchsreentab.model.YouTubeApiObject;
 
 import io.reactivex.Observable;
-import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
 
@@ -24,4 +25,10 @@ public interface ApiService {
                                              @Query("limit") String limit,
                                              @Query("linked_partitioning") String linked_partitioning,
                                              @Query("offset") String offset);
+
+    @GET("media/song/getHotSongs")
+    Observable<ResultSong> getListSongs();
+
+    @GET("media/singer/getHotSingers")
+    Observable<ResultSinger> getListSingers();
 }

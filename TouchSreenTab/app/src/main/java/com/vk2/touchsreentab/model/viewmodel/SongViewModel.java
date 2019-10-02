@@ -10,6 +10,7 @@ import android.arch.paging.PagedList;
 
 import com.vk2.touchsreentab.database.dao.SongDao;
 import com.vk2.touchsreentab.database.entity.Song;
+import com.vk2.touchsreentab.model.SongDataSourceFactory;
 
 
 public class SongViewModel extends ViewModel {
@@ -17,6 +18,7 @@ public class SongViewModel extends ViewModel {
     public LiveData<PagedList<Song>> listSearchSong;
     public MutableLiveData<String> search = new MutableLiveData<>();
     private PagedList.Config config;
+    public LiveData<PagedList<Song>> listSongOnline;
 
     private static final int LIMIT = 20;
 
@@ -42,5 +44,13 @@ public class SongViewModel extends ViewModel {
                     ).build();
             }
         });
+    }
+    public void getAllListSong() {
+        SongDataSourceFactory songDataSourceFactory = new SongDataSourceFactory();
+        PagedList.Config pagedListConfig =
+                (new PagedList.Config.Builder()).setEnablePlaceholders(false)
+                        .setInitialLoadSizeHint(10)
+                        .setPageSize(10).build();
+        listSongOnline = new LivePagedListBuilder(songDataSourceFactory, pagedListConfig).build();
     }
 }

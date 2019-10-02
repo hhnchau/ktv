@@ -12,11 +12,13 @@ import com.vk2.touchsreentab.database.dao.SingerDao;
 import com.vk2.touchsreentab.database.dao.SongDao;
 import com.vk2.touchsreentab.database.entity.Singer;
 import com.vk2.touchsreentab.database.entity.Song;
+import com.vk2.touchsreentab.model.SingerDataSourceFactory;
 
 
 public class SingerVewModel extends ViewModel {
     private static final int LIMIT = 20;
     public LiveData<PagedList<Singer>> listSinger;
+    public LiveData<PagedList<Singer>> listSingerOnline;
     public LiveData<PagedList<Song>> listSongBySinger;
     public LiveData<PagedList<Singer>> listSearchSinger;
     public MutableLiveData<String> search = new MutableLiveData<>();
@@ -56,5 +58,13 @@ public class SingerVewModel extends ViewModel {
                     ).build();
             }
         });
+    }
+    public void getAllListSinger() {
+        SingerDataSourceFactory singerDataSource = new SingerDataSourceFactory();
+        PagedList.Config pagedListConfig =
+                (new PagedList.Config.Builder()).setEnablePlaceholders(false)
+                        .setInitialLoadSizeHint(10)
+                        .setPageSize(10).build();
+        listSingerOnline = new LivePagedListBuilder(singerDataSource, pagedListConfig).build();
     }
 }
