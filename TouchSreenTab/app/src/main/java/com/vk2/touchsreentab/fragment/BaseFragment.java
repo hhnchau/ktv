@@ -27,11 +27,13 @@ public abstract class BaseFragment extends Fragment {
     private SingerVewModel singerVewModel;
     private SongViewModel songViewModel;
     private TextSearchViewModel textSearchViewModel;
+    private PageFragment pageFragment;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getActivity() == null) return;
+        pageFragment = (PageFragment) getFragmentByTag(PageFragment.class.getName());
         pageControlViewModel = ViewModelProviders.of(getActivity()).get(PageControlViewModel.class);
         playlistModelView = ViewModelProviders.of(getActivity()).get(PlaylistModelView.class);
         singerVewModel = ViewModelProviders.of(getActivity()).get(SingerVewModel.class);
@@ -50,7 +52,6 @@ public abstract class BaseFragment extends Fragment {
     }
 
     public void updateCurrentPage(int currentPage, int totalPage) {
-        PageFragment pageFragment = (PageFragment) getFragmentByTag(PageFragment.class.getName());
         if (pageFragment != null) {
             pageFragment.onPageChange(currentPage, totalPage);
         }
@@ -85,9 +86,7 @@ public abstract class BaseFragment extends Fragment {
     }
 
     protected void pageControl(Fragmentez frg, int direction) {
-        if (pageControlViewModel == null && getActivity() != null)
-            pageControlViewModel = ViewModelProviders.of(getActivity()).get(PageControlViewModel.class);
-        pageControlViewModel.setPageControl(new PageControl(frg, direction));
+        getPageControlViewModel().setPageControl(new PageControl(frg, direction));
     }
 
     public Fragment getFragmentByTag(String tag) {
@@ -95,11 +94,28 @@ public abstract class BaseFragment extends Fragment {
         return getActivity().getSupportFragmentManager().findFragmentByTag(tag);
     }
 
+    protected void gotoComplex() {
+        if (pageFragment != null) {
+            pageFragment.onFragmentChange(Fragmentez.SEARCH_COMPLEX_FRAGMENT);
+        }
+    }
+
+    protected void gotoRecommend() {
+        if (pageFragment != null) {
+            pageFragment.onFragmentChange(Fragmentez.RECOMMEND_FRAGMENT);
+        }
+    }
+
     protected void gotoSinger(Integer idSinger) {
-        PageFragment pageFragment = (PageFragment) getFragmentByTag(PageFragment.class.getName());
         if (pageFragment != null) {
             pageFragment.onFragmentChange(Fragmentez.SINGER_FRAGMENT);
             singerVewModel.idSinger.setValue(idSinger);
+        }
+    }
+
+    protected void backStackFragment() {
+        if (pageFragment != null) {
+            pageFragment.onFragmentChange(pageFragment.getBackStackFragment());
         }
     }
 

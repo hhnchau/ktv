@@ -10,6 +10,7 @@ import android.support.v4.content.res.ResourcesCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -28,9 +29,11 @@ import java.util.List;
 public class PageFragment extends BaseFragment implements View.OnClickListener {
     private View view;
     public static List<Fragmentoz> lstFrg;
+    private Fragmentez backStack;
     private LinearLayout boxRecommend, boxSongArtist, boxPlaylist, boxSearch;
     private View[] listArrow;
     private View[] listBackground;
+    private ImageView imgBack;
     private TextView tvNumber;
     private ControlFragment controlFragment;
 
@@ -45,6 +48,7 @@ public class PageFragment extends BaseFragment implements View.OnClickListener {
     }
 
     public void onFragmentChange(Fragmentez frgez) {
+        if (frgez == Fragmentez.SINGER_FRAGMENT) backStack = Fragmentcz.getCurrentFragment();
         Fragmentcz.addFragment(lstFrg, getFragmentManager(), frgez, false, R.id.layout_container, null, Fragmentcz.NONE);
         Fragmenttz.setToolbar(getActivity(), frgez, boxRecommend, boxSongArtist, boxPlaylist, boxSearch);
         if (frgez == Fragmentez.SEARCH_COMPLEX_FRAGMENT) {
@@ -54,6 +58,8 @@ public class PageFragment extends BaseFragment implements View.OnClickListener {
             }
         } else if (frgez == Fragmentez.PLAYLIST_FRAGMENT)
             setActiveBackground(0);
+        else if (frgez == Fragmentez.RECOMMEND_FRAGMENT)
+            showPositionFocus(0);
     }
 
 
@@ -70,6 +76,10 @@ public class PageFragment extends BaseFragment implements View.OnClickListener {
     @Override
     public int getTotalPage() {
         return 0;
+    }
+
+    public Fragmentez getBackStackFragment() {
+        return backStack;
     }
 
     private void initView() {
@@ -99,7 +109,8 @@ public class PageFragment extends BaseFragment implements View.OnClickListener {
         view.findViewById(R.id.tvYoutube).setOnClickListener(this);
         view.findViewById(R.id.imgPrevious).setOnClickListener(this);
         view.findViewById(R.id.imgNext).setOnClickListener(this);
-        view.findViewById(R.id.imgBack).setOnClickListener(this);
+        imgBack = view.findViewById(R.id.imgBack);
+        imgBack.setOnClickListener(this);
         listArrow = new View[]{
                 view.findViewById(R.id.position_recommended),
                 view.findViewById(R.id.position_song),
@@ -229,10 +240,11 @@ public class PageFragment extends BaseFragment implements View.OnClickListener {
                 pageControl(Fragmentcz.getCurrentFragment(), PageControl.NEXT);
                 break;
             case R.id.imgBack:
-                onFragmentChange(Fragmentez.RECOMMEND_FRAGMENT);
+                pageControl(Fragmentcz.getCurrentFragment(), PageControl.TOP);
                 break;
         }
     }
+
 
     private void clearSearch() {
         if (controlFragment != null && !controlFragment.isHidden())
