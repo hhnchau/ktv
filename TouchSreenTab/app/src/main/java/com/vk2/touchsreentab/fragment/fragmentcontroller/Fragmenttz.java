@@ -48,6 +48,12 @@ public class Fragmenttz {
             case SONG_FRAGMENT:
                 ll2.setVisibility(View.VISIBLE);
                 break;
+            case HISTORY_FRAGMENT:
+                ll3.setVisibility(View.VISIBLE);
+                break;
+            case DOWNLOAD_FRAGMENT:
+                ll3.setVisibility(View.VISIBLE);
+                break;
 
         }
     }

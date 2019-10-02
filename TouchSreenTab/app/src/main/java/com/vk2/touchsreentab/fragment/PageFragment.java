@@ -188,12 +188,15 @@ public class PageFragment extends BaseFragment implements View.OnClickListener {
                 break;
             case R.id.tvPlaylist:
                 setActiveBackground(0);
+                onFragmentChange(Fragmentez.PLAYLIST_FRAGMENT);
                 break;
             case R.id.tvHistory:
                 setActiveBackground(1);
+                onFragmentChange(Fragmentez.HISTORY_FRAGMENT);
                 break;
             case R.id.tvDownload:
                 setActiveBackground(2);
+                onFragmentChange(Fragmentez.DOWNLOAD_FRAGMENT);
                 break;
             case R.id.tvComplex:
                 setActiveBackground(3);
