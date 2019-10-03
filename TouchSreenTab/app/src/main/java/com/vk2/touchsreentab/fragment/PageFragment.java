@@ -82,6 +82,19 @@ public class PageFragment extends BaseFragment implements View.OnClickListener {
         return backStack;
     }
 
+
+    @Override
+    protected void showBackButton() {
+        if (imgBack != null && imgBack.getVisibility() == View.GONE)
+            imgBack.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    protected void hideBackButton() {
+        if (imgBack != null && imgBack.getVisibility() == View.VISIBLE)
+            imgBack.setVisibility(View.GONE);
+    }
+
     private void initView() {
         lstFrg = new ArrayList<>();
         tvNumber = view.findViewById(R.id.tvNumber);
@@ -167,10 +180,12 @@ public class PageFragment extends BaseFragment implements View.OnClickListener {
             case R.id.logo:
                 clearSearch();
                 onFragmentChange(Fragmentez.RECOMMEND_FRAGMENT);
+                handleBackButton();
                 showPositionFocus(0);
                 break;
             case R.id.songs:
                 clearSearch();
+                showBackButton();
                 SongFragment songFragment = (SongFragment) getFragmentByTag(SongFragment.class.getName());
                 if (songFragment != null) {
                     onPageChange(songFragment.getCurrentPage(), songFragment.getTotalPage());
@@ -180,6 +195,7 @@ public class PageFragment extends BaseFragment implements View.OnClickListener {
                 break;
             case R.id.artists:
                 clearSearch();
+                showBackButton();
                 ArtistFragment artistFragment = (ArtistFragment) getFragmentByTag(ArtistFragment.class.getName());
                 if (artistFragment != null) {
                     onPageChange(artistFragment.getCurrentPage(), artistFragment.getTotalPage());
@@ -189,6 +205,11 @@ public class PageFragment extends BaseFragment implements View.OnClickListener {
                 break;
             case R.id.playList:
                 clearSearch();
+                showBackButton();
+                PlaylistFragment playlistFragment = (PlaylistFragment) getFragmentByTag(PlaylistFragment.class.getName());
+                if (playlistFragment != null) {
+                    onPageChange(playlistFragment.getCurrentPage(), playlistFragment.getTotalPage());
+                }
                 onFragmentChange(Fragmentez.PLAYLIST_FRAGMENT);
                 showPositionFocus(3);
                 break;
@@ -198,18 +219,22 @@ public class PageFragment extends BaseFragment implements View.OnClickListener {
             case R.id.usb:
                 break;
             case R.id.tvPlaylist:
+                showBackButton();
                 setActiveBackground(0);
                 onFragmentChange(Fragmentez.PLAYLIST_FRAGMENT);
                 break;
             case R.id.tvHistory:
+                showBackButton();
                 setActiveBackground(1);
                 onFragmentChange(Fragmentez.HISTORY_FRAGMENT);
                 break;
             case R.id.tvDownload:
+                showBackButton();
                 setActiveBackground(2);
                 onFragmentChange(Fragmentez.DOWNLOAD_FRAGMENT);
                 break;
             case R.id.tvComplex:
+                showBackButton();
                 setActiveBackground(3);
                 onFragmentChange(Fragmentez.SEARCH_COMPLEX_FRAGMENT);
                 if (controlFragment != null) {
@@ -217,6 +242,7 @@ public class PageFragment extends BaseFragment implements View.OnClickListener {
                 }
                 break;
             case R.id.tvSoundCloud:
+                showBackButton();
                 setActiveBackground(4);
                 onFragmentChange(Fragmentez.SEARCH_SOUNDCLOUND_FRAGMENT);
                 if (controlFragment != null) {
@@ -224,9 +250,11 @@ public class PageFragment extends BaseFragment implements View.OnClickListener {
                 }
                 break;
             case R.id.tvMixCloud:
+                showBackButton();
                 setActiveBackground(5);
                 break;
             case R.id.tvYoutube:
+                showBackButton();
                 setActiveBackground(6);
                 onFragmentChange(Fragmentez.SEARCH_YOUTUBE_FRAGMENT);
                 if (controlFragment != null) {

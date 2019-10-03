@@ -36,8 +36,6 @@ public class ControlFragment extends BaseFragment implements View.OnClickListene
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_control, container, false);
         initView();
-
-
         return view;
     }
 
