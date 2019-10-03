@@ -95,6 +95,11 @@ public class PageFragment extends BaseFragment implements View.OnClickListener {
             imgBack.setVisibility(View.GONE);
     }
 
+    @Override
+    protected void changeBackgroundTopbar(int color) {
+        view.findViewById(R.id.layoutTopbar).setBackgroundColor(color);
+    }
+
     private void initView() {
         lstFrg = new ArrayList<>();
         tvNumber = view.findViewById(R.id.tvNumber);
