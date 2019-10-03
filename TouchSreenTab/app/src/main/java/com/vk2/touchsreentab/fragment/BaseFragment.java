@@ -103,6 +103,7 @@ public abstract class BaseFragment extends Fragment {
     protected void gotoRecommend() {
         if (pageFragment != null) {
             pageFragment.onFragmentChange(Fragmentez.RECOMMEND_FRAGMENT);
+            handleBackButton();
         }
     }
 
@@ -136,5 +137,18 @@ public abstract class BaseFragment extends Fragment {
 
     protected void updatePlaylist(Song song, int type) {
         playlistModelView.setValue(getActivity(), song, type);
+    }
+
+    protected void showBackButton() {
+        if (pageFragment != null) pageFragment.showBackButton();
+    }
+
+    protected void hideBackButton() {
+        if (pageFragment != null) pageFragment.hideBackButton();
+    }
+
+    protected void handleBackButton() {
+        RecommendFragment recommendFragment = (RecommendFragment) getFragmentByTag(RecommendFragment.class.getName());
+        if (recommendFragment != null) recommendFragment.handleBackButton();
     }
 }

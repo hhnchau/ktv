@@ -114,11 +114,11 @@
     <orderEntry type="library" name="Gradle: com.squareup.retrofit2:adapter-rxjava2:2.3.0@jar" level="project" />
     <orderEntry type="library" name="Gradle: com.squareup.retrofit2:converter-gson:2.4.0@jar" level="project" />
     <orderEntry type="library" name="Gradle: com.squareup.retrofit2:retrofit:2.4.0@jar" level="project" />
-    <orderEntry type="library" name="Gradle: com.squareup.okhttp3:okhttp:3.10.0@jar" level="project" />
+    <orderEntry type="library" name="Gradle: com.squareup.okhttp3:okhttp:3.11.0@jar" level="project" />
     <orderEntry type="library" name="Gradle: com.squareup.okio:okio:1.14.0@jar" level="project" />
     <orderEntry type="library" name="Gradle: io.reactivex.rxjava2:rxjava:2.2.3@jar" level="project" />
     <orderEntry type="library" name="Gradle: org.reactivestreams:reactive-streams:1.0.2@jar" level="project" />
-    <orderEntry type="library" name="Gradle: com.google.code.gson:gson:2.8.2@jar" level="project" />
+    <orderEntry type="library" name="Gradle: com.google.code.gson:gson:2.8.5@jar" level="project" />
     <orderEntry type="library" name="Gradle: com.google.apis:google-api-services-youtube:v3-rev189-1.23.0@jar" level="project" />
     <orderEntry type="library" name="Gradle: com.google.api-client:google-api-client:1.25.0@jar" level="project" />
     <orderEntry type="library" name="Gradle: com.google.oauth-client:google-oauth-client-jetty:1.23.0@jar" level="project" />

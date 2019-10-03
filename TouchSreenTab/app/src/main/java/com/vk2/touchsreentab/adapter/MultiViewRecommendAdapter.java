@@ -95,6 +95,7 @@ public class MultiViewRecommendAdapter extends PagedListAdapter<Song, RecyclerVi
             singerVewModel.listSingerOnline.observe((FragmentActivity) context, new Observer<PagedList<Singer>>() {
                 @Override
                 public void onChanged(@Nullable PagedList<Singer> artists) {
+
                     artistAdapter.submitList(artists);
                 }
             });
