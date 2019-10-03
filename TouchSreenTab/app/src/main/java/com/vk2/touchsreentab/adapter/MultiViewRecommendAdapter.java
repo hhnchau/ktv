@@ -24,6 +24,8 @@ import com.vk2.touchsreentab.database.entity.Song;
 import com.vk2.touchsreentab.databinding.ItemCategoryRecyclerviewBinding;
 import com.vk2.touchsreentab.databinding.ItemSingerRecyclerviewBinding;
 import com.vk2.touchsreentab.databinding.ItemSongsBinding;
+import com.vk2.touchsreentab.model.Ablum;
+import com.vk2.touchsreentab.model.viewmodel.AblumViewModel;
 import com.vk2.touchsreentab.model.viewmodel.SingerVewModel;
 import com.yarolegovich.discretescrollview.transform.Pivot;
 import com.yarolegovich.discretescrollview.transform.ScaleTransformer;
@@ -64,18 +66,26 @@ public class MultiViewRecommendAdapter extends PagedListAdapter<Song, RecyclerVi
         return list;
     }
     @Override
-    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
+    public void onBindViewHolder(@NonNull final RecyclerView.ViewHolder viewHolder, int i) {
         final Song song = getItem(i);
         if (song == null) return;
         if (i == 0) {
-            final CategoryAdapter categoryAdapter = new CategoryAdapter(context,getListCategory());
-            ((CategoryRecyclerViewHolder) viewHolder).recyclerViewBinding.rcvItem.setAdapter(categoryAdapter);
-            ((CategoryRecyclerViewHolder) viewHolder).recyclerViewBinding.rcvItem.scrollToPosition(2);
+            final AblumAdapter ablumAdapter = new AblumAdapter();
+            ((CategoryRecyclerViewHolder) viewHolder).recyclerViewBinding.rcvItem.setAdapter(ablumAdapter);
             ((CategoryRecyclerViewHolder) viewHolder).recyclerViewBinding.rcvItem.setItemTransformer(new ScaleTransformer.Builder()
                     .setMaxScale(1.2f)
                     .setPivotX(Pivot.X.CENTER)
                     .build());
             ((CategoryRecyclerViewHolder) viewHolder).recyclerViewBinding.rcvItem.setSlideOnFlingThreshold(3000);
+            AblumViewModel ablumViewModel =  ViewModelProviders.of((FragmentActivity) context).get(AblumViewModel.class);
+            ablumViewModel.getAllListAblum();
+            ablumViewModel.listAblumOnline.observe((FragmentActivity) context, new Observer<PagedList<Ablum>>() {
+                @Override
+                public void onChanged(@Nullable PagedList<Ablum> ablums) {
+                    ablumAdapter.submitList(ablums);
+                    ((CategoryRecyclerViewHolder) viewHolder).recyclerViewBinding.rcvItem.scrollToPosition(2);
+                }
+            });
         } else if(i ==1) {
             final ArtistAdapter artistAdapter = new ArtistAdapter();
             ((SingerRecyclerViewHolder) viewHolder).recyclerViewBinding.rcvItem.setLayoutManager(new LinearLayoutManager(context, LinearLayout.HORIZONTAL, false));

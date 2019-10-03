@@ -1,5 +1,6 @@
 package com.vk2.touchsreentab.api;
 
+import com.vk2.touchsreentab.model.ResultAblum;
 import com.vk2.touchsreentab.model.ResultSinger;
 import com.vk2.touchsreentab.model.ResultSong;
 import com.vk2.touchsreentab.model.ResultSoundCloud;
@@ -31,4 +32,6 @@ public interface ApiService {
 
     @GET("media/singer/getHotSingers")
     Observable<ResultSinger> getListSingers();
+    @GET("media/album/getListAlbum")
+    Observable<ResultAblum> getListAblums(@Query("page") int page, @Query("limit") int limit);
 }

@@ -12,7 +12,7 @@ import com.vk2.touchsreentab.database.dao.SingerDao;
 import com.vk2.touchsreentab.database.dao.SongDao;
 import com.vk2.touchsreentab.database.entity.Singer;
 import com.vk2.touchsreentab.database.entity.Song;
-import com.vk2.touchsreentab.model.SingerDataSourceFactory;
+import com.vk2.touchsreentab.model.datasource.SingerDataSourceFactory;
 
 
 public class SingerVewModel extends ViewModel {
