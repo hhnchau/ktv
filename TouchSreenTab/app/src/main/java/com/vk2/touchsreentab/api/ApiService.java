@@ -28,10 +28,10 @@ public interface ApiService {
                                              @Query("offset") String offset);
 
     @GET("media/song/getHotSongs")
-    Observable<ResultSong> getListSongs();
+    Observable<ResultSong> getListSongs(@Query("page") int page, @Query("limit") int limit);
 
     @GET("media/singer/getHotSingers")
-    Observable<ResultSinger> getListSingers();
+    Observable<ResultSinger> getListSingers(@Query("page") int page, @Query("limit") int limit);
     @GET("media/album/getListAlbum")
     Observable<ResultAblum> getListAblums(@Query("page") int page, @Query("limit") int limit);
 }
