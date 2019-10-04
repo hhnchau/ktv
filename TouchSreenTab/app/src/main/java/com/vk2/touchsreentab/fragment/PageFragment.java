@@ -227,23 +227,23 @@ public class PageFragment extends BaseFragment implements View.OnClickListener {
                 onFragmentChange(Fragmentez.SETTING_FRAGMENT);
                 break;
             case R.id.usb:
-                CustomDialogMessage dialogMessage = new CustomDialogMessage(getActivity(), new CustomDialogMessage.OnDialogMessageClick() {
-                    @Override
-                    public void onButtonOK() {
-                        Toast.makeText(getContext(), "onButtonOK", Toast.LENGTH_SHORT).show();
-//                        ((MainActivity) getActivity()).pageFragmentFullSceen();
-//                        if (diskFragment == null) diskFragment = new DiskFragment();
-//                        getActivity().getSupportFragmentManager().beginTransaction()
-//                                .add(R.id.framePage, diskFragment, DiskFragment.class.getName()).addToBackStack(DiskFragment.class.getName()).commit();
-                    }
-
-                    @Override
-                    public void onButtonCancel() {
-                        Toast.makeText(getContext(), "onButtonCancel", Toast.LENGTH_SHORT).show();
-
-                    }
-                });
-                dialogMessage.show();
+//                CustomDialogMessage dialogMessage = new CustomDialogMessage(getActivity(), new CustomDialogMessage.OnDialogMessageClick() {
+//                    @Override
+//                    public void onButtonOK() {
+//                        Toast.makeText(getContext(), "onButtonOK", Toast.LENGTH_SHORT).show();
+////                        ((MainActivity) getActivity()).pageFragmentFullSceen();
+////                        if (diskFragment == null) diskFragment = new DiskFragment();
+////                        getActivity().getSupportFragmentManager().beginTransaction()
+////                                .add(R.id.framePage, diskFragment, DiskFragment.class.getName()).addToBackStack(DiskFragment.class.getName()).commit();
+//                    }
+//
+//                    @Override
+//                    public void onButtonCancel() {
+//                        Toast.makeText(getContext(), "onButtonCancel", Toast.LENGTH_SHORT).show();
+//
+//                    }
+//                });
+//                dialogMessage.show();
                 break;
             case R.id.tvPlaylist:
                 showBackButton();
