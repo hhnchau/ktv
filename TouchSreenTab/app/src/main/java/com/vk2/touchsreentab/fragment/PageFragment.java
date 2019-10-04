@@ -231,10 +231,10 @@ public class PageFragment extends BaseFragment implements View.OnClickListener {
                     @Override
                     public void onButtonOK() {
                         Toast.makeText(getContext(), "onButtonOK", Toast.LENGTH_SHORT).show();
-                        ((MainActivity) getActivity()).pageFragmentFullSceen();
-                        if (diskFragment == null) diskFragment = new DiskFragment();
-                        getActivity().getSupportFragmentManager().beginTransaction()
-                                .add(R.id.framePage, diskFragment, DiskFragment.class.getName()).addToBackStack(DiskFragment.class.getName()).commit();
+//                        ((MainActivity) getActivity()).pageFragmentFullSceen();
+//                        if (diskFragment == null) diskFragment = new DiskFragment();
+//                        getActivity().getSupportFragmentManager().beginTransaction()
+//                                .add(R.id.framePage, diskFragment, DiskFragment.class.getName()).addToBackStack(DiskFragment.class.getName()).commit();
                     }
 
                     @Override
