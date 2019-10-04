@@ -147,6 +147,11 @@ public abstract class BaseFragment extends Fragment {
         if (pageFragment != null) pageFragment.hideBackButton();
     }
 
+    protected void changeBackgroundTopbar(int color) {
+        if (pageFragment != null) pageFragment.changeBackgroundTopbar(color);
+    }
+
+
     protected void handleBackButton() {
         RecommendFragment recommendFragment = (RecommendFragment) getFragmentByTag(RecommendFragment.class.getName());
         if (recommendFragment != null) recommendFragment.handleBackButton();

@@ -10,7 +10,8 @@ import android.arch.paging.PagedList;
 
 import com.vk2.touchsreentab.database.dao.SongDao;
 import com.vk2.touchsreentab.database.entity.Song;
-import com.vk2.touchsreentab.model.SongDataSourceFactory;
+import com.vk2.touchsreentab.model.datasource.SongDataSource;
+import com.vk2.touchsreentab.model.datasource.SongDataSourceFactory;
 
 
 public class SongViewModel extends ViewModel {
@@ -20,6 +21,15 @@ public class SongViewModel extends ViewModel {
     private PagedList.Config config;
     public LiveData<PagedList<Song>> listSongOnline;
 
+    public LiveData<String> getProgressLoadStatus() {
+        return progressLoadStatus;
+    }
+
+    public void setProgressLoadStatus(LiveData<String> progressLoadStatus) {
+        this.progressLoadStatus = progressLoadStatus;
+    }
+
+    private LiveData<String> progressLoadStatus = new MutableLiveData<>();
     private static final int LIMIT = 20;
 
     public SongViewModel() {
@@ -52,5 +62,11 @@ public class SongViewModel extends ViewModel {
                         .setInitialLoadSizeHint(10)
                         .setPageSize(10).build();
         listSongOnline = new LivePagedListBuilder(songDataSourceFactory, pagedListConfig).build();
+        progressLoadStatus = Transformations.switchMap(songDataSourceFactory.getMutableLiveData(), new Function<SongDataSource, LiveData<String>>() {
+            @Override
+            public LiveData<String> apply(SongDataSource progressLoadStatus) {
+                return progressLoadStatus.getProgressLiveStatus();
+            }
+        });
     }
 }

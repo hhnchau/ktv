@@ -13,15 +13,19 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.vk2.touchsreentab.R;
+import com.vk2.touchsreentab.activity.MainActivity;
 import com.vk2.touchsreentab.database.entity.Song;
+import com.vk2.touchsreentab.fragment.fragmentcontroller.DiskFragment;
 import com.vk2.touchsreentab.fragment.fragmentcontroller.Fragmentcz;
 import com.vk2.touchsreentab.fragment.fragmentcontroller.Fragmentez;
 import com.vk2.touchsreentab.fragment.fragmentcontroller.Fragmentoz;
 import com.vk2.touchsreentab.fragment.fragmentcontroller.Fragmenttz;
 import com.vk2.touchsreentab.model.PageControl;
 import com.vk2.touchsreentab.model.viewmodel.PlaylistModelView;
+import com.vk2.touchsreentab.view.CustomDialogMessage;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,6 +40,7 @@ public class PageFragment extends BaseFragment implements View.OnClickListener {
     private ImageView imgBack;
     private TextView tvNumber;
     private ControlFragment controlFragment;
+    private DiskFragment diskFragment;
 
     @Nullable
     @Override
@@ -93,6 +98,11 @@ public class PageFragment extends BaseFragment implements View.OnClickListener {
     protected void hideBackButton() {
         if (imgBack != null && imgBack.getVisibility() == View.VISIBLE)
             imgBack.setVisibility(View.GONE);
+    }
+
+    @Override
+    protected void changeBackgroundTopbar(int color) {
+        view.findViewById(R.id.layoutTopbar).setBackgroundColor(color);
     }
 
     private void initView() {
@@ -217,6 +227,23 @@ public class PageFragment extends BaseFragment implements View.OnClickListener {
                 onFragmentChange(Fragmentez.SETTING_FRAGMENT);
                 break;
             case R.id.usb:
+                CustomDialogMessage dialogMessage = new CustomDialogMessage(getActivity(), new CustomDialogMessage.OnDialogMessageClick() {
+                    @Override
+                    public void onButtonOK() {
+                        Toast.makeText(getContext(), "onButtonOK", Toast.LENGTH_SHORT).show();
+                        ((MainActivity) getActivity()).pageFragmentFullSceen();
+                        if (diskFragment == null) diskFragment = new DiskFragment();
+                        getActivity().getSupportFragmentManager().beginTransaction()
+                                .add(R.id.framePage, diskFragment, DiskFragment.class.getName()).addToBackStack(DiskFragment.class.getName()).commit();
+                    }
+
+                    @Override
+                    public void onButtonCancel() {
+                        Toast.makeText(getContext(), "onButtonCancel", Toast.LENGTH_SHORT).show();
+
+                    }
+                });
+                dialogMessage.show();
                 break;
             case R.id.tvPlaylist:
                 showBackButton();
