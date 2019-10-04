@@ -48,13 +48,12 @@ public class ControlFragment extends BaseFragment implements View.OnClickListene
         imgEnter.setOnClickListener(this);
         final ImageView imgClear = view.findViewById(R.id.imgClear);
         imgClear.setOnClickListener(this);
-        view.findViewById(R.id.vocal).setOnClickListener(this);
-        view.findViewById(R.id.replay).setOnClickListener(this);
-        view.findViewById(R.id.play).setOnClickListener(this);
-        view.findViewById(R.id.next).setOnClickListener(this);
-        view.findViewById(R.id.reduce).setOnClickListener(this);
-        view.findViewById(R.id.add).setOnClickListener(this);
-        view.findViewById(R.id.other).setOnClickListener(this);
+        view.findViewById(R.id.imgVocal).setOnClickListener(this);
+        view.findViewById(R.id.imgReplay).setOnClickListener(this);
+        view.findViewById(R.id.imgPlay).setOnClickListener(this);
+        view.findViewById(R.id.imgNext).setOnClickListener(this);
+        view.findViewById(R.id.imgReduce).setOnClickListener(this);
+        view.findViewById(R.id.imgAdd).setOnClickListener(this);
 
         MyKeyboard myKeyboard = view.findViewById(R.id.myKeyboard);
 
@@ -131,32 +130,28 @@ public class ControlFragment extends BaseFragment implements View.OnClickListene
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.vocal:
+            case R.id.imgVocal:
                 Toast.makeText(getActivity(), "Button vocal click!",
                         Toast.LENGTH_LONG).show();
                 break;
-            case R.id.replay:
+            case R.id.imgReplay:
                 Toast.makeText(getActivity(), "Button replay click!",
                         Toast.LENGTH_LONG).show();
                 break;
-            case R.id.play:
+            case R.id.imgPlay:
                 Toast.makeText(getActivity(), "Button play click!",
                         Toast.LENGTH_LONG).show();
                 break;
-            case R.id.next:
+            case R.id.imgNext:
                 Toast.makeText(getActivity(), "Button next click!",
                         Toast.LENGTH_LONG).show();
                 break;
-            case R.id.reduce:
+            case R.id.imgReduce:
                 Toast.makeText(getActivity(), "Button reduce click!",
                         Toast.LENGTH_LONG).show();
                 break;
-            case R.id.add:
+            case R.id.imgAdd:
                 Toast.makeText(getActivity(), "Button add click!",
-                        Toast.LENGTH_LONG).show();
-                break;
-            case R.id.other:
-                Toast.makeText(getActivity(), "Button other click!",
                         Toast.LENGTH_LONG).show();
                 break;
             case R.id.imgClear:
