@@ -13,19 +13,16 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.vk2.touchsreentab.R;
 import com.vk2.touchsreentab.activity.MainActivity;
 import com.vk2.touchsreentab.database.entity.Song;
-import com.vk2.touchsreentab.fragment.fragmentcontroller.DiskFragment;
 import com.vk2.touchsreentab.fragment.fragmentcontroller.Fragmentcz;
 import com.vk2.touchsreentab.fragment.fragmentcontroller.Fragmentez;
 import com.vk2.touchsreentab.fragment.fragmentcontroller.Fragmentoz;
 import com.vk2.touchsreentab.fragment.fragmentcontroller.Fragmenttz;
 import com.vk2.touchsreentab.model.PageControl;
 import com.vk2.touchsreentab.model.viewmodel.PlaylistModelView;
-import com.vk2.touchsreentab.view.CustomDialogMessage;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,7 +37,6 @@ public class PageFragment extends BaseFragment implements View.OnClickListener {
     private ImageView imgBack;
     private TextView tvNumber;
     private ControlFragment controlFragment;
-    private DiskFragment diskFragment;
 
     @Nullable
     @Override
