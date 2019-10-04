@@ -37,6 +37,7 @@ public class ArtistAdapter extends PagedListAdapter<Singer, ArtistViewHolder> {
                 if (onItemClick != null) onItemClick.onClick(singer);
             }
         });
+        artistViewHolder.artistBinding.executePendingBindings();
     }
 
    public interface OnItemClick {

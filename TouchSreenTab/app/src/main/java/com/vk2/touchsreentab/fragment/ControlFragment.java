@@ -27,7 +27,7 @@ public class ControlFragment extends BaseFragment implements View.OnClickListene
     private View view;
     private EditText edtSearch;
     private ImageView imgEnter;
-    private PageFragment pageFragment;
+
     private TextSearchViewModel textSearchViewModel;
     private TextSearch textSearch;
 
@@ -35,10 +35,7 @@ public class ControlFragment extends BaseFragment implements View.OnClickListene
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_control, container, false);
-        pageFragment = (PageFragment) getFragmentByTag(PageFragment.class.getName());
         initView();
-
-
         return view;
     }
 
@@ -90,10 +87,10 @@ public class ControlFragment extends BaseFragment implements View.OnClickListene
                 if (imgEnter.getVisibility() == View.GONE) {
                     if (TextUtils.isEmpty(charSequence)) {
                         imgClear.setVisibility(View.GONE);
-                        showRecommendFragment();
+                        gotoRecommend();
                     } else {
                         imgClear.setVisibility(View.VISIBLE);
-                        showSearchComplexFragment();
+                        gotoComplex();
                         submitSearchInput(charSequence);
                     }
                 }
@@ -116,15 +113,6 @@ public class ControlFragment extends BaseFragment implements View.OnClickListene
                 textSearchViewModel.setTextSearch(textSearch);
             }
         }, 300);
-    }
-
-
-    private void showSearchComplexFragment() {
-        if (pageFragment != null) pageFragment.onFragmentChange(Fragmentez.SEARCH_COMPLEX_FRAGMENT);
-    }
-
-    private void showRecommendFragment() {
-        if (pageFragment != null) pageFragment.onFragmentChange(Fragmentez.RECOMMEND_FRAGMENT);
     }
 
     public void showButtonEnter() {

@@ -4,6 +4,8 @@ import android.support.v4.app.Fragment;
 
 import com.vk2.touchsreentab.fragment.ArtistFragment;
 import com.vk2.touchsreentab.fragment.ControlFragment;
+import com.vk2.touchsreentab.fragment.DownloadFragment;
+import com.vk2.touchsreentab.fragment.HistoryFragment;
 import com.vk2.touchsreentab.fragment.PageFragment;
 import com.vk2.touchsreentab.fragment.PlayerFragment;
 import com.vk2.touchsreentab.fragment.PlaylistFragment;
@@ -42,6 +44,10 @@ public class Fragmentiz {
                 return new SongFragment();
             case SETTING_FRAGMENT:
                 return new SettingFragment();
+            case HISTORY_FRAGMENT:
+                return new HistoryFragment();
+            case DOWNLOAD_FRAGMENT:
+                return new DownloadFragment();
         }
         return null;
     }

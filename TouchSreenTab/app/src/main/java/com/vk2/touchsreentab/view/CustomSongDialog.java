@@ -27,16 +27,16 @@ public class CustomSongDialog extends Dialog implements View.OnClickListener,
         MediaPlayer.OnPreparedListener,
         MediaPlayer.OnCompletionListener {
     private static final int MESSAGE_CURRENT_POSITION = 1;
-//
+
     private Context mContext;
     private ImageView ivCancel, ivSelect, ivInsertTop;
     private TextView tvSongName, tvCurrentDuration, tvMaxDuration, tvSinger;
     private SurfaceView videoSurfaceView;
     private SeekBar seekBarVideo;
-//
+
     MediaPlayer mediaPlayer;
     Thread updateSeekBarThread;
-//
+
     private Song mSong;
     private int mCurrentPosition, mMaxDuration;
     private SurfaceHolder surfaceHolder;
@@ -49,6 +49,7 @@ public class CustomSongDialog extends Dialog implements View.OnClickListener,
         this.mSong = song;
         this.onButtonDialogClick = onButtonDialogClick;
     }
+
     public CustomSongDialog(Context context, Song song) {
         super(context);
         this.mContext = context;
@@ -70,36 +71,38 @@ public class CustomSongDialog extends Dialog implements View.OnClickListener,
         tvSongName = findViewById(R.id.tv_song_name);
         tvSinger = findViewById(R.id.tv_singer);
         tvCurrentDuration = findViewById(R.id.tv_current_duration);
-        tvMaxDuration= findViewById(R.id.tv_max_duration);
+        tvMaxDuration = findViewById(R.id.tv_max_duration);
         videoSurfaceView = findViewById(R.id.video_surfaceView);
         seekBarVideo = findViewById(R.id.seekbar_video);
         surfaceHolder = videoSurfaceView.getHolder();
         surfaceHolder.addCallback(this);
-//
+
         ivCancel.setOnClickListener(this);
         ivSelect.setOnClickListener(this);
         ivInsertTop.setOnClickListener(this);
-//
+
         showSongInfo();
     }
 
     @Override
     public void surfaceCreated(SurfaceHolder holder) {
-        if (mediaPlayer == null){
+        if (mediaPlayer == null) {
             mediaPlayer = new MediaPlayer();
         }
         mediaPlayer.setDisplay(holder);
         showVideo();
     }
-//  hiển thị thông tin video
+
+    //  hiển thị thông tin video
     private void showSongInfo() {
-        if (mSong!= null){
+        if (mSong != null) {
             tvSongName.setText(mSong.getSongName());
             tvSinger.setText(mSong.getSingerName1());
-            Log.e("nhat","Song MType: "+mSong.getMType());
+            Log.e("nhat", "Song MType: " + mSong.getMType());
         }
     }
-// config media player, set data
+
+    // config media player, set data
     private void showVideo() {
         mediaPlayer.reset();
         try {
@@ -113,7 +116,8 @@ public class CustomSongDialog extends Dialog implements View.OnClickListener,
         initHandler();
         updateSeekBar();
     }
-// tạo handler xử lý trên UI
+
+    // tạo handler xử lý trên UI
     private void initHandler() {
         mHandler = new Handler() {
             @Override
@@ -131,7 +135,8 @@ public class CustomSongDialog extends Dialog implements View.OnClickListener,
             }
         };
     }
-//  config cho seekbar, tạo thread update current position của video
+
+    //  config cho seekbar, tạo thread update current position của video
     private void updateSeekBar() {
         mMaxDuration = mediaPlayer.getDuration();
         tvMaxDuration.setText(millisecondsToString(mMaxDuration));
@@ -149,7 +154,7 @@ public class CustomSongDialog extends Dialog implements View.OnClickListener,
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
-                if (mediaPlayer != null){
+                if (mediaPlayer != null) {
                     mediaPlayer.seekTo(mCurrentPosition);
                     tvCurrentDuration.setText(millisecondsToString(mCurrentPosition));
                 }
@@ -171,7 +176,7 @@ public class CustomSongDialog extends Dialog implements View.OnClickListener,
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
-                }while (isThreadWorking);
+                } while (isThreadWorking);
             }
         });
         updateSeekBarThread.start();
@@ -186,7 +191,8 @@ public class CustomSongDialog extends Dialog implements View.OnClickListener,
     public void surfaceDestroyed(SurfaceHolder holder) {
 
     }
-//khi prepare xong thì có thể start video
+
+    //khi prepare xong thì có thể start video
     @Override
     public void onPrepared(MediaPlayer mp) {
         mp.start();
@@ -196,31 +202,35 @@ public class CustomSongDialog extends Dialog implements View.OnClickListener,
     public void onCompletion(MediaPlayer mp) {
         isThreadWorking = false;
     }
-//callback
+
+    //callback
     public interface OnButtonDialogClick {
         void onSelected();
 
         void onInsertedTop();
     }
+
     private OnButtonDialogClick onButtonDialogClick;
-    public void setOnButtonDialogClick(OnButtonDialogClick onButtonDialogClick){
+
+    public void setOnButtonDialogClick(OnButtonDialogClick onButtonDialogClick) {
         this.onButtonDialogClick = onButtonDialogClick;
     }
+
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
-            case R.id.iv_button_cancel:{
+        switch (v.getId()) {
+            case R.id.iv_button_cancel: {
                 dismiss();
                 break;
             }
-            case R.id.iv_button_select:{
-                if (onButtonDialogClick != null){
+            case R.id.iv_button_select: {
+                if (onButtonDialogClick != null) {
                     onButtonDialogClick.onSelected();
                 }
                 break;
             }
-            case R.id.iv_button_insert_top:{
-                if (onButtonDialogClick != null){
+            case R.id.iv_button_insert_top: {
+                if (onButtonDialogClick != null) {
                     onButtonDialogClick.onInsertedTop();
                 }
                 break;
@@ -229,28 +239,29 @@ public class CustomSongDialog extends Dialog implements View.OnClickListener,
         dismiss();
     }
 
-//  release everything here
+    //  release everything here
     @Override
     protected void onStop() {
         super.onStop();
-        if(mediaPlayer.isPlaying()){
+        if (mediaPlayer.isPlaying()) {
             mediaPlayer.stop();
             mediaPlayer.release();
         }
         isThreadWorking = false;
     }
-// chuyển milisecond sang định dạng mm:ss, kiểu string
-    private String millisecondsToString(int milliseconds)  {
-        Log.e("nhat","milisecond: "+milliseconds);
-        if (milliseconds == 0){
+
+    // chuyển milisecond sang định dạng mm:ss, kiểu string
+    private String millisecondsToString(int milliseconds) {
+        Log.e("nhat", "milisecond: " + milliseconds);
+        if (milliseconds == 0) {
             return "0:00";
         }
         long minutes = TimeUnit.MILLISECONDS.toMinutes((long) milliseconds);
-        long seconds =  TimeUnit.MILLISECONDS.toSeconds((long) milliseconds);
-        long subSecond = seconds/60;
-        if ((seconds-subSecond*60) < 9){
-            return minutes+":0"+ ((seconds-subSecond*60)+1);
+        long seconds = TimeUnit.MILLISECONDS.toSeconds((long) milliseconds);
+        long subSecond = seconds / 60;
+        if ((seconds - subSecond * 60) < 9) {
+            return minutes + ":0" + ((seconds - subSecond * 60) + 1);
         }
-        return minutes+":"+ ((seconds-subSecond*60)+1);
+        return minutes + ":" + ((seconds - subSecond * 60) + 1);
     }
 }

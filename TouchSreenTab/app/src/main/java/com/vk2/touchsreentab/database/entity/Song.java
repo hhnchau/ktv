@@ -9,8 +9,6 @@ import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.v7.util.DiffUtil;
 import android.text.SpannableString;
-import android.text.Spanned;
-import android.text.style.BackgroundColorSpan;
 import android.text.style.ForegroundColorSpan;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -18,6 +16,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestOptions;
+import com.google.gson.annotations.SerializedName;
 
 
 @Entity(tableName = "song")
@@ -26,6 +25,7 @@ public class Song {
     @ColumnInfo(name = "FileName")
     @NonNull
     private String fileName = "0";
+    @SerializedName("songname")
     @ColumnInfo(name = "SongName")
     private String songName;
     @ColumnInfo(name = "WordNum")
@@ -34,6 +34,7 @@ public class Song {
     private String pyCode;
     @ColumnInfo(name = "Stroke")
     private String stroke;
+    @SerializedName("singername1")
     @ColumnInfo(name = "SingerName1")
     private String singerName1;
     @ColumnInfo(name = "SingerName2")
@@ -70,6 +71,8 @@ public class Song {
     private String spell;
     @ColumnInfo(name = "NamePinyin")
     private String namePinyin;
+    @ColumnInfo(name = "Selected")
+    private Integer selected;
 
     @Ignore
     private String videoPath;
@@ -263,7 +266,7 @@ public class Song {
     }
 
     @Ignore
-    private String image = "https://api.androidhive.info/images/nature/2.jpg";
+    private String image = "https://api.androidhive.info/images/nature/8.jpg";
 
     public String getImage() {
         return image;
@@ -279,6 +282,14 @@ public class Song {
 
     public void setVideoPath(String videoPath) {
         this.videoPath = videoPath;
+    }
+
+    public Integer getSelected() {
+        return selected;
+    }
+
+    public void setSelected(Integer selected) {
+        this.selected = selected;
     }
 
     @BindingAdapter("urlSongImage")
@@ -305,13 +316,13 @@ public class Song {
 
     public static DiffUtil.ItemCallback<Song> DIFF_CALLBACK = new DiffUtil.ItemCallback<Song>() {
         @Override
-        public boolean areItemsTheSame(@NonNull Song song, @NonNull Song t1) {
-            return song.fileName.equals(t1.fileName);
+        public boolean areItemsTheSame(@NonNull Song song, @NonNull Song song1) {
+            return song.fileName.equals(song1.fileName);
         }
 
         @Override
-        public boolean areContentsTheSame(@NonNull Song song, @NonNull Song t1) {
-            return song.equals(t1);
+        public boolean areContentsTheSame(@NonNull Song song, @NonNull Song song1) {
+            return song.equals(song1);
         }
     };
 
@@ -319,6 +330,6 @@ public class Song {
     public boolean equals(Object obj) {
         if (obj == this) return true;
         Song song = (Song) obj;
-        return song.fileName.equals(this.fileName) && song.songName.equals(this.songName);
+        return song.selected.equals(this.selected);
     }
 }

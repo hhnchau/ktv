@@ -2,7 +2,9 @@ package com.vk2.touchsreentab.database.dao;
 
 import android.arch.paging.DataSource;
 import android.arch.persistence.room.Dao;
+import android.arch.persistence.room.OnConflictStrategy;
 import android.arch.persistence.room.Query;
+import android.arch.persistence.room.Update;
 
 import com.vk2.touchsreentab.database.entity.Song;
 
@@ -16,4 +18,10 @@ public interface SongDao {
 
     @Query("SELECT * FROM (SELECT * FROM song LIMIT 1) UNION ALL SELECT * FROM song WHERE SongNamePinyin LIKE :keyword OR PyCode LIKE :key OR NamePinyin LIKE  :keyword OR Spell LIKE :key")
     DataSource.Factory<Integer, Song> getSongBySearch(String keyword, String key);
+
+    @Query("UPDATE song SET Selected = :selected WHERE FileName = :fileName")
+    void setSelected(int selected, String fileName);
+
+    @Query("UPDATE song set Selected = 0")
+    void clearSelected();
 }

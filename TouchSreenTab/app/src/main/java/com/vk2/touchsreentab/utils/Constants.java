@@ -1,0 +1,1 @@
+package com.vk2.touchsreentab.utils;public class Constants {    public static String LOADING = "LOADING";    public static String LOADED = "LOADED";    public static int MAX_ITEM_SONG = 50;    public static int LIMIT_ITEM = 10;}

@@ -17,26 +17,30 @@ import com.vk2.touchsreentab.activity.MainActivity;
 
 public class PlayerFragment extends BaseFragment implements View.OnClickListener {
     private View view;
+    private int count = 0;
+
     private LinearLayout layoutSetting;
     private ImageView imgArrow;
     private Button btnDefault, btnTreble, btnBass;
     private ImageView btnIncrVol, btnDecrVol, btnIncrTone, btnDecrTone;
     private SeekBar seekBarVol, seekBarTone;
     private TextView tvVolValue, tvToneValue;
-//
+
     private int toneValue, volValue;
     private int currentTonePresetValue = 0;
     private final int TONE_PRESET_DEFAULT = 0;
     private final int TONE_PRESET_TREBLE = 1;
     private final int TONE_PRESET_BASS = 2;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_player, container, false);
-        initView(view);
+        initView();
         return view;
     }
-    private void initView(View view){
+
+    private void initView() {
         imgArrow = view.findViewById(R.id.img_arrow);
         layoutSetting = view.findViewById(R.id.layout_setting);
 
@@ -102,92 +106,92 @@ public class PlayerFragment extends BaseFragment implements View.OnClickListener
             }
         });
     }
-    int count = 0;
+
     @Override
     public void onClick(View view) {
-        switch (view.getId()){
+        switch (view.getId()) {
             case R.id.zoom:
-                if(count % 2 == 0 ){
+                if (count % 2 == 0) {
                     ((MainActivity) getActivity()).playerFullScreen();
-                }else {
+                } else {
                     ((MainActivity) getActivity()).playerSmallScreen();
                 }
-                count ++;
+                count++;
                 break;
             case R.id.control:
-                if (layoutSetting.getVisibility() == View.GONE){
+                if (layoutSetting.getVisibility() == View.GONE) {
                     layoutSetting.setVisibility(View.VISIBLE);
                     imgArrow.setVisibility(View.VISIBLE);
-                }
-                else {
+                } else {
                     layoutSetting.setVisibility(View.GONE);
                     imgArrow.setVisibility(View.GONE);
                 }
                 break;
             case R.id.feeling:
                 break;
-            case R.id.btn_incr_vol:{
-                if (volValue < 100){
+            case R.id.btn_incr_vol: {
+                if (volValue < 100) {
                     volValue++;
                     seekBarVol.setProgress(volValue);
                     tvVolValue.setText(String.valueOf(volValue));
                 }
                 break;
             }
-            case R.id.btn_decr_vol:{
-                if (volValue > 0){
+            case R.id.btn_decr_vol: {
+                if (volValue > 0) {
                     volValue--;
                     seekBarVol.setProgress(volValue);
                     tvVolValue.setText(String.valueOf(volValue));
                 }
                 break;
             }
-            case R.id.btn_incr_tone:{
-                if (toneValue < 4){
+            case R.id.btn_incr_tone: {
+                if (toneValue < 4) {
                     toneValue++;
                     seekBarTone.setProgress(toneValue);
                     tvToneValue.setText(String.valueOf(toneValue));
                 }
                 break;
             }
-            case R.id.btn_decr_tone:{
-                if (toneValue > 0){
+            case R.id.btn_decr_tone: {
+                if (toneValue > 0) {
                     toneValue--;
                     seekBarTone.setProgress(toneValue);
                     tvToneValue.setText(String.valueOf(toneValue));
                 }
                 break;
             }
-            case R.id.btn_tone_preset_default:{
+            case R.id.btn_tone_preset_default: {
                 checkTonePresetValue(TONE_PRESET_DEFAULT);
                 break;
             }
-            case R.id.btn_tone_preset_treble:{
+            case R.id.btn_tone_preset_treble: {
                 checkTonePresetValue(TONE_PRESET_TREBLE);
                 break;
             }
-            case R.id.btn_tone_preset_bass:{
+            case R.id.btn_tone_preset_bass: {
                 checkTonePresetValue(TONE_PRESET_BASS);
                 break;
             }
         }
     }
-// default là TONE_PRESET_DEFAULT = 0, check
-    private void checkTonePresetValue(int tonePresetValue){
-        if (this.currentTonePresetValue == tonePresetValue){
+
+    // default là TONE_PRESET_DEFAULT = 0, check
+    private void checkTonePresetValue(int tonePresetValue) {
+        if (this.currentTonePresetValue == tonePresetValue) {
             return;
         }
 //      set lại background unselect cho button
-        switch (this.currentTonePresetValue){
-            case TONE_PRESET_DEFAULT:{
+        switch (this.currentTonePresetValue) {
+            case TONE_PRESET_DEFAULT: {
                 btnDefault.setBackgroundResource(R.drawable.custom_rounded_border_unselected_button);
                 break;
             }
-            case TONE_PRESET_TREBLE:{
+            case TONE_PRESET_TREBLE: {
                 btnTreble.setBackgroundResource(R.drawable.custom_rounded_border_unselected_button);
                 break;
             }
-            case TONE_PRESET_BASS:{
+            case TONE_PRESET_BASS: {
                 btnBass.setBackgroundResource(R.drawable.custom_rounded_border_unselected_button);
                 break;
             }
@@ -195,16 +199,16 @@ public class PlayerFragment extends BaseFragment implements View.OnClickListener
 //        xử lý sự kiện click button ở đây
         this.currentTonePresetValue = tonePresetValue;
 //        selected
-        switch (tonePresetValue){
-            case TONE_PRESET_DEFAULT:{
+        switch (tonePresetValue) {
+            case TONE_PRESET_DEFAULT: {
                 btnDefault.setBackgroundResource(R.drawable.custom_rounded_border_selected_button);
                 break;
             }
-            case TONE_PRESET_TREBLE:{
+            case TONE_PRESET_TREBLE: {
                 btnTreble.setBackgroundResource(R.drawable.custom_rounded_border_selected_button);
                 break;
             }
-            case TONE_PRESET_BASS:{
+            case TONE_PRESET_BASS: {
                 btnBass.setBackgroundResource(R.drawable.custom_rounded_border_selected_button);
                 break;
             }
