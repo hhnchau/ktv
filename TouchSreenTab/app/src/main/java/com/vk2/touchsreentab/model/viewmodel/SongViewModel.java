@@ -25,11 +25,13 @@ public class SongViewModel extends ViewModel {
         return progressLoadStatus;
     }
 
-    public void setProgressLoadStatus(LiveData<String> progressLoadStatus) {
-        this.progressLoadStatus = progressLoadStatus;
+    private LiveData<String> progressLoadStatus = new MutableLiveData<>();
+
+    public LiveData<Integer> getTotalLive() {
+        return totalLive;
     }
 
-    private LiveData<String> progressLoadStatus = new MutableLiveData<>();
+    private LiveData<Integer> totalLive = new MutableLiveData<>();
     private static final int LIMIT = 20;
 
     public SongViewModel() {
@@ -66,6 +68,12 @@ public class SongViewModel extends ViewModel {
             @Override
             public LiveData<String> apply(SongDataSource progressLoadStatus) {
                 return progressLoadStatus.getProgressLiveStatus();
+            }
+        });
+        totalLive = Transformations.switchMap(songDataSourceFactory.getMutableLiveData(), new Function<SongDataSource, LiveData<Integer>>() {
+            @Override
+            public LiveData<Integer> apply(SongDataSource input) {
+                return input.getTotalLive();
             }
         });
     }
