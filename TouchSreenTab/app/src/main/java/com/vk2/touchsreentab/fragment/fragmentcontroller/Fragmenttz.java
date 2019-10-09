@@ -43,7 +43,7 @@ public class Fragmenttz {
                 ll4.setVisibility(View.VISIBLE);
                 break;
             case SINGER_FRAGMENT:
-
+                ll1.setVisibility(View.VISIBLE);
                 break;
             case SONG_FRAGMENT:
                 ll2.setVisibility(View.VISIBLE);

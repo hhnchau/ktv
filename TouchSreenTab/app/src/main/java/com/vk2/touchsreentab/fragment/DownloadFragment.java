@@ -47,4 +47,9 @@ public class DownloadFragment extends BaseFragment {
         });
 
     }
+
+    @Override
+    protected void onResumeFragment() {
+        showBackButton();
+    }
 }

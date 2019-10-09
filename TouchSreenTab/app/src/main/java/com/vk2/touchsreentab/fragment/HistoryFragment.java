@@ -45,4 +45,9 @@ public class HistoryFragment extends BaseFragment {
             }
         });
     }
+
+    @Override
+    protected void onResumeFragment() {
+        showBackButton();
+    }
 }

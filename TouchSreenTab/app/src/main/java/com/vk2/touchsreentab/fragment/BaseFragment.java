@@ -13,6 +13,7 @@ import com.vk2.touchsreentab.R;
 import com.vk2.touchsreentab.aplication.MyApplication;
 import com.vk2.touchsreentab.database.entity.Song;
 import com.vk2.touchsreentab.fragment.fragmentcontroller.Fragmentez;
+import com.vk2.touchsreentab.model.Ablum;
 import com.vk2.touchsreentab.model.PageControl;
 import com.vk2.touchsreentab.model.viewmodel.PageControlViewModel;
 import com.vk2.touchsreentab.model.viewmodel.PlaylistModelView;
@@ -28,12 +29,14 @@ public abstract class BaseFragment extends Fragment {
     private SongViewModel songViewModel;
     private TextSearchViewModel textSearchViewModel;
     private PageFragment pageFragment;
+    private ControlFragment controlFragment;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getActivity() == null) return;
         pageFragment = (PageFragment) getFragmentByTag(PageFragment.class.getName());
+        controlFragment = (ControlFragment) getFragmentByTag(ControlFragment.class.getName());
         pageControlViewModel = ViewModelProviders.of(getActivity()).get(PageControlViewModel.class);
         playlistModelView = ViewModelProviders.of(getActivity()).get(PlaylistModelView.class);
         singerVewModel = ViewModelProviders.of(getActivity()).get(SingerVewModel.class);
@@ -57,12 +60,9 @@ public abstract class BaseFragment extends Fragment {
         }
     }
 
-    protected int getCurrentPage() {
-        return 0;
-    }
 
-    protected int getTotalPage() {
-        return 0;
+    protected void onResumeFragment() {
+
     }
 
     public SingerVewModel getSingerVewModel() {
@@ -103,13 +103,13 @@ public abstract class BaseFragment extends Fragment {
     protected void gotoRecommend() {
         if (pageFragment != null) {
             pageFragment.onFragmentChange(Fragmentez.RECOMMEND_FRAGMENT);
-            handleBackButton();
         }
     }
 
-    protected void gotoSinger(Integer idSinger) {
+    protected void gotoSinger(Integer idSinger, String singerName) {
         if (pageFragment != null) {
             pageFragment.onFragmentChange(Fragmentez.SINGER_FRAGMENT);
+            pageFragment.setTitleTopBar(singerName);
             singerVewModel.idSinger.setValue(idSinger);
         }
     }
@@ -135,6 +135,10 @@ public abstract class BaseFragment extends Fragment {
         dialog.show();
     }
 
+    protected void handleBanner(Ablum album) {
+        Toast.makeText(getActivity(), "Xu ly Album", Toast.LENGTH_SHORT).show();
+    }
+
     protected void updatePlaylist(Song song, int type) {
         playlistModelView.setValue(getActivity(), song, type);
     }
@@ -147,13 +151,23 @@ public abstract class BaseFragment extends Fragment {
         if (pageFragment != null) pageFragment.hideBackButton();
     }
 
-    protected void changeBackgroundTopbar(int color) {
-        if (pageFragment != null) pageFragment.changeBackgroundTopbar(color);
+    protected void showEnterButton() {
+        if (controlFragment != null) controlFragment.showEnterButton();
     }
 
+    protected void hideEnterButton() {
+        if (controlFragment != null) controlFragment.hideEnterButton();
+    }
 
-    protected void handleBackButton() {
-        RecommendFragment recommendFragment = (RecommendFragment) getFragmentByTag(RecommendFragment.class.getName());
-        if (recommendFragment != null) recommendFragment.handleBackButton();
+    protected void clearTextSearch() {
+        if (controlFragment != null) controlFragment.clearTextSearch();
+    }
+
+    protected void showTopBar() {
+        if (pageFragment != null) pageFragment.showTopBar();
+    }
+
+    protected void hideTopBar() {
+        if (pageFragment != null) pageFragment.hideTopBar();
     }
 }

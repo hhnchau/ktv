@@ -86,7 +86,8 @@ public class ControlFragment extends BaseFragment implements View.OnClickListene
                 if (imgEnter.getVisibility() == View.GONE) {
                     if (TextUtils.isEmpty(charSequence)) {
                         imgClear.setVisibility(View.GONE);
-                        gotoRecommend();
+                        if (Fragmentcz.getCurrentFragment() == Fragmentez.SEARCH_COMPLEX_FRAGMENT)
+                            gotoRecommend();
                     } else {
                         imgClear.setVisibility(View.VISIBLE);
                         gotoComplex();
@@ -114,15 +115,18 @@ public class ControlFragment extends BaseFragment implements View.OnClickListene
         }, 300);
     }
 
-    public void showButtonEnter() {
+    @Override
+    protected void showEnterButton() {
         if (getActivity() != null && imgEnter != null) imgEnter.setVisibility(View.VISIBLE);
     }
 
-    public void hideButtonEnter() {
+    @Override
+    protected void hideEnterButton() {
         if (getActivity() != null && imgEnter != null) imgEnter.setVisibility(View.GONE);
     }
 
-    public void clearSearch() {
+    @Override
+    protected void clearTextSearch() {
         edtSearch.setText("");
         imgEnter.setVisibility(View.GONE);
     }
