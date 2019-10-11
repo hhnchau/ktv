@@ -48,19 +48,7 @@ public class DownloadAdapter extends RecyclerView.Adapter<DownloadViewHolder> {
                 if (onItemClick != null) onItemClick.onRemoveClick(song);
             }
         });
-        holder.playlistBinding.imgMove.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (onItemClick != null) onItemClick.onMoveClick(song);
-            }
-        });
 
-        holder.playlistBinding.imgMore.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (onItemClick != null) onItemClick.onIconClick(song);
-            }
-        });
     }
 
     @Override
@@ -74,9 +62,6 @@ public class DownloadAdapter extends RecyclerView.Adapter<DownloadViewHolder> {
 
         void onRemoveClick(Song song);
 
-        void onMoveClick(Song song);
-
-        void onIconClick(Song song);
     }
 
     private OnItemClick onItemClick;

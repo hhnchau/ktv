@@ -10,14 +10,17 @@ import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.annotation.NonNull;
 
+import com.vk2.touchsreentab.database.dao.CategoryDao;
 import com.vk2.touchsreentab.database.dao.SingerDao;
 import com.vk2.touchsreentab.database.dao.SongDao;
 import com.vk2.touchsreentab.database.entity.Singer;
 import com.vk2.touchsreentab.database.entity.Song;
+import com.vk2.touchsreentab.database.entity.SongLang;
+import com.vk2.touchsreentab.database.entity.SongType;
 
 import static android.content.Context.MODE_PRIVATE;
 
-@Database(entities = {Singer.class, Song.class}, version = 2, exportSchema = false)
+@Database(entities = {Singer.class, Song.class, SongType.class, SongLang.class}, version = 2, exportSchema = false)
 public abstract class AppDatabase extends RoomDatabase {
     private static final String DB_NAME = "song-0905.db";
 
@@ -57,5 +60,7 @@ public abstract class AppDatabase extends RoomDatabase {
     public abstract SongDao songDao();
 
     public abstract SingerDao singerDao();
+
+    public abstract CategoryDao categoryDao();
 
 }

@@ -38,7 +38,7 @@ public class HistoryFragment extends BaseFragment {
         rcv.setAdapter(adapter);
 
         if (getActivity() == null) return;
-        getPlaylistModelView().getPlaylist().observe(getActivity(), new Observer<List<Song>>() {
+        getPlaylistModelView().getHistory().observe(getActivity(), new Observer<List<Song>>() {
             @Override
             public void onChanged(List<Song> songs) {
                 adapter.update(songs);

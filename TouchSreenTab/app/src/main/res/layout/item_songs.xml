@@ -51,24 +51,62 @@
             bind:character="@{textSearch}"
             android:textColor="@{song.selected == 0 ? @color/white: @color/yellow}"
             android:textSize="@dimen/sp_16"
-            app:layout_constraintEnd_toStartOf="@+id/imgMore"
+            app:layout_constraintEnd_toStartOf="@+id/box"
             app:layout_constraintStart_toEndOf="@id/imgSong"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintVertical_bias="0.3"/>
 
-        <ImageView
-            android:id="@+id/imgMore"
-            android:layout_width="@dimen/dp_35"
-            android:layout_height="@dimen/dp_35"
-            android:background="@drawable/more"
-            android:clickable="true"
-            android:contentDescription="@string/img"
-            android:focusable="true"
-            android:scaleType="fitCenter"
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/box"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ProgressBar
+                android:id="@+id/progressBar"
+                android:theme="@style/white_loading"
+                style="?android:attr/progressBarStyle"
+                android:layout_width="@dimen/dp_45"
+                android:layout_height="@dimen/dp_45"
+                android:layout_gravity="center"
+                android:background="@android:color/transparent"
+                app:layout_constraintTop_toTopOf="@id/imgLoading"
+                app:layout_constraintBottom_toBottomOf="@id/imgLoading"
+                app:layout_constraintStart_toStartOf="@id/imgLoading"/>
+
+            <ImageView
+                android:id="@+id/imgLoading"
+                android:layout_width="@dimen/dp_45"
+                android:layout_height="@dimen/dp_45"
+                android:background="@mipmap/pause_loading"
+                android:clickable="true"
+                android:contentDescription="@string/img"
+                android:focusable="true"
+                android:layout_margin="@dimen/dp_12"
+                android:scaleType="fitCenter"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"/>
+
+            <ImageView
+                android:id="@+id/imgMore"
+                android:layout_width="@dimen/dp_45"
+                android:layout_height="@dimen/dp_45"
+                android:background="@drawable/more"
+                android:clickable="true"
+                android:contentDescription="@string/img"
+                android:focusable="true"
+                android:scaleType="fitCenter"
+                android:layout_margin="@dimen/dp_12"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toEndOf="@id/imgLoading"/>
+
+        </android.support.constraint.ConstraintLayout>
 
 
         <ImageView
@@ -94,7 +132,7 @@
             android:textColor="@{song.selected == 0 ? @color/white: @color/yellow_8}"
             android:textSize="@dimen/sp_13"
             android:layout_margin="@dimen/dp_8"
-            app:layout_constraintEnd_toStartOf="@id/imgMore"
+            app:layout_constraintEnd_toStartOf="@id/box"
             app:layout_constraintStart_toEndOf="@id/imgType"
             app:layout_constraintTop_toBottomOf="@id/tvSongName"
             />
