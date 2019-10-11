@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="category"
+            type="com.vk2.touchsreentab.model.Category" />
+    </data>
+
+    <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/dp_8"
+        android:background="@{category.selected ? @drawable/custom_rounded_border_selected_button : @drawable/custom_rounded_border_unselected_button}"
+        android:paddingStart="@dimen/dp_16"
+        android:paddingTop="@dimen/dp_8"
+        android:paddingEnd="@dimen/dp_16"
+        android:paddingBottom="@dimen/dp_8"
+        android:text="@{category.songTypeName == null ? category.langDis : category.songTypeName}"
+        android:textSize="@dimen/sp_16">
+
+    </TextView>
+</layout>
