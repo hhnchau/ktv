@@ -55,6 +55,8 @@ public class SongViewModel extends ViewModel {
             }
         });
     }
+
+    @SuppressWarnings("unchecked")
     public void getAllListSong() {
         SongDataSourceFactory songDataSourceFactory = new SongDataSourceFactory();
         PagedList.Config pagedListConfig =

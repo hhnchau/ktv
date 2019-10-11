@@ -8,6 +8,9 @@ import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.content.res.ResourcesCompat;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,17 +22,22 @@ import android.widget.Toast;
 
 import com.vk2.touchsreentab.R;
 import com.vk2.touchsreentab.activity.MainActivity;
+import com.vk2.touchsreentab.adapter.CategoryAdapter;
+import com.vk2.touchsreentab.adapter.PlaylistAdapter;
 import com.vk2.touchsreentab.database.entity.Song;
 import com.vk2.touchsreentab.fragment.fragmentcontroller.Fragmentaz;
 import com.vk2.touchsreentab.fragment.fragmentcontroller.Fragmentcz;
 import com.vk2.touchsreentab.fragment.fragmentcontroller.Fragmentez;
 import com.vk2.touchsreentab.fragment.fragmentcontroller.Fragmentoz;
 import com.vk2.touchsreentab.fragment.fragmentcontroller.Fragmenttz;
+import com.vk2.touchsreentab.model.Category;
 import com.vk2.touchsreentab.model.PageControl;
+import com.vk2.touchsreentab.model.viewmodel.CategoryModelView;
 import com.vk2.touchsreentab.model.viewmodel.PlaylistModelView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class PageFragment extends BaseFragment implements View.OnClickListener, Fragmentaz.FragmentChangeListener {
     private View view;
@@ -38,8 +46,9 @@ public class PageFragment extends BaseFragment implements View.OnClickListener, 
     private LinearLayout boxRecommend, boxSongArtist, boxPlaylist, boxSearch;
     private View[] listArrow;
     private View[] listBackground;
-    private ImageView imgBack;
-    private TextView tvNumber, tvRecommend, tvPages;
+    private ImageView imgBack, arrowCategory;
+    private RecyclerView rcvCategory;
+    private TextView tvHot, tvNumber, tvRecommend, tvPages;
 
     private ConstraintLayout topBar;
 
@@ -48,8 +57,34 @@ public class PageFragment extends BaseFragment implements View.OnClickListener, 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_page, container, false);
         initView();
+        initCategory();
         onFragmentChange(Fragmentez.RECOMMEND_FRAGMENT);
         return view;
+    }
+
+    private void initCategory() {
+        if (getActivity() == null) return;
+        CategoryModelView categoryModelView = ViewModelProviders.of(getActivity()).get(CategoryModelView.class);
+        categoryModelView.getAllCategory();
+        categoryModelView.mapCategory.observe(getActivity(), new Observer<Map<String, List<Category>>>() {
+            @Override
+            public void onChanged(@Nullable Map<String, List<Category>> stringListMap) {
+                CategoryAdapter adapter = new CategoryAdapter(stringListMap);
+                rcvCategory.setAdapter(adapter);
+                final LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity(),  LinearLayout.VERTICAL, false);
+                rcvCategory.setLayoutManager(layoutManager);
+            }
+        });
+    }
+
+    private void showCategory() {
+        rcvCategory.setVisibility(View.VISIBLE);
+        arrowCategory.setVisibility(View.VISIBLE);
+    }
+
+    private void hideCategory() {
+        rcvCategory.setVisibility(View.GONE);
+        arrowCategory.setVisibility(View.GONE);
     }
 
     public void setTitleTopBar(final String s) {
@@ -62,12 +97,12 @@ public class PageFragment extends BaseFragment implements View.OnClickListener, 
             });
     }
 
-
     public void onFragmentChange(Fragmentez frgez) {
         Log.d("TAG - CHANGE FRAGMENT: ", frgez.name());
         if (frgez == Fragmentez.SINGER_FRAGMENT) backStack = Fragmentcz.getCurrentFragment();
         Fragmentcz.addFragment(lstFrg, getFragmentManager(), frgez, false, R.id.layout_container, null, Fragmentcz.NONE);
         Fragmentaz.getInstance().onFragmentListener(frgez, this, boxRecommend, boxSongArtist, boxPlaylist, boxSearch);
+        hideCategory();
     }
 
 
@@ -111,6 +146,10 @@ public class PageFragment extends BaseFragment implements View.OnClickListener, 
 
     private void initView() {
         lstFrg = new ArrayList<>();
+        tvHot = view.findViewById(R.id.tvHot);
+        tvHot.setOnClickListener(this);
+        arrowCategory = view.findViewById(R.id.arrowCategory);
+        rcvCategory = view.findViewById(R.id.rcvCategory);
         topBar = view.findViewById(R.id.layoutTopbar);
         tvNumber = view.findViewById(R.id.tvNumber);
         boxRecommend = view.findViewById(R.id.boxRecommend);
@@ -260,6 +299,12 @@ public class PageFragment extends BaseFragment implements View.OnClickListener, 
                 break;
             case R.id.imgBack:
                 pageControl(Fragmentcz.getCurrentFragment(), PageControl.TOP);
+                break;
+            case R.id.tvHot:
+                if (rcvCategory.getVisibility() == View.GONE)
+                    showCategory();
+                else
+                    hideCategory();
                 break;
         }
     }

@@ -21,51 +21,74 @@ public class PlaylistModelView extends ViewModel {
     public static final int RANDOM = 4;
     public static final int MOVE = 5;
     public static final int PRIORITY = 6;
+    public static final int PLAYED = 7;
 
-    private List<Song> lst = new ArrayList<>();
+    private List<Song> cachePlaylist = new ArrayList<>();
     private MutableLiveData<List<Song>> lstPlaylist = new MutableLiveData<>();
+    private List<Song> cacheHistory = new ArrayList<>();
+    private MutableLiveData<List<Song>> lstHistory = new MutableLiveData<>();
 
     public MutableLiveData<List<Song>> getPlaylist() {
         return lstPlaylist;
     }
 
+    public MutableLiveData<List<Song>> getHistory() {
+        return lstHistory;
+    }
+
     public void setValue(Context context, Song song, int type) {
-        for (Song s : lst) {
-            if (song != null && s.getFileName().equals(song.getFileName())) {
-                Toast.makeText(context, "Da ton tai", Toast.LENGTH_SHORT).show();
-                return;
+        if (type == ADD)
+            for (Song s : cachePlaylist) {
+                if (song != null && s.getFileName().equals(song.getFileName())) {
+                    Toast.makeText(context, "Da ton tai", Toast.LENGTH_SHORT).show();
+                    return;
+                }
             }
-        }
 
         switch (type) {
             case ADD:
-                lst.add(song);
+                cachePlaylist.add(song);
                 if (song != null)
                     new selected().execute(song.getFileName());
                 break;
             case REMOVE:
-                lst.remove(song);
+                cachePlaylist.remove(song);
+                setHistory(song);
+                if (song != null)
+                    new unSelected().execute(song.getFileName());
+                break;
+            case PLAYED:
+                cachePlaylist.remove(song);
+                setHistory(song);
                 if (song != null)
                     new unSelected().execute(song.getFileName());
                 break;
             case EMPTY:
-                lst.clear();
+                cachePlaylist.clear();
                 new clearSelected().execute();
                 break;
             case RANDOM:
-                Collections.shuffle(lst);
+                Collections.shuffle(cachePlaylist);
                 break;
             case MOVE:
-                while (lst.indexOf(song) != 0) {
-                    int i = lst.indexOf(song);
-                    Collections.swap(lst, i, i - 1);
+                for (int i = 0; i < cachePlaylist.size(); i++) {
+                    if (song != null && cachePlaylist.get(i).getFileName().equals(song.getFileName())) {
+                        cachePlaylist.remove(i);
+                        cachePlaylist.add(0, song);
+                        break;
+                    }
                 }
                 break;
             case PRIORITY:
-                lst.add(0, song);
+                cachePlaylist.add(0, song);
                 break;
         }
-        this.lstPlaylist.setValue(lst);
+        this.lstPlaylist.setValue(cachePlaylist);
+    }
+
+    private void setHistory(Song song) {
+        cacheHistory.add(0, song);
+        this.lstHistory.setValue(cacheHistory);
     }
 
     static class selected extends AsyncTask<String, Void, Void> {

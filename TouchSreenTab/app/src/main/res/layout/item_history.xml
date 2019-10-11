@@ -44,65 +44,21 @@
             android:text="@{song.songName}"
             android:textColor="@color/white"
             android:textSize="@dimen/sp_16"
-            app:layout_constraintEnd_toStartOf="@id/box"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/tvNumber"
             app:layout_constraintTop_toTopOf="parent" />
-
-        <LinearLayout
-            android:id="@+id/box"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <ImageView
-                android:id="@+id/imgCancel"
-                android:layout_width="@dimen/dp_45"
-                android:layout_height="@dimen/dp_45"
-                android:background="@mipmap/cancel"
-                android:clickable="true"
-                android:contentDescription="@string/img"
-                android:focusable="true"
-                android:layout_margin="@dimen/dp_8"
-                android:scaleType="fitCenter" />
-
-            <ImageView
-                android:id="@+id/imgMove"
-                android:layout_width="@dimen/dp_45"
-                android:layout_height="@dimen/dp_45"
-                android:background="@mipmap/move"
-                android:clickable="true"
-                android:contentDescription="@string/img"
-                android:focusable="true"
-                android:layout_margin="@dimen/dp_8"
-                android:scaleType="fitCenter" />
-
-            <ImageView
-                android:id="@+id/imgMore"
-                android:layout_width="@dimen/dp_45"
-                android:layout_height="@dimen/dp_45"
-                android:background="@drawable/more"
-                android:clickable="true"
-                android:contentDescription="@string/img"
-                android:focusable="true"
-                android:layout_margin="@dimen/dp_8"
-                android:scaleType="fitCenter" />
-
-        </LinearLayout>
-
 
         <ImageView
             android:id="@+id/imgType"
             android:layout_width="@dimen/dp_26"
             android:layout_height="@dimen/dp_13"
-            android:layout_margin="@dimen/dp_8"
+            android:layout_marginEnd="@dimen/dp_8"
+            android:layout_marginRight="@dimen/dp_8"
             android:contentDescription="@string/img"
             android:scaleType="fitCenter"
             android:src="@mipmap/k4"
             app:layout_constraintBottom_toBottomOf="@id/tvNameArtistSong"
-            app:layout_constraintStart_toEndOf="@id/tvNumber"
+            app:layout_constraintStart_toStartOf="@id/tvNameSong"
             app:layout_constraintTop_toTopOf="@id/tvNameArtistSong" />
 
         <TextView
@@ -114,9 +70,8 @@
             android:textColor="@color/white"
             android:textSize="@dimen/sp_13"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/box"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/imgType" />
-
 
     </android.support.constraint.ConstraintLayout>
 </layout>

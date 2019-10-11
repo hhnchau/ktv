@@ -48,7 +48,7 @@
             app:layout_constraintStart_toEndOf="@id/tvNumber"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <LinearLayout
+        <android.support.constraint.ConstraintLayout
             android:id="@+id/box"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -57,19 +57,34 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <ImageView
-                android:id="@+id/imgCancel"
+            <ProgressBar
+                android:id="@+id/progressBar"
+                android:theme="@style/white_loading"
+                style="?android:attr/progressBarStyle"
                 android:layout_width="@dimen/dp_45"
                 android:layout_height="@dimen/dp_45"
-                android:background="@mipmap/cancel"
+                android:layout_gravity="center"
+                android:background="@android:color/transparent"
+                app:layout_constraintTop_toTopOf="@id/imgLoading"
+                app:layout_constraintBottom_toBottomOf="@id/imgLoading"
+                app:layout_constraintStart_toStartOf="@id/imgLoading"/>
+
+            <ImageView
+                android:id="@+id/imgLoading"
+                android:layout_width="@dimen/dp_45"
+                android:layout_height="@dimen/dp_45"
+                android:background="@mipmap/pause_loading"
                 android:clickable="true"
                 android:contentDescription="@string/img"
                 android:focusable="true"
                 android:layout_margin="@dimen/dp_8"
-                android:scaleType="fitCenter" />
+                android:scaleType="fitCenter"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"/>
 
             <ImageView
-                android:id="@+id/imgMove"
+                android:id="@+id/imgCancel"
                 android:layout_width="@dimen/dp_45"
                 android:layout_height="@dimen/dp_45"
                 android:background="@mipmap/move"
@@ -77,32 +92,26 @@
                 android:contentDescription="@string/img"
                 android:focusable="true"
                 android:layout_margin="@dimen/dp_8"
-                android:scaleType="fitCenter" />
+                android:scaleType="fitCenter"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/imgLoading"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
 
-            <ImageView
-                android:id="@+id/imgMore"
-                android:layout_width="@dimen/dp_45"
-                android:layout_height="@dimen/dp_45"
-                android:background="@drawable/more"
-                android:clickable="true"
-                android:contentDescription="@string/img"
-                android:focusable="true"
-                android:layout_margin="@dimen/dp_8"
-                android:scaleType="fitCenter" />
-
-        </LinearLayout>
+        </android.support.constraint.ConstraintLayout>
 
 
         <ImageView
             android:id="@+id/imgType"
             android:layout_width="@dimen/dp_26"
             android:layout_height="@dimen/dp_13"
-            android:layout_margin="@dimen/dp_8"
+            android:layout_marginEnd="@dimen/dp_8"
+            android:layout_marginRight="@dimen/dp_8"
             android:contentDescription="@string/img"
             android:scaleType="fitCenter"
             android:src="@mipmap/k4"
             app:layout_constraintBottom_toBottomOf="@id/tvNameArtistSong"
-            app:layout_constraintStart_toEndOf="@id/tvNumber"
+            app:layout_constraintStart_toStartOf="@id/tvNameSong"
             app:layout_constraintTop_toTopOf="@id/tvNameArtistSong" />
 
         <TextView
