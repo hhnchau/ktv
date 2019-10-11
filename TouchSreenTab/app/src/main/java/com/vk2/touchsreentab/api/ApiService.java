@@ -32,6 +32,7 @@ public interface ApiService {
 
     @GET("media/singer/getHotSingers")
     Observable<ResultSinger> getListSingers(@Query("page") int page, @Query("limit") int limit);
+
     @GET("media/album/getListAlbum")
     Observable<ResultAblum> getListAblums(@Query("page") int page, @Query("limit") int limit);
 }
