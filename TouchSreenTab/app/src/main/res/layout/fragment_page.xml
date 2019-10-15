@@ -52,7 +52,7 @@
         android:id="@+id/arrowCategory"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@mipmap/arrow_black"
+        android:src="@mipmap/arrow"
         app:layout_constraintBottom_toTopOf="@id/rcvCategory"
         app:layout_constraintStart_toStartOf="@id/rcvCategory"
         android:layout_marginStart="@dimen/dp_46"

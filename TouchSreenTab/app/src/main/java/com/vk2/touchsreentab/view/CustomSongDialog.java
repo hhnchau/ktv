@@ -22,12 +22,12 @@ import com.vk2.touchsreentab.database.entity.Song;
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
+import static com.vk2.touchsreentab.utils.Constants.MESSAGE_CURRENT_POSITION;
+
 public class CustomSongDialog extends Dialog implements View.OnClickListener,
         SurfaceHolder.Callback,
         MediaPlayer.OnPreparedListener,
         MediaPlayer.OnCompletionListener {
-    private static final int MESSAGE_CURRENT_POSITION = 1;
-
     private Context mContext;
     private ImageView ivCancel, ivSelect, ivInsertTop;
     private TextView tvSongName, tvCurrentDuration, tvMaxDuration, tvSinger;
