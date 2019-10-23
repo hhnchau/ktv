@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="450dp"
     android:layout_height="394dp"
     android:orientation="vertical"
@@ -25,13 +26,13 @@
         <!--Button-Cancel-->
         <ImageView
             android:id="@+id/iv_button_cancel"
-            android:layout_marginRight="15dp"
+            android:layout_marginEnd="15dp"
             android:layout_marginTop="15dp"
-            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/clear"
-            />
+            tools:ignore="ContentDescription" />
         <!--SeekBar-&-Duration-Time-->
         <LinearLayout
             android:id="@+id/layout_control_seekbar"
@@ -51,7 +52,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginRight="14dp"
                 android:layout_marginLeft="14dp"
-                android:text="00:00"
+                android:text="@string/default_duration"
                 />
             <!--SeekBar-->
             <SeekBar
@@ -70,7 +71,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginRight="14dp"
                 android:layout_marginLeft="14dp"
-                android:text="00:00"
+                android:text="@string/default_duration"
                 />
 
         </LinearLayout>
@@ -95,7 +96,7 @@
             android:layout_marginEnd="@dimen/dp_8"
             android:ellipsize="end"
             android:maxLines="2"
-            android:text="Recusandae Aut Architecto Offici Haradk Baid is Eeirarao"
+            android:text="@string/default_title_song"
             android:textColor="@color/white"
             android:textSize="@dimen/sp_16"
             />
@@ -104,7 +105,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="horizontal"
-            >
+            android:baselineAligned="false">
             <!--Text-Left-->
             <LinearLayout
                 android:layout_weight="1"
@@ -130,7 +131,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/dp_8"
                     android:layout_marginEnd="@dimen/dp_8"
-                    android:text="Jakd Jrela Doa"
+                    android:text="@string/default_artist"
                     android:textColor="@color/white"
                     android:textSize="@dimen/sp_13"
                     android:layout_margin="@dimen/dp_8"
@@ -148,20 +149,20 @@
                 <RelativeLayout
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:layout_marginRight="50dp"
+                    android:layout_marginEnd="50dp"
                     >
                     <ImageView
                         android:id="@+id/iv_button_select"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:src="@mipmap/select"
-                        />
+                        tools:ignore="ContentDescription" />
                     <TextView
                         android:layout_alignParentBottom="true"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerHorizontal="true"
-                        android:text="Select"
+                        android:text="@string/select"
                         />
 
                 </RelativeLayout>
@@ -175,13 +176,13 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:src="@mipmap/top"
-                        />
+                        tools:ignore="ContentDescription" />
                     <TextView
                         android:layout_alignParentBottom="true"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerHorizontal="true"
-                        android:text="Top"
+                        android:text="@string/top"
                         />
                 </RelativeLayout>
             </LinearLayout>

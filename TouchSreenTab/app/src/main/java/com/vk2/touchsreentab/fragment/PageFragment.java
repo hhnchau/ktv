@@ -2,6 +2,7 @@ package com.vk2.touchsreentab.fragment;
 
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -18,8 +19,11 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.vk2.touchsreentab.R;
+import com.vk2.touchsreentab.activity.DiskUsbActivity;
+import com.vk2.touchsreentab.activity.MainActivity;
 import com.vk2.touchsreentab.adapter.CategoryAdapter;
 import com.vk2.touchsreentab.database.entity.Song;
 import com.vk2.touchsreentab.fragment.fragmentcontroller.Fragmentaz;
@@ -30,6 +34,7 @@ import com.vk2.touchsreentab.model.Category;
 import com.vk2.touchsreentab.model.PageControl;
 import com.vk2.touchsreentab.model.viewmodel.CategoryModelView;
 import com.vk2.touchsreentab.model.viewmodel.PlaylistModelView;
+import com.vk2.touchsreentab.view.CustomDialogMessage;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -258,23 +263,20 @@ public class PageFragment extends BaseFragment implements View.OnClickListener, 
                 onFragmentChange(Fragmentez.SETTING_FRAGMENT);
                 break;
             case R.id.usb:
-//                CustomDialogMessage dialogMessage = new CustomDialogMessage(getActivity(), new CustomDialogMessage.OnDialogMessageClick() {
-//                    @Override
-//                    public void onButtonOK() {
-//                        Toast.makeText(getContext(), "onButtonOK", Toast.LENGTH_SHORT).show();
-////                        ((MainActivity) getActivity()).pageFragmentFullSceen();
-////                        if (diskFragment == null) diskFragment = new DiskFragment();
-////                        getActivity().getSupportFragmentManager().beginTransaction()
-////                                .add(R.id.framePage, diskFragment, DiskFragment.class.getName()).addToBackStack(DiskFragment.class.getName()).commit();
-//                    }
-//
-//                    @Override
-//                    public void onButtonCancel() {
-//                        Toast.makeText(getContext(), "onButtonCancel", Toast.LENGTH_SHORT).show();
-//
-//                    }
-//                });
-//                dialogMessage.show();
+                CustomDialogMessage dialogMessage = new CustomDialogMessage(getActivity(), new CustomDialogMessage.OnDialogMessageClick() {
+                    @Override
+                    public void onButtonOK() {
+                        Toast.makeText(getContext(), "onButtonOK", Toast.LENGTH_SHORT).show();
+                        DiskUsbActivity.showMe(getActivity());
+                    }
+
+                    @Override
+                    public void onButtonCancel() {
+                        Toast.makeText(getContext(), "onButtonCancel", Toast.LENGTH_SHORT).show();
+
+                    }
+                });
+                dialogMessage.show();
                 break;
             case R.id.tvPlaylist:
                 onFragmentChange(Fragmentez.PLAYLIST_FRAGMENT);
