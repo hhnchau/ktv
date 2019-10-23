@@ -1,1 +1,0 @@
-package com.vk2.touchsreentab.listener;public class IObjectResultListener {}

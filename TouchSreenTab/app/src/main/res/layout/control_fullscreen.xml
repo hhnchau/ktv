@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/imgControl"
+        android:layout_width="@dimen/dp_60"
+        android:layout_height="@dimen/dp_60"
+        android:contentDescription="@string/img"
+        android:src="@drawable/control"
+        app:layout_constraintEnd_toEndOf="@id/tvControl"
+        app:layout_constraintStart_toStartOf="@id/tvControl"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvControl"
+        android:layout_width="@dimen/dp_80"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:maxLines="1"
+        android:text="@string/title_control"
+        android:textColor="@color/white"
+        android:textSize="@dimen/sp_18"
+        app:layout_constraintBottom_toBottomOf="@id/imgControl"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/imgControl"
+        app:layout_constraintVertical_bias="1" />
+
+    <ImageView
+        android:id="@+id/arrowControl"
+        android:layout_width="@dimen/dp_8"
+        android:layout_height="@dimen/dp_8"
+        android:src="@mipmap/arrow"
+        android:scaleType="fitEnd"
+        android:contentDescription="@string/img"
+        app:layout_constraintStart_toStartOf="@id/tvControl"
+        app:layout_constraintEnd_toEndOf="@id/tvControl"
+        app:layout_constraintTop_toBottomOf="@id/tvControl"/>
+
+    <ImageView
+        android:id="@+id/imgFun"
+        android:layout_width="@dimen/dp_60"
+        android:layout_height="@dimen/dp_60"
+        android:contentDescription="@string/img"
+        android:src="@drawable/fun"
+        app:layout_constraintEnd_toEndOf="@id/tvFun"
+        app:layout_constraintStart_toStartOf="@id/tvFun"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvFun"
+        android:layout_width="@dimen/dp_80"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:maxLines="1"
+        android:text="@string/title_feel"
+        android:textColor="@color/white"
+        android:textSize="@dimen/sp_18"
+        app:layout_constraintStart_toEndOf="@id/tvControl"
+        app:layout_constraintTop_toTopOf="@id/tvControl" />
+
+    <ImageView
+        android:id="@+id/arrowFun"
+        android:layout_width="@dimen/dp_8"
+        android:layout_height="@dimen/dp_8"
+        android:src="@mipmap/arrow"
+        android:scaleType="fitEnd"
+        android:contentDescription="@string/img"
+        app:layout_constraintStart_toStartOf="@id/tvFun"
+        app:layout_constraintEnd_toEndOf="@id/tvFun"
+        app:layout_constraintTop_toBottomOf="@id/tvFun" />
+
+    <ImageView
+        android:id="@+id/imgFull"
+        android:layout_width="@dimen/dp_60"
+        android:layout_height="@dimen/dp_60"
+        android:contentDescription="@string/img"
+        android:src="@drawable/fullscreen"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</android.support.constraint.ConstraintLayout>

@@ -18,18 +18,14 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.vk2.touchsreentab.R;
-import com.vk2.touchsreentab.activity.MainActivity;
 import com.vk2.touchsreentab.adapter.CategoryAdapter;
-import com.vk2.touchsreentab.adapter.PlaylistAdapter;
 import com.vk2.touchsreentab.database.entity.Song;
 import com.vk2.touchsreentab.fragment.fragmentcontroller.Fragmentaz;
 import com.vk2.touchsreentab.fragment.fragmentcontroller.Fragmentcz;
 import com.vk2.touchsreentab.fragment.fragmentcontroller.Fragmentez;
 import com.vk2.touchsreentab.fragment.fragmentcontroller.Fragmentoz;
-import com.vk2.touchsreentab.fragment.fragmentcontroller.Fragmenttz;
 import com.vk2.touchsreentab.model.Category;
 import com.vk2.touchsreentab.model.PageControl;
 import com.vk2.touchsreentab.model.viewmodel.CategoryModelView;

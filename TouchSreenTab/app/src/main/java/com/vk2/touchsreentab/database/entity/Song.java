@@ -82,6 +82,10 @@ public class Song {
     public Song() {
     }
 
+    public Song(String songName) {
+        this.songName = songName;
+    }
+
     @NonNull
     public String getFileName() {
         return fileName;

@@ -2,7 +2,9 @@ package com.vk2.touchsreentab.fragment.fragmentcontroller;
 
 public enum Fragmentez {
     PAGE_FRAGMENT,
-    PLAYER_FRAGMENT,
+    NORMAL_PLAYER_FRAGMENT,
+    EXO_PLAYER_FRAGMENT,
+    YOUTUBE_PLAYER_FRAGMENT,
     CONTROL_FRAGMENT,
     ARTIST_FRAGMENT,
     PLAYLIST_FRAGMENT,

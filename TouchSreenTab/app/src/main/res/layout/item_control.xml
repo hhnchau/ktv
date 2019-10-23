@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/rootControl"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/ic1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/img"
+        android:src="@mipmap/ic_praise"
+        app:layout_constraintEnd_toStartOf="@id/ic2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_margin="@dimen/dp_8"/>
+
+    <ImageView
+        android:id="@+id/ic2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/img"
+        android:src="@mipmap/ic_applause"
+        app:layout_constraintEnd_toStartOf="@id/ic3"
+        app:layout_constraintStart_toEndOf="@id/ic1"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_margin="@dimen/dp_8"/>
+
+    <ImageView
+        android:id="@+id/ic3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/img"
+        android:src="@mipmap/ic_flowers"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/ic2"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_margin="@dimen/dp_8"/>
+
+</android.support.constraint.ConstraintLayout>

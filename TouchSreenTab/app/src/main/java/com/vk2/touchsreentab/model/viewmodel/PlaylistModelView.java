@@ -37,6 +37,7 @@ public class PlaylistModelView extends ViewModel {
     }
 
     public void setValue(Context context, Song song, int type) {
+        song.setSongName("http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4");
         if (type == ADD)
             for (Song s : cachePlaylist) {
                 if (song != null && s.getFileName().equals(song.getFileName())) {

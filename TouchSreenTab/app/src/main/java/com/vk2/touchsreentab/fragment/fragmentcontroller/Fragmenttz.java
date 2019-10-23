@@ -18,7 +18,13 @@ public class Fragmenttz {
             case PAGE_FRAGMENT:
 
                 break;
-            case PLAYER_FRAGMENT:
+            case NORMAL_PLAYER_FRAGMENT:
+
+                break;
+            case EXO_PLAYER_FRAGMENT:
+
+                break;
+            case YOUTUBE_PLAYER_FRAGMENT:
 
                 break;
             case CONTROL_FRAGMENT:

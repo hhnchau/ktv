@@ -13,6 +13,7 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 
 import com.vk2.touchsreentab.R;
+import com.vk2.touchsreentab.activity.DualMode;
 import com.vk2.touchsreentab.activity.MainActivity;
 
 public class PlayerFragment extends BaseFragment implements View.OnClickListener {
@@ -112,9 +113,9 @@ public class PlayerFragment extends BaseFragment implements View.OnClickListener
         switch (view.getId()) {
             case R.id.zoom:
                 if (count % 2 == 0) {
-                    ((MainActivity) getActivity()).playerFullScreen();
+                    ((DualMode) getActivity()).playerFullScreen();
                 } else {
-                    ((MainActivity) getActivity()).playerSmallScreen();
+                    ((DualMode) getActivity()).playerSmallScreen();
                 }
                 count++;
                 break;

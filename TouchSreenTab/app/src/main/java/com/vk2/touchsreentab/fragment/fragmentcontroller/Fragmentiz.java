@@ -5,9 +5,10 @@ import android.support.v4.app.Fragment;
 import com.vk2.touchsreentab.fragment.ArtistFragment;
 import com.vk2.touchsreentab.fragment.ControlFragment;
 import com.vk2.touchsreentab.fragment.DownloadFragment;
+import com.vk2.touchsreentab.fragment.ExoPlayerFragment;
 import com.vk2.touchsreentab.fragment.HistoryFragment;
+import com.vk2.touchsreentab.fragment.NormalPlayerFragment;
 import com.vk2.touchsreentab.fragment.PageFragment;
-import com.vk2.touchsreentab.fragment.PlayerFragment;
 import com.vk2.touchsreentab.fragment.PlaylistFragment;
 import com.vk2.touchsreentab.fragment.RecommendFragment;
 import com.vk2.touchsreentab.fragment.SearchComplexFragment;
@@ -16,14 +17,19 @@ import com.vk2.touchsreentab.fragment.SearchYoutubeFragment;
 import com.vk2.touchsreentab.fragment.SettingFragment;
 import com.vk2.touchsreentab.fragment.SingerFragment;
 import com.vk2.touchsreentab.fragment.SongFragment;
+import com.vk2.touchsreentab.fragment.YoutubePlayerFragment;
 
 public class Fragmentiz {
     public static Fragment getFragment(Fragmentez fzg) {
         switch (fzg) {
             case PAGE_FRAGMENT:
                 return new PageFragment();
-            case PLAYER_FRAGMENT:
-                return new PlayerFragment();
+            case NORMAL_PLAYER_FRAGMENT:
+                return new NormalPlayerFragment();
+            case EXO_PLAYER_FRAGMENT:
+                return new ExoPlayerFragment();
+            case YOUTUBE_PLAYER_FRAGMENT:
+                return new YoutubePlayerFragment();
             case CONTROL_FRAGMENT:
                 return new ControlFragment();
             case ARTIST_FRAGMENT:
