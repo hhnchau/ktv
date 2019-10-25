@@ -1,5 +1,7 @@
 package com.vk2.touchsreentab.fragment;
 
+import android.arch.lifecycle.Observer;
+import android.arch.lifecycle.ViewModelProviders;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -8,7 +10,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.google.android.exoplayer2.ExoPlaybackException;
 import com.google.android.exoplayer2.ExoPlayerFactory;
@@ -23,10 +24,12 @@ import com.google.android.exoplayer2.trackselection.DefaultTrackSelector;
 import com.google.android.exoplayer2.trackselection.TrackSelectionArray;
 import com.google.android.exoplayer2.ui.PlayerView;
 import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory;
-import com.google.android.exoplayer2.video.VideoListener;
 import com.vk2.touchsreentab.R;
 import com.vk2.touchsreentab.activity.DualMode;
-import com.vk2.touchsreentab.activity.MainActivity;
+import com.vk2.touchsreentab.model.viewmodel.PlayerViewModel;
+import com.vk2.touchsreentab.utils.Utils;
+
+import java.util.Map;
 
 public class ExoPlayerFragment extends BaseFragment {
     private PlayerView mPlayer;
@@ -47,9 +50,26 @@ public class ExoPlayerFragment extends BaseFragment {
         if (getArguments() != null)
             VIDEO_PATH = getArguments().getString("id");
         initPlayer();
+        playerListener();
         return view;
     }
 
+    private void playerListener() {
+        if (getActivity() == null) return;
+        final PlayerViewModel playerViewModel = ViewModelProviders.of(getActivity()).get(PlayerViewModel.class);
+        playerViewModel.getPlayer().observe(getActivity(), new Observer<Map<String, Object>>() {
+            @Override
+            public void onChanged(Map<String, Object> stringObjectMap) {
+                int action = (int) stringObjectMap.get("action");
+                if (action == PlayerViewModel.ACTION_BROADCAST && simpleExoPlayer != null) {
+                    playerViewModel.setValue(PlayerViewModel.ACTION_PROGRESS, simpleExoPlayer.getDuration(), simpleExoPlayer.getContentPosition());
+                } else if (action == PlayerViewModel.ACTION_SEEK && simpleExoPlayer != null) {
+                    long p = (long) stringObjectMap.get("progress");
+                    simpleExoPlayer.seekTo((int) p);
+                }
+            }
+        });
+    }
 
     private void initPlayer() {
         if (getActivity() == null) return;

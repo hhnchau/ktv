@@ -167,6 +167,7 @@ public class CustomSongDialog extends Dialog implements View.OnClickListener,
             public void run() {
                 do {
                     int currentTime = mediaPlayer.getCurrentPosition();
+                    Log.d("TAG-THREAD", String.valueOf(currentTime));
                     Message msg = new Message();
                     msg.what = MESSAGE_CURRENT_POSITION;
                     msg.arg1 = currentTime;

@@ -1,11 +1,14 @@
 package com.vk2.touchsreentab.fragment;
 
+import android.arch.lifecycle.Observer;
+import android.arch.lifecycle.ViewModelProviders;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -14,8 +17,10 @@ import android.view.ViewGroup;
 
 import com.vk2.touchsreentab.R;
 import com.vk2.touchsreentab.activity.DualMode;
+import com.vk2.touchsreentab.model.viewmodel.PlayerViewModel;
 
 import java.io.IOException;
+import java.util.Map;
 
 public class NormalPlayerFragment extends BaseFragment implements SurfaceHolder.Callback, MediaPlayer.OnPreparedListener {
     private MediaPlayer mPlayer;
@@ -36,8 +41,26 @@ public class NormalPlayerFragment extends BaseFragment implements SurfaceHolder.
         surfaceHolder.addCallback(this);
         if (getArguments() != null) {
             VIDEO_PATH = getArguments().getString("id");
+            playerListener();
         }
         return view;
+    }
+
+    private void playerListener() {
+        if (getActivity() == null) return;
+        final PlayerViewModel playerViewModel = ViewModelProviders.of(getActivity()).get(PlayerViewModel.class);
+        playerViewModel.getPlayer().observe(getActivity(), new Observer<Map<String, Object>>() {
+            @Override
+            public void onChanged(Map<String, Object> stringObjectMap) {
+                int action = (int) stringObjectMap.get("action");
+                if (action == PlayerViewModel.ACTION_BROADCAST && mPlayer != null) {
+                    playerViewModel.setValue(PlayerViewModel.ACTION_PROGRESS, mPlayer.getDuration(), mPlayer.getCurrentPosition());
+                } else if (action == PlayerViewModel.ACTION_SEEK && mPlayer != null) {
+                    long p = (long) stringObjectMap.get("progress");
+                    mPlayer.seekTo((int) p);
+                }
+            }
+        });
     }
 
     @Override
@@ -66,6 +89,7 @@ public class NormalPlayerFragment extends BaseFragment implements SurfaceHolder.
             e.printStackTrace();
         }
     }
+
 
     @Override
     public void surfaceChanged(SurfaceHolder surfaceHolder, int i, int i1, int i2) {

@@ -32,9 +32,10 @@
         android:id="@+id/arrowControl"
         android:layout_width="@dimen/dp_8"
         android:layout_height="@dimen/dp_8"
-        android:src="@mipmap/arrow"
+        android:src="@mipmap/arrow_black"
         android:scaleType="fitEnd"
         android:contentDescription="@string/img"
+        android:visibility="gone"
         app:layout_constraintStart_toStartOf="@id/tvControl"
         app:layout_constraintEnd_toEndOf="@id/tvControl"
         app:layout_constraintTop_toBottomOf="@id/tvControl"/>
@@ -65,9 +66,10 @@
         android:id="@+id/arrowFun"
         android:layout_width="@dimen/dp_8"
         android:layout_height="@dimen/dp_8"
-        android:src="@mipmap/arrow"
+        android:src="@mipmap/arrow_black"
         android:scaleType="fitEnd"
         android:contentDescription="@string/img"
+        android:visibility="gone"
         app:layout_constraintStart_toStartOf="@id/tvFun"
         app:layout_constraintEnd_toEndOf="@id/tvFun"
         app:layout_constraintTop_toBottomOf="@id/tvFun" />

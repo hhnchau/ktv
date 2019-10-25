@@ -4,10 +4,11 @@
     android:layout_height="match_parent"
     android:background="@android:color/transparent">
 
-    <View
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+    <ImageView
+        android:id="@+id/icon"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
         android:layout_centerInParent="true"
-        android:background="@mipmap/search" />
+        android:contentDescription="@string/img"/>
 
 </RelativeLayout>

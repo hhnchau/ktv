@@ -113,9 +113,9 @@ public class PlayerFragment extends BaseFragment implements View.OnClickListener
         switch (view.getId()) {
             case R.id.zoom:
                 if (count % 2 == 0) {
-                    ((DualMode) getActivity()).playerFullScreen();
+                    //((DualMode) getActivity()).playerFullScreen();
                 } else {
-                    ((DualMode) getActivity()).playerSmallScreen();
+                    //((DualMode) getActivity()).playerSmallScreen();
                 }
                 count++;
                 break;

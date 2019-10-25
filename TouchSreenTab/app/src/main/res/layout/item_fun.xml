@@ -7,63 +7,132 @@
 
     <ImageView
         android:id="@+id/ic1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="@dimen/dp_80"
+        android:layout_height="@dimen/dp_80"
+        android:layout_marginTop="@dimen/dp_28"
         android:contentDescription="@string/img"
         android:src="@mipmap/ic_praise"
         app:layout_constraintEnd_toStartOf="@id/ic2"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_margin="@dimen/dp_8"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
-        android:id="@+id/ic2"
+    <TextView
+        android:id="@+id/tv1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:contentDescription="@string/img"
-        android:src="@mipmap/ic_applause"
-        app:layout_constraintEnd_toStartOf="@id/ic3"
-        app:layout_constraintStart_toEndOf="@id/ic1"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_margin="@dimen/dp_8"/>
-
-    <ImageView
-        android:id="@+id/ic3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:contentDescription="@string/img"
-        android:src="@mipmap/ic_flowers"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/ic2"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_margin="@dimen/dp_8"/>
-
-
-    <ImageView
-        android:id="@+id/ic4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:contentDescription="@string/img"
-        android:src="@mipmap/ic_love"
+        android:text="Praise"
+        android:textSize="@dimen/sp_18"
+        app:layout_constraintEnd_toEndOf="@id/ic1"
         app:layout_constraintStart_toStartOf="@id/ic1"
         app:layout_constraintTop_toBottomOf="@id/ic1" />
 
     <ImageView
-        android:id="@+id/ic5"
+        android:id="@+id/ic2"
+        android:layout_width="@dimen/dp_80"
+        android:layout_height="@dimen/dp_80"
+        android:layout_marginTop="@dimen/dp_28"
+        android:contentDescription="@string/img"
+        android:src="@mipmap/ic_applause"
+        app:layout_constraintEnd_toStartOf="@id/ic3"
+        app:layout_constraintStart_toEndOf="@id/ic1"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:contentDescription="@string/img"
-        android:src="@mipmap/ic_speechless"
+        android:text="Applause"
+        android:textSize="@dimen/sp_18"
+        app:layout_constraintEnd_toEndOf="@id/ic2"
         app:layout_constraintStart_toStartOf="@id/ic2"
         app:layout_constraintTop_toBottomOf="@id/ic2" />
 
     <ImageView
-        android:id="@+id/ic6"
+        android:id="@+id/ic3"
+        android:layout_width="@dimen/dp_80"
+        android:layout_height="@dimen/dp_80"
+        android:layout_marginTop="@dimen/dp_28"
+        android:contentDescription="@string/img"
+        android:src="@mipmap/ic_flowers"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/ic2"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="Flowers"
+        android:textSize="@dimen/sp_18"
+        app:layout_constraintEnd_toEndOf="@id/ic3"
+        app:layout_constraintStart_toStartOf="@id/ic3"
+        app:layout_constraintTop_toBottomOf="@id/ic3" />
+
+
+    <ImageView
+        android:id="@+id/ic4"
+        android:layout_width="@dimen/dp_80"
+        android:layout_height="@dimen/dp_80"
+        android:layout_marginTop="@dimen/dp_32"
+        android:contentDescription="@string/img"
+        android:src="@mipmap/ic_love"
+        app:layout_constraintStart_toStartOf="@id/ic1"
+        app:layout_constraintTop_toBottomOf="@id/tv1" />
+
+    <TextView
+        android:id="@+id/tv4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/dp_28"
+        android:text="Love"
+        android:textSize="@dimen/sp_18"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/ic4"
+        app:layout_constraintStart_toStartOf="@id/ic4"
+        app:layout_constraintTop_toBottomOf="@id/ic4" />
+
+    <ImageView
+        android:id="@+id/ic5"
+        android:layout_width="@dimen/dp_80"
+        android:layout_height="@dimen/dp_80"
+        android:layout_marginTop="@dimen/dp_32"
+        android:contentDescription="@string/img"
+        android:src="@mipmap/ic_speechless"
+        app:layout_constraintStart_toStartOf="@id/ic2"
+        app:layout_constraintTop_toBottomOf="@id/tv2" />
+
+    <TextView
+        android:id="@+id/tv5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/dp_28"
+        android:text="Speechless"
+        android:textSize="@dimen/sp_18"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/ic5"
+        app:layout_constraintStart_toStartOf="@id/ic5"
+        app:layout_constraintTop_toBottomOf="@id/ic5" />
+
+    <ImageView
+        android:id="@+id/ic6"
+        android:layout_width="@dimen/dp_80"
+        android:layout_height="@dimen/dp_80"
+        android:layout_marginTop="@dimen/dp_32"
         android:contentDescription="@string/img"
         android:src="@mipmap/ic_cheers"
         app:layout_constraintStart_toStartOf="@id/ic3"
-        app:layout_constraintTop_toBottomOf="@id/ic3" />
+        app:layout_constraintTop_toBottomOf="@id/tv3" />
+
+    <TextView
+        android:id="@+id/tv6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/dp_28"
+        android:text="Cheers"
+        android:textSize="@dimen/sp_18"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/ic6"
+        app:layout_constraintStart_toStartOf="@id/ic6"
+        app:layout_constraintTop_toBottomOf="@id/ic6" />
 
 </android.support.constraint.ConstraintLayout>
