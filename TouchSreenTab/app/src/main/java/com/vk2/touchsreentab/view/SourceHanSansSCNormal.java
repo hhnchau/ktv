@@ -24,7 +24,8 @@ public class SourceHanSansSCNormal extends android.support.v7.widget.AppCompatTe
 
     @Override
     public void setTypeface(Typeface tf) {
-        String fontName = "SourceHanSansSC-Normal.otf";
+        //String fontName = "SourceHanSansSC-Normal.otf";
+        String fontName = "OpenSans-Regular.ttf";
         super.setTypeface(FontUtils.getFont(getContext(), fontName));
     }
 

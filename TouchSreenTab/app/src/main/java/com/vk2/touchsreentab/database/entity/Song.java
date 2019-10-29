@@ -3,6 +3,7 @@ package com.vk2.touchsreentab.database.entity;
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.Ignore;
+import android.arch.persistence.room.Index;
 import android.arch.persistence.room.PrimaryKey;
 import android.databinding.BindingAdapter;
 import android.graphics.Color;
@@ -21,7 +22,18 @@ import com.google.gson.annotations.SerializedName;
 import com.vk2.touchsreentab.R;
 
 
-@Entity(tableName = "song")
+@Entity(tableName = "song",
+        indices = {@Index(name = "idx_SongName", value = "SongName"),
+                @Index(name = "idx_filename", value = "FileName"),
+                @Index(name = "idx_lang", value = "Lang"),
+                @Index(name = "idx_pycode", value = "PyCode"),
+                @Index(name = "idx_singername1", value = "SingerName1"),
+                @Index(name = "idx_song_singername2", value = "SingerName2"),
+                @Index(name = "idx_song_singerid1", value = "SingerID1"),
+                @Index(name = "idx_song_singerid2", value = "SingerID2"),
+                @Index(name = "idx_stroke", value = "Stroke"),
+                @Index(name = "idx_wordnum", value = "WordNum"),
+        })
 public class Song {
     @PrimaryKey()
     @ColumnInfo(name = "FileName")

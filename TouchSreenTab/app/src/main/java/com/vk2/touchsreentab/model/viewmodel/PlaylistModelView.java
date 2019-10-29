@@ -4,10 +4,9 @@ import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModel;
 import android.content.Context;
 import android.os.AsyncTask;
-import android.support.annotation.NonNull;
 import android.widget.Toast;
 
-import com.vk2.touchsreentab.aplication.MyApplication;
+import com.vk2.touchsreentab.application.MyApplication;
 import com.vk2.touchsreentab.database.entity.Song;
 
 import java.util.ArrayList;

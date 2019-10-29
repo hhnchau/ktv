@@ -34,8 +34,8 @@ public abstract class AppDatabase extends RoomDatabase {
                         @Override
                         public void migrate(@NonNull SupportSQLiteDatabase database) {
                             database.execSQL("ALTER TABLE song ADD COLUMN Selected INTEGER DEFAULT 0");
-                            database.execSQL("ALTER TABLE song ADD COLUMN Spell TEXT");
-                            database.execSQL("ALTER TABLE song ADD COLUMN NamePinyin TEXT");
+                            //database.execSQL("ALTER TABLE song ADD COLUMN Spell TEXT");
+                            //database.execSQL("ALTER TABLE song ADD COLUMN NamePinyin TEXT");
                             database.execSQL("UPDATE song SET Spell = (SELECT singer.Spell FROM singer WHERE singer.ID = song.SingerID1) WHERE EXISTS (SELECT singer.Spell FROM singer WHERE singer.ID = song.SingerID1)");
                             database.execSQL("UPDATE song SET NamePinyin = (SELECT singer.NamePinyin FROM singer WHERE singer.ID = song.SingerID1) WHERE EXISTS (SELECT singer.Spell FROM singer WHERE singer.ID = song.SingerID1)");
                         }

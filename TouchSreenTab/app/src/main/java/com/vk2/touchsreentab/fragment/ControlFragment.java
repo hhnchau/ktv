@@ -127,8 +127,10 @@ public class ControlFragment extends BaseFragment implements View.OnClickListene
 
     @Override
     protected void clearTextSearch() {
-        edtSearch.setText("");
-        imgEnter.setVisibility(View.GONE);
+        if (edtSearch != null) {
+            edtSearch.setText("");
+            imgEnter.setVisibility(View.GONE);
+        }
     }
 
     @Override

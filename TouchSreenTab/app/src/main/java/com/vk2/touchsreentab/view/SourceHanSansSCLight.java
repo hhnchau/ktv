@@ -24,7 +24,8 @@ public class SourceHanSansSCLight extends android.support.v7.widget.AppCompatTex
 
     @Override
     public void setTypeface(Typeface tf) {
-        String fontName = "SourceHanSansSC-Light.otf";
+        //String fontName = "SourceHanSansSC-Light.otf";
+        String fontName = "OpenSans-Light.ttf";
         super.setTypeface(FontUtils.getFont(getContext(), fontName));
     }
 

@@ -3,6 +3,7 @@ package com.vk2.touchsreentab.database.entity;
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.Ignore;
+import android.arch.persistence.room.Index;
 import android.arch.persistence.room.PrimaryKey;
 import android.databinding.BindingAdapter;
 import android.support.annotation.NonNull;
@@ -13,7 +14,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
 
-@Entity(tableName = "singer")
+@Entity(tableName = "singer", indices = {@Index(name = "idx_singer_id", value = "ID"), @Index(name = "idx_singer_lang", value = "Lang"),@Index(name = "idx_singer_name", value = "Name"),@Index(name = "idx_singer_spell", value = "Spell")})
 public class Singer {
     @PrimaryKey()
     @ColumnInfo(name = "ID")

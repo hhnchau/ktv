@@ -2,14 +2,10 @@ package com.vk2.touchsreentab.fragment;
 
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
-import android.support.v4.content.ContextCompat;
-import android.support.v4.content.res.ResourcesCompat;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -23,7 +19,6 @@ import android.widget.Toast;
 
 import com.vk2.touchsreentab.R;
 import com.vk2.touchsreentab.activity.DiskUsbActivity;
-import com.vk2.touchsreentab.activity.MainActivity;
 import com.vk2.touchsreentab.adapter.CategoryAdapter;
 import com.vk2.touchsreentab.database.entity.Song;
 import com.vk2.touchsreentab.fragment.fragmentcontroller.Fragmentaz;
@@ -160,6 +155,7 @@ public class PageFragment extends BaseFragment implements View.OnClickListener, 
         lstFrg = new ArrayList<>();
         tvHot = view.findViewById(R.id.tvHot);
         tvHot.setOnClickListener(this);
+        view.findViewById(R.id.boxSongArtist).setOnClickListener(this);
         arrowCategory = view.findViewById(R.id.arrowCategory);
         rcvCategory = view.findViewById(R.id.rcvCategory);
         topBar = view.findViewById(R.id.layoutTopbar);
@@ -309,7 +305,7 @@ public class PageFragment extends BaseFragment implements View.OnClickListener, 
             case R.id.imgBack:
                 pageControl(Fragmentcz.getCurrentFragment(), PageControl.TOP);
                 break;
-            case R.id.tvHot:
+            case R.id.boxSongArtist:
                 if (rcvCategory.getVisibility() == View.GONE)
                     showCategory();
                 else

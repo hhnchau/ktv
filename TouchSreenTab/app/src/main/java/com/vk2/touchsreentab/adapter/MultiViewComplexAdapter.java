@@ -24,7 +24,7 @@ import com.vk2.touchsreentab.R;
 import com.vk2.touchsreentab.adapter.viewholder.RecyclerViewHolder;
 import com.vk2.touchsreentab.adapter.viewholder.SongViewHolder;
 
-import com.vk2.touchsreentab.aplication.MyApplication;
+import com.vk2.touchsreentab.application.MyApplication;
 import com.vk2.touchsreentab.database.entity.Singer;
 import com.vk2.touchsreentab.database.entity.Song;
 import com.vk2.touchsreentab.databinding.ItemRecyclerviewBinding;
