@@ -154,7 +154,6 @@ public class PageFragment extends BaseFragment implements View.OnClickListener, 
     private void initView() {
         lstFrg = new ArrayList<>();
         tvHot = view.findViewById(R.id.tvHot);
-        tvHot.setOnClickListener(this);
         view.findViewById(R.id.boxSongArtist).setOnClickListener(this);
         arrowCategory = view.findViewById(R.id.arrowCategory);
         rcvCategory = view.findViewById(R.id.rcvCategory);

@@ -10,11 +10,10 @@
         android:id="@+id/header"
         layout="@layout/header_layout"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_150"
+        android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
 
     <FrameLayout
         android:id="@+id/layout_container"
@@ -47,15 +46,14 @@
         app:layout_constraintTop_toBottomOf="@id/header"/>
 
     <ImageView
-        android:visibility="gone"
+        android:visibility="visible"
         android:contentDescription="@string/img"
         android:id="@+id/arrowCategory"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@mipmap/arrow"
+        android:src="@mipmap/arrow_black"
         app:layout_constraintBottom_toTopOf="@id/rcvCategory"
         app:layout_constraintStart_toStartOf="@id/rcvCategory"
-        android:layout_marginStart="@dimen/dp_46"
-        android:layout_marginLeft="@dimen/dp_46"/>
+        android:layout_marginStart="@dimen/dp_46" />
 
 </android.support.constraint.ConstraintLayout>

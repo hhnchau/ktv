@@ -15,15 +15,15 @@
         android:id="@+id/artist"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/dp_40"
-        android:layout_marginTop="@dimen/dp_14"
-        android:layout_marginEnd="@dimen/dp_40"
-        android:layout_marginBottom="@dimen/dp_14">
+        android:layout_marginStart="@dimen/dp_60"
+        android:layout_marginEnd="@dimen/dp_60"
+        android:layout_marginTop="@dimen/dp_24"
+        android:layout_marginBottom="@dimen/dp_24">
 
         <ImageView
             android:id="@+id/imgArtists"
-            android:layout_width="@dimen/dp_110"
-            android:layout_height="@dimen/dp_110"
+            android:layout_width="@dimen/dp_150"
+            android:layout_height="@dimen/dp_150"
             android:contentDescription="@string/img"
             android:scaleType="fitXY"
             android:src="@drawable/artists1"
@@ -38,8 +38,8 @@
             android:layout_height="wrap_content"
             android:text="@{singer.name}"
             android:textColor="@color/grey"
-            android:textSize="@dimen/sp_16"
-            android:textStyle="normal"
+            android:textSize="@dimen/sp_22"
+            android:layout_marginTop="@dimen/dp_8"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/imgArtists" />
