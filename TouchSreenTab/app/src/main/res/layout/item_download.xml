@@ -20,30 +20,33 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <TextView
+
+
+        <com.vk2.touchsreentab.view.SourceHanSansSCNormal
             android:id="@+id/tvNumber"
-            android:layout_width="@dimen/dp_42"
-            android:layout_height="@dimen/sp_42"
-            android:layout_margin="@dimen/dp_5"
+            android:layout_width="@dimen/dp_95"
+            android:layout_height="@dimen/sp_95"
             android:gravity="center"
-            android:text="@{number}"
+            android:text="@{Integer.parseInt(number) &lt; 10 ? '0'+number: number}"
             android:textColor="@color/grey_8"
-            android:textSize="@dimen/sp_18"
+            android:textSize="@dimen/sp_26"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/tvNameSong"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
+        <com.vk2.touchsreentab.view.SourceHanSansSCLight
             android:id="@+id/tvNameSong"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/dp_8"
+            android:layout_marginStart="@dimen/dp_16"
+            android:layout_marginTop="@dimen/dp_16"
+            android:layout_marginEnd="@dimen/dp_16"
             android:ellipsize="end"
             android:maxLines="1"
             android:text="@{song.songName}"
             android:textColor="@color/white"
-            android:textSize="@dimen/sp_16"
+            android:textSize="@dimen/sp_24"
             app:layout_constraintEnd_toStartOf="@id/box"
             app:layout_constraintStart_toEndOf="@id/tvNumber"
             app:layout_constraintTop_toTopOf="parent" />
@@ -52,7 +55,7 @@
             android:id="@+id/box"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
+            android:layout_marginEnd="@dimen/dp_32"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -61,8 +64,8 @@
                 android:id="@+id/progressBar"
                 android:theme="@style/white_loading"
                 style="?android:attr/progressBarStyle"
-                android:layout_width="@dimen/dp_45"
-                android:layout_height="@dimen/dp_45"
+                android:layout_width="@dimen/dp_50"
+                android:layout_height="@dimen/dp_50"
                 android:layout_gravity="center"
                 android:background="@android:color/transparent"
                 app:layout_constraintTop_toTopOf="@id/imgLoading"
@@ -71,13 +74,12 @@
 
             <ImageView
                 android:id="@+id/imgLoading"
-                android:layout_width="@dimen/dp_45"
-                android:layout_height="@dimen/dp_45"
+                android:layout_width="@dimen/dp_50"
+                android:layout_height="@dimen/dp_50"
                 android:background="@mipmap/pause_loading"
                 android:clickable="true"
                 android:contentDescription="@string/img"
                 android:focusable="true"
-                android:layout_margin="@dimen/dp_8"
                 android:scaleType="fitCenter"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -85,47 +87,47 @@
 
             <ImageView
                 android:id="@+id/imgCancel"
-                android:layout_width="@dimen/dp_45"
-                android:layout_height="@dimen/dp_45"
-                android:background="@mipmap/move"
+                android:layout_width="@dimen/dp_60"
+                android:layout_height="@dimen/dp_60"
+                android:background="@drawable/delete"
                 android:clickable="true"
                 android:contentDescription="@string/img"
                 android:focusable="true"
-                android:layout_margin="@dimen/dp_8"
                 android:scaleType="fitCenter"
+                android:layout_marginStart="@dimen/dp_24"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/imgLoading"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"/>
+                app:layout_constraintStart_toEndOf="@id/imgLoading"/>
 
         </android.support.constraint.ConstraintLayout>
 
-
         <ImageView
             android:id="@+id/imgType"
-            android:layout_width="@dimen/dp_26"
-            android:layout_height="@dimen/dp_13"
-            android:layout_marginEnd="@dimen/dp_8"
-            android:layout_marginRight="@dimen/dp_8"
+            android:layout_width="@dimen/dp_52"
+            android:layout_height="@dimen/dp_24"
+            android:layout_marginStart="@dimen/dp_16"
+            android:layout_marginEnd="@dimen/dp_16"
             android:contentDescription="@string/img"
-            android:scaleType="fitCenter"
+            android:scaleType="fitXY"
             android:src="@mipmap/k4"
             app:layout_constraintBottom_toBottomOf="@id/tvNameArtistSong"
-            app:layout_constraintStart_toStartOf="@id/tvNameSong"
+            app:layout_constraintStart_toEndOf="@id/tvNumber"
             app:layout_constraintTop_toTopOf="@id/tvNameArtistSong" />
 
-        <TextView
+        <com.vk2.touchsreentab.view.SourceHanSansSCNormal
             android:id="@+id/tvNameArtistSong"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/dp_8"
+            android:layout_marginStart="@dimen/dp_16"
+            android:layout_marginTop="@dimen/dp_8"
+            android:layout_marginEnd="@dimen/dp_16"
             android:text="@{song.singerName1}"
-            android:textColor="@color/white"
-            android:textSize="@dimen/sp_13"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:textColor="@color/grey_8"
+            android:textSize="@dimen/sp_20"
             app:layout_constraintEnd_toStartOf="@id/box"
-            app:layout_constraintStart_toEndOf="@id/imgType" />
-
+            app:layout_constraintStart_toEndOf="@id/imgType"
+            app:layout_constraintTop_toBottomOf="@id/tvNameSong" />
 
     </android.support.constraint.ConstraintLayout>
 </layout>

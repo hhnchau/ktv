@@ -10,6 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
+        android:layout_margin="@dimen/dp_8"
         app:layout_constraintBottom_toTopOf="@id/rcvPlaylist"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -21,18 +22,17 @@
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/dp_13"
             android:drawableStart="@mipmap/empty"
-            android:drawableLeft="@mipmap/empty"
-            android:drawablePadding="@dimen/dp_4"
+            android:drawablePadding="@dimen/dp_12"
             android:text="Empty"
             android:textColor="@color/white"
-            android:textSize="@dimen/sp_15" />
+            android:textSize="@dimen/sp_20" />
 
         <ImageView
             android:layout_width="1dp"
             android:layout_height="match_parent"
             android:layout_margin="@dimen/dp_13"
-            android:contentDescription="@string/img"
-            android:src="@drawable/divider" />
+            android:background="@color/grey"
+            android:contentDescription="@string/img" />
 
         <TextView
             android:id="@+id/tvRandom"
@@ -40,11 +40,10 @@
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/dp_13"
             android:drawableStart="@mipmap/random"
-            android:drawableLeft="@mipmap/random"
-            android:drawablePadding="@dimen/dp_4"
+            android:drawablePadding="@dimen/dp_12"
             android:text="Random"
             android:textColor="@color/white"
-            android:textSize="@dimen/sp_15" />
+            android:textSize="@dimen/sp_20" />
 
     </LinearLayout>
 
@@ -52,8 +51,6 @@
         android:id="@+id/rcvPlaylist"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginStart="@dimen/dp_13"
-        android:layout_marginEnd="@dimen/dp_13"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@id/box"
         app:layout_constraintStart_toStartOf="@id/box"

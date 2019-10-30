@@ -54,13 +54,6 @@ public class PlaylistAdapter extends RecyclerView.Adapter<PlaylistViewHolder> {
                 if (onItemClick != null) onItemClick.onMoveClick(song);
             }
         });
-
-        holder.playlistBinding.imgMore.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (onItemClick != null) onItemClick.onIconClick(song);
-            }
-        });
     }
 
     @Override
@@ -76,7 +69,7 @@ public class PlaylistAdapter extends RecyclerView.Adapter<PlaylistViewHolder> {
 
         void onMoveClick(Song song);
 
-        void onIconClick(Song song);
+
     }
 
     private OnItemClick onItemClick;

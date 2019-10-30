@@ -74,7 +74,7 @@ public class PlaylistModelView extends ViewModel {
                 for (int i = 0; i < cachePlaylist.size(); i++) {
                     if (song != null && cachePlaylist.get(i).getFileName().equals(song.getFileName())) {
                         cachePlaylist.remove(i);
-                        cachePlaylist.add(0, song);
+                        cachePlaylist.add(1, song);
                         break;
                     }
                 }

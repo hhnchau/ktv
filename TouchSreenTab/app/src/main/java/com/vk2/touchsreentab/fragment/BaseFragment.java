@@ -10,6 +10,7 @@ import android.widget.Toast;
 
 import com.vk2.touchsreentab.R;
 import com.vk2.touchsreentab.database.entity.Song;
+import com.vk2.touchsreentab.fragment.fragmentcontroller.Fragmentcz;
 import com.vk2.touchsreentab.fragment.fragmentcontroller.Fragmentez;
 import com.vk2.touchsreentab.model.Ablum;
 import com.vk2.touchsreentab.model.PageControl;
@@ -52,8 +53,8 @@ public abstract class BaseFragment extends Fragment {
     protected void onPageChange(int page, int totalPage) {
     }
 
-    public void updateCurrentPage(int currentPage, int totalPage) {
-        if (pageFragment != null) {
+    public void updateCurrentPage(Fragmentez frg, int currentPage, int totalPage) {
+        if (Fragmentcz.getCurrentFragment() == frg && pageFragment != null) {
             pageFragment.onPageChange(currentPage, totalPage);
         }
     }
