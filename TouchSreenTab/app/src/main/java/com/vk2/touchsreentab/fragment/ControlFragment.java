@@ -59,18 +59,24 @@ public class ControlFragment extends BaseFragment implements View.OnClickListene
 
         myKeyboard.setOnMyKeyboardListener(new MyKeyboard.OnMyKeyboardListener() {
             @Override
-            public void onKey(CharSequence chr, String tag) {
-                if (tag.equals(MyKeyboard.BTN_SPACE)) {
-                    edtSearch.append(" ");
-                } else if (tag.equals(MyKeyboard.BTN_CLEAR)) {
-                    Editable s = edtSearch.getText();
-                    if (s != null && !s.toString().isEmpty()) {
-                        String str = s.toString().substring(0, s.length() - 1);
-                        edtSearch.setText(str);
-                    }
-                } else {
-                    edtSearch.append(chr);
-                }
+            public void onKey(final CharSequence chr, final String tag) {
+                if (getActivity() != null)
+                    getActivity().runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            if (tag.equals(MyKeyboard.BTN_SPACE)) {
+                                edtSearch.append(" ");
+                            } else if (tag.equals(MyKeyboard.BTN_CLEAR)) {
+                                Editable s = edtSearch.getText();
+                                if (s != null && !s.toString().isEmpty()) {
+                                    String str = s.toString().substring(0, s.length() - 1);
+                                    edtSearch.setText(str);
+                                }
+                            } else {
+                                edtSearch.append(chr);
+                            }
+                        }
+                    });
             }
         });
 
@@ -82,18 +88,24 @@ public class ControlFragment extends BaseFragment implements View.OnClickListene
             }
 
             @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                if (imgEnter.getVisibility() == View.GONE) {
-                    if (TextUtils.isEmpty(charSequence)) {
-                        imgClear.setVisibility(View.GONE);
-                        if (Fragmentcz.getCurrentFragment() == Fragmentez.SEARCH_COMPLEX_FRAGMENT)
-                            gotoRecommend();
-                    } else {
-                        imgClear.setVisibility(View.VISIBLE);
-                        gotoComplex();
-                        submitSearchInput(charSequence);
-                    }
-                }
+            public void onTextChanged(final CharSequence charSequence, int i, int i1, int i2) {
+                if (getActivity() != null)
+                    getActivity().runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            if (imgEnter.getVisibility() == View.GONE) {
+                                if (TextUtils.isEmpty(charSequence)) {
+                                    imgClear.setVisibility(View.GONE);
+                                    if (Fragmentcz.getCurrentFragment() == Fragmentez.SEARCH_COMPLEX_FRAGMENT)
+                                        gotoRecommend();
+                                } else {
+                                    imgClear.setVisibility(View.VISIBLE);
+                                    gotoComplex();
+                                    submitSearchInput(charSequence);
+                                }
+                            }
+                        }
+                    });
             }
 
             @Override
@@ -117,19 +129,36 @@ public class ControlFragment extends BaseFragment implements View.OnClickListene
 
     @Override
     protected void showEnterButton() {
-        if (getActivity() != null && imgEnter != null) imgEnter.setVisibility(View.VISIBLE);
+        if (getActivity() != null && imgEnter != null)
+            getActivity().runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    imgEnter.setVisibility(View.VISIBLE);
+                }
+            });
     }
 
     @Override
     protected void hideEnterButton() {
-        if (getActivity() != null && imgEnter != null) imgEnter.setVisibility(View.GONE);
+        if (getActivity() != null && imgEnter != null)
+            getActivity().runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    imgEnter.setVisibility(View.GONE);
+                }
+            });
     }
 
     @Override
     protected void clearTextSearch() {
-        if (edtSearch != null) {
-            edtSearch.setText("");
-            imgEnter.setVisibility(View.GONE);
+        if (getActivity() != null && edtSearch != null) {
+            getActivity().runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    edtSearch.setText("");
+                    imgEnter.setVisibility(View.GONE);
+                }
+            });
         }
     }
 

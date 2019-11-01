@@ -214,15 +214,35 @@ public class DualMode extends BaseActivity implements PresentationHelper.Listene
     }
 
     private void playerFullScreen() {
-        framePage.setVisibility(View.GONE);
-        frameControl.setVisibility(View.GONE);
-        addControlPlayerToFront();
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                framePage.setVisibility(View.GONE);
+                frameControl.setVisibility(View.GONE);
+                controlSeekBar.setVisibility(View.GONE);
+                imgControl.setVisibility(View.GONE);
+                tvControl.setVisibility(View.GONE);
+                imgFull.setVisibility(View.GONE);
+                tvFun.setVisibility(View.GONE);
+                addControlPlayerToFront();
+            }
+        });
     }
 
     private void playerSmallScreen() {
-        framePage.setVisibility(View.VISIBLE);
-        frameControl.setVisibility(View.VISIBLE);
-        addControlPlayerToBottom();
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                framePage.setVisibility(View.VISIBLE);
+                frameControl.setVisibility(View.VISIBLE);
+                controlSeekBar.setVisibility(View.VISIBLE);
+                imgControl.setVisibility(View.VISIBLE);
+                tvControl.setVisibility(View.VISIBLE);
+                imgFull.setVisibility(View.VISIBLE);
+                tvFun.setVisibility(View.VISIBLE);
+                addControlPlayerToBottom();
+            }
+        });
     }
 
     @Override
@@ -287,75 +307,106 @@ public class DualMode extends BaseActivity implements PresentationHelper.Listene
 
 
     private void addControlPlayerToBottom() {
-        constraintSet.clone(boxPlayer);
-        constraintSet.connect(R.id.framePlayer, ConstraintSet.BOTTOM, R.id.controlPlayer, ConstraintSet.TOP);
-        constraintSet.connect(R.id.controlPlayer, ConstraintSet.BOTTOM, ConstraintSet.PARENT_ID, ConstraintSet.BOTTOM);
-        constraintSet.connect(R.id.controlPlayer, ConstraintSet.TOP, R.id.framePlayer, ConstraintSet.BOTTOM);
-        constraintSet.connect(R.id.controlPlayer, ConstraintSet.START, R.id.framePlayer, ConstraintSet.START);
-        constraintSet.connect(R.id.controlPlayer, ConstraintSet.END, R.id.framePlayer, ConstraintSet.END);
-        constraintSet.applyTo(boxPlayer);
-        controlPlayer.setBackground(null);
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                constraintSet.clone(boxPlayer);
+                constraintSet.connect(R.id.framePlayer, ConstraintSet.BOTTOM, R.id.controlPlayer, ConstraintSet.TOP);
+                constraintSet.connect(R.id.controlPlayer, ConstraintSet.BOTTOM, ConstraintSet.PARENT_ID, ConstraintSet.BOTTOM);
+                constraintSet.connect(R.id.controlPlayer, ConstraintSet.TOP, R.id.framePlayer, ConstraintSet.BOTTOM);
+                constraintSet.connect(R.id.controlPlayer, ConstraintSet.START, R.id.framePlayer, ConstraintSet.START);
+                constraintSet.connect(R.id.controlPlayer, ConstraintSet.END, R.id.framePlayer, ConstraintSet.END);
+                constraintSet.applyTo(boxPlayer);
+                controlPlayer.setBackground(null);
+            }
+        });
     }
 
     private void addControlPlayerToFront() {
-        constraintSet.clone(boxPlayer);
-        constraintSet.connect(R.id.framePlayer, ConstraintSet.BOTTOM, ConstraintSet.PARENT_ID, ConstraintSet.BOTTOM);
-        constraintSet.connect(R.id.controlPlayer, ConstraintSet.BOTTOM, R.id.framePlayer, ConstraintSet.BOTTOM);
-        constraintSet.connect(R.id.controlPlayer, ConstraintSet.TOP, R.id.framePlayer, ConstraintSet.TOP);
-        constraintSet.connect(R.id.controlPlayer, ConstraintSet.START, R.id.l1, ConstraintSet.START);
-        constraintSet.connect(R.id.controlPlayer, ConstraintSet.END, R.id.l2, ConstraintSet.END);
-        constraintSet.setVerticalBias(R.id.controlPlayer, 0.98f);
-        constraintSet.applyTo(boxPlayer);
-        controlPlayer.setBackground(getResources().getDrawable(R.drawable.bg_control_player));
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                constraintSet.clone(boxPlayer);
+                constraintSet.connect(R.id.framePlayer, ConstraintSet.BOTTOM, ConstraintSet.PARENT_ID, ConstraintSet.BOTTOM);
+                constraintSet.connect(R.id.controlPlayer, ConstraintSet.BOTTOM, R.id.framePlayer, ConstraintSet.BOTTOM);
+                constraintSet.connect(R.id.controlPlayer, ConstraintSet.TOP, R.id.framePlayer, ConstraintSet.TOP);
+                constraintSet.connect(R.id.controlPlayer, ConstraintSet.START, R.id.l1, ConstraintSet.START);
+                constraintSet.connect(R.id.controlPlayer, ConstraintSet.END, R.id.l2, ConstraintSet.END);
+                constraintSet.setVerticalBias(R.id.controlPlayer, 0.98f);
+                constraintSet.applyTo(boxPlayer);
+                controlPlayer.setBackground(getResources().getDrawable(R.drawable.bg_control_player));
+            }
+        });
     }
 
-    private void showControlRcv(int type) {
-        if (type == 0) {
-            arrows[0].setVisibility(View.VISIBLE);
-            arrows[1].setVisibility(View.GONE);
-            controlRcv.setAdapter(controlAdapter);
-        } else {
-            arrows[0].setVisibility(View.GONE);
-            arrows[1].setVisibility(View.VISIBLE);
-            controlRcv.setAdapter(funAdapter);
-        }
+    private void showControlRcv(final int type) {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                if (type == 0) {
+                    arrows[0].setVisibility(View.VISIBLE);
+                    arrows[1].setVisibility(View.GONE);
+                    controlRcv.setAdapter(controlAdapter);
+                } else {
+                    arrows[0].setVisibility(View.GONE);
+                    arrows[1].setVisibility(View.VISIBLE);
+                    controlRcv.setAdapter(funAdapter);
+                }
+            }
+        });
     }
 
     private void hideControlRcv() {
-        arrows[0].setVisibility(View.GONE);
-        arrows[1].setVisibility(View.GONE);
-        controlRcv.setAdapter(null);
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                arrows[0].setVisibility(View.GONE);
+                arrows[1].setVisibility(View.GONE);
+                controlRcv.setAdapter(null);
+            }
+        });
     }
 
     private void showControl() {
-        controlFull.setVisibility(View.VISIBLE);
-        if (isFull) {
-            controlPlayer.setVisibility(View.VISIBLE);
-            controlSeekBar.setVisibility(View.GONE);
-            imgControl.setVisibility(View.GONE);
-            tvControl.setVisibility(View.GONE);
-            imgFull.setVisibility(View.GONE);
-            tvFun.setVisibility(View.GONE);
-        } else {
-            controlSeekBar.setVisibility(View.VISIBLE);
-            imgControl.setVisibility(View.VISIBLE);
-            tvControl.setVisibility(View.VISIBLE);
-            imgFull.setVisibility(View.VISIBLE);
-            tvFun.setVisibility(View.VISIBLE);
-        }
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                controlFull.setVisibility(View.VISIBLE);
+                if (isFull) {
+                    controlPlayer.setVisibility(View.VISIBLE);
+                    controlSeekBar.setVisibility(View.GONE);
+                    imgControl.setVisibility(View.GONE);
+                    tvControl.setVisibility(View.GONE);
+                    imgFull.setVisibility(View.GONE);
+                    tvFun.setVisibility(View.GONE);
+                } else {
+                    controlSeekBar.setVisibility(View.VISIBLE);
+                    imgControl.setVisibility(View.VISIBLE);
+                    tvControl.setVisibility(View.VISIBLE);
+                    imgFull.setVisibility(View.VISIBLE);
+                    tvFun.setVisibility(View.VISIBLE);
+                }
+            }
+        });
 
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
                 hideControl();
+                hideControlRcv();
             }
         }, TIMEOUT);
     }
 
     private void hideControl() {
-        controlFull.setVisibility(View.GONE);
-        if (isFull) controlPlayer.setVisibility(View.GONE);
-        else controlSeekBar.setVisibility(View.GONE);
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                controlFull.setVisibility(View.GONE);
+                if (isFull) controlPlayer.setVisibility(View.GONE);
+                else controlSeekBar.setVisibility(View.GONE);
+            }
+        });
     }
 
     @Override
@@ -392,15 +443,11 @@ public class DualMode extends BaseActivity implements PresentationHelper.Listene
 
                 break;
             case R.id.framePlayer:
-                new Handler().post(new Runnable() {
-                    @Override
-                    public void run() {
-                        if (controlFull.getVisibility() == View.GONE)
-                            showControl();
-                        else
-                            hideControlRcv();
-                    }
-                });
+                if (controlFull.getVisibility() == View.GONE)
+                    showControl();
+                else
+                    hideControlRcv();
+
                 break;
         }
     }

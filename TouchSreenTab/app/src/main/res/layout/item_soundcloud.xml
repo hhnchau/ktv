@@ -16,9 +16,11 @@
 
         <ImageView
             android:id="@+id/imgSong"
-            android:layout_width="@dimen/dp_134"
-            android:layout_height="@dimen/dp_102"
-            android:layout_margin="@dimen/dp_5"
+            android:layout_width="@dimen/dp_100"
+            android:layout_height="@dimen/dp_100"
+            android:layout_marginStart="@dimen/dp_24"
+            android:layout_marginTop="@dimen/dp_16"
+            android:layout_marginBottom="@dimen/dp_16"
             android:contentDescription="@string/img"
             android:scaleType="fitXY"
             android:src="@drawable/song1"
@@ -27,7 +29,7 @@
             app:layout_constraintTop_toTopOf="parent"
             bind:urlSongImage="@{soundCloud.image}" />
 
-        <TextView
+        <com.vk2.touchsreentab.view.SourceHanSansSCLight
             android:id="@+id/tvSongName"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -37,17 +39,19 @@
             android:maxLines="1"
             android:text="@{soundCloud.songName}"
             android:textColor="@color/white"
-            android:textSize="@dimen/sp_16"
+            android:textSize="@dimen/sp_24"
             app:layout_constraintEnd_toStartOf="@id/imgMore"
             app:layout_constraintStart_toEndOf="@id/imgSong"
-            android:layout_marginTop="@dimen/dp_40"
             app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="@id/imgSong"
+            app:layout_constraintVertical_bias="0.2"
             />
 
         <ImageView
             android:id="@+id/imgMore"
-            android:layout_width="@dimen/dp_35"
-            android:layout_height="@dimen/dp_35"
+            android:layout_width="@dimen/dp_50"
+            android:layout_height="@dimen/dp_50"
+            android:layout_marginEnd="@dimen/dp_24"
             android:background="@drawable/more"
             android:clickable="true"
             android:contentDescription="@string/img"
@@ -57,14 +61,15 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
+        <com.vk2.touchsreentab.view.SourceHanSansSCNormal
             android:id="@+id/tvSingerName"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="@{soundCloud.singerName1}"
-            android:textColor="@color/white"
-            android:textSize="@dimen/sp_13"
+            android:textColor="@color/grey_8"
+            android:textSize="@dimen/sp_20"
             android:singleLine="true"
+            android:layout_marginTop="@dimen/dp_16"
             app:layout_constraintEnd_toEndOf="@id/tvSongName"
             app:layout_constraintStart_toStartOf="@id/tvSongName"
             app:layout_constraintTop_toBottomOf="@id/tvSongName" />

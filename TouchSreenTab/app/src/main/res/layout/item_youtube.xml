@@ -19,16 +19,18 @@
             android:id="@+id/imgSong"
             android:layout_width="@dimen/dp_134"
             android:layout_height="@dimen/dp_102"
-            android:layout_margin="@dimen/dp_5"
+            android:layout_marginStart="@dimen/dp_24"
+            android:layout_marginTop="@dimen/dp_16"
+            android:layout_marginBottom="@dimen/dp_16"
             android:contentDescription="@string/img"
-            android:scaleType="fitXY"
+            android:scaleType="fitCenter"
             android:src="@drawable/song1"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             bind:urlSongImage="@{song.image}" />
 
-        <TextView
+        <com.vk2.touchsreentab.view.SourceHanSansSCLight
             android:id="@+id/tvSongName"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -38,20 +40,22 @@
             android:maxLines="2"
             android:text="@{song.songName}"
             android:textColor="@color/white"
-            android:textSize="@dimen/sp_16"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:textSize="@dimen/sp_24"
+            app:layout_constraintBottom_toBottomOf="@id/imgSong"
             app:layout_constraintEnd_toStartOf="@id/imgMore"
             app:layout_constraintStart_toEndOf="@id/imgSong"
             app:layout_constraintTop_toTopOf="@id/imgSong" />
 
         <ImageView
             android:id="@+id/imgMore"
-            android:layout_width="@dimen/dp_35"
-            android:layout_height="@dimen/dp_35"
+            android:layout_width="@dimen/dp_50"
+            android:layout_height="@dimen/dp_50"
             android:background="@drawable/more"
             android:clickable="true"
+            android:focusable="true"
             android:contentDescription="@string/img"
             android:scaleType="fitCenter"
+            android:layout_marginEnd="@dimen/dp_24"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/tvSongName"
