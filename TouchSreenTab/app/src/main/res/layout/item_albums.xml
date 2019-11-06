@@ -16,5 +16,7 @@
         android:contentDescription="@string/img"
         android:scaleType="fitXY"
         android:src="@drawable/album1"
-        bind:urlSongImage="@{ablum.imagePath}"/>
+        bind:urlSongImage="@{ablum.imagePath}"
+        android:background="@drawable/custom_rounded_album_image"
+        />
 </layout>
