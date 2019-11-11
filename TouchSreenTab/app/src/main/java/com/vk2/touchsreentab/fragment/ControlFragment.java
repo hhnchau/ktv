@@ -8,6 +8,7 @@ import android.support.annotation.Nullable;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,6 +23,9 @@ import com.vk2.touchsreentab.model.TextSearch;
 import com.vk2.touchsreentab.model.viewmodel.TextSearchViewModel;
 import com.vk2.touchsreentab.view.MyKeyboard;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 
 public class ControlFragment extends BaseFragment implements View.OnClickListener {
     private View view;
@@ -30,6 +34,8 @@ public class ControlFragment extends BaseFragment implements View.OnClickListene
 
     private TextSearchViewModel textSearchViewModel;
     private TextSearch textSearch;
+    private Timer timer;
+    private static final long DELAY = 1000;
 
     @Nullable
     @Override
@@ -41,6 +47,7 @@ public class ControlFragment extends BaseFragment implements View.OnClickListene
 
     private void initView() {
         if (getActivity() == null) return;
+        timer = new Timer();
         textSearchViewModel = ViewModelProviders.of(getActivity()).get(TextSearchViewModel.class);
         textSearch = new TextSearch();
         edtSearch = view.findViewById(R.id.edtSearch);
@@ -84,47 +91,49 @@ public class ControlFragment extends BaseFragment implements View.OnClickListene
         edtSearch.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
             }
 
             @Override
             public void onTextChanged(final CharSequence charSequence, int i, int i1, int i2) {
-                if (getActivity() != null)
-                    getActivity().runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            if (imgEnter.getVisibility() == View.GONE) {
-                                if (TextUtils.isEmpty(charSequence)) {
-                                    imgClear.setVisibility(View.GONE);
-                                    if (Fragmentcz.getCurrentFragment() == Fragmentez.SEARCH_COMPLEX_FRAGMENT)
-                                        gotoRecommend();
-                                } else {
-                                    imgClear.setVisibility(View.VISIBLE);
-                                    gotoComplex();
-                                    submitSearchInput(charSequence);
-                                }
-                            }
-                        }
-                    });
+
             }
 
             @Override
-            public void afterTextChanged(Editable editable) {
-
+            public void afterTextChanged(final Editable editable) {
+                timer.cancel();
+                timer = new Timer();
+                timer.schedule(new TimerTask() {
+                    @Override
+                    public void run() {
+                        if (getActivity() != null)
+                            getActivity().runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    if (imgEnter.getVisibility() == View.GONE) {
+                                        if (TextUtils.isEmpty(editable)) {
+                                            imgClear.setVisibility(View.GONE);
+                                            if (Fragmentcz.getCurrentFragment() == Fragmentez.SEARCH_COMPLEX_FRAGMENT)
+                                                gotoRecommend();
+                                        } else {
+                                            imgClear.setVisibility(View.VISIBLE);
+                                            if (Fragmentcz.getCurrentFragment() != Fragmentez.SEARCH_COMPLEX_FRAGMENT)
+                                                gotoComplex();
+                                            submitSearchInput(editable);
+                                        }
+                                    }
+                                }
+                            });
+                    }
+                }, DELAY);
             }
         });
     }
 
     private void submitSearchInput(final CharSequence s) {
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                if (textSearchViewModel == null || textSearch == null) return;
-                textSearch.setFrg(Fragmentcz.getCurrentFragment());
-                textSearch.setTextSearch(s.toString());
-                textSearchViewModel.setTextSearch(textSearch);
-            }
-        }, 300);
+        if (textSearchViewModel == null || textSearch == null) return;
+        textSearch.setFrg(Fragmentcz.getCurrentFragment());
+        textSearch.setTextSearch(s.toString());
+        textSearchViewModel.setTextSearch(textSearch);
     }
 
     @Override

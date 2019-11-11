@@ -79,14 +79,14 @@ public class MultiViewRecommendAdapter extends PagedListAdapter<Song, RecyclerVi
             ((CategoryRecyclerViewHolder) viewHolder).recyclerViewBinding.rcvItem.setOffscreenItems(2);
             ((CategoryRecyclerViewHolder) viewHolder).recyclerViewBinding.rcvItem.setItemTransitionTimeMillis(150);
             ((CategoryRecyclerViewHolder) viewHolder).recyclerViewBinding.rcvItem.setOverScrollEnabled(false);
-            AblumViewModel ablumViewModel = ViewModelProviders.of((FragmentActivity) context).get(AblumViewModel.class);
-            ablumViewModel.getAllListAblum();
-            ablumViewModel.listAblumOnline.observe((FragmentActivity) context, new Observer<PagedList<Ablum>>() {
-                @Override
-                public void onChanged(@Nullable PagedList<Ablum> ablums) {
-                    ablumAdapter.submitList(ablums);
-                }
-            });
+//            AblumViewModel ablumViewModel = ViewModelProviders.of((FragmentActivity) context).get(AblumViewModel.class);
+//            ablumViewModel.getAllListAblum();
+//            ablumViewModel.listAblumOnline.observe((FragmentActivity) context, new Observer<PagedList<Ablum>>() {
+//                @Override
+//                public void onChanged(@Nullable PagedList<Ablum> ablums) {
+//                    ablumAdapter.submitList(ablums);
+//                }
+//            });
 
             ablumAdapter.setOnItemClick(new AblumAdapter.OnItemClick() {
                 @Override
@@ -99,7 +99,7 @@ public class MultiViewRecommendAdapter extends PagedListAdapter<Song, RecyclerVi
             ((SingerRecyclerViewHolder) viewHolder).recyclerViewBinding.rcvItem.setLayoutManager(new LinearLayoutManager(context, LinearLayout.HORIZONTAL, false));
             ((SingerRecyclerViewHolder) viewHolder).recyclerViewBinding.rcvItem.setAdapter(artistAdapter);
             final SingerVewModel singerVewModel = ViewModelProviders.of((FragmentActivity) context).get(SingerVewModel.class);
-            singerVewModel.getAllListSinger();
+            singerVewModel.getAllListSinger(context);
             singerVewModel.listSingerOnline.observe((FragmentActivity) context, new Observer<PagedList<Singer>>() {
                 @Override
                 public void onChanged(@Nullable PagedList<Singer> artists) {

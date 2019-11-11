@@ -16,5 +16,5 @@
         android:contentDescription="@string/img"
         android:scaleType="fitXY"
         android:src="@drawable/album1"
-        bind:urlSongImage="@{ablum.imagePath}"/>
+        bind:urlAlbumImage="@{ablum.imagePath}"/>
 </layout>

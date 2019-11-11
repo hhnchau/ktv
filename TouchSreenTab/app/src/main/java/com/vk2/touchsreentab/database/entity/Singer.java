@@ -2,10 +2,11 @@ package com.vk2.touchsreentab.database.entity;
 
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
-import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.Index;
 import android.arch.persistence.room.PrimaryKey;
 import android.databinding.BindingAdapter;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.util.DiffUtil;
 import android.widget.ImageView;
@@ -13,24 +14,38 @@ import android.widget.ImageView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
+import com.google.gson.annotations.SerializedName;
+import com.vk2.touchsreentab.download.ImageLoaderTask;
 
-@Entity(tableName = "singer", indices = {@Index(name = "idx_singer_id", value = "ID"), @Index(name = "idx_singer_lang", value = "Lang"),@Index(name = "idx_singer_name", value = "Name"),@Index(name = "idx_singer_spell", value = "Spell")})
+@Entity(tableName = "singer", indices = {@Index(name = "idx_singer_id", value = "ID"), @Index(name = "idx_singer_lang", value = "Lang"), @Index(name = "idx_singer_name", value = "Name"), @Index(name = "idx_singer_spell", value = "Spell")})
 public class Singer {
     @PrimaryKey()
     @ColumnInfo(name = "ID")
     private Integer id;
+
     @ColumnInfo(name = "Name")
     private String name;
+
+    @SerializedName("sex_id")
     @ColumnInfo(name = "Sex")
     private Integer sex;
+
+    @SerializedName("lang_id")
     @ColumnInfo(name = "Lang")
     private Integer lang;
+
+    @SerializedName("singerNameSpell")
     @ColumnInfo(name = "Spell")
     private String spell;
+
+    @SerializedName("fileId")
     @ColumnInfo(name = "FileName")
     private String fileName;
+
     @ColumnInfo(name = "Star")
     private Integer star;
+
+    @SerializedName("pinyin")
     @ColumnInfo(name = "NamePinyin")
     private String namePinyin;
 
@@ -101,24 +116,27 @@ public class Singer {
         this.namePinyin = namePinyin;
     }
 
-    @Ignore
-    private String image = "https://api.androidhive.info/images/nature/2.jpg";
-
-    public String getImage() {
-        return image;
-    }
-
-    public void setImage(String image) {
-        this.image = image;
-    }
-
     @BindingAdapter("urlSingerImage")
-    public static void loadImage(ImageView view, String imageUrl) {
+    public static void loadImage(final ImageView view, String imageId) {
+        Uri uri = ImageLoaderTask.getImageUri(imageId);
         Glide.with(view.getContext())
-                .load(imageUrl)
+                .load(uri)
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .apply(RequestOptions.circleCropTransform())
                 .into(view);
+
+        if (uri.toString().contains("default.png")) {
+            new ImageLoaderTask(view.getContext(), imageId, new ImageLoaderTask.Callback() {
+                @Override
+                public void onBitmap(Bitmap bitmap) {
+                    Glide.with(view.getContext())
+                            .load(bitmap)
+                            .diskCacheStrategy(DiskCacheStrategy.ALL)
+                            .apply(RequestOptions.circleCropTransform())
+                            .into(view);
+                }
+            }).execute("http://vksinger.oss-ap-southeast-1.aliyuncs.com//1821.png?Expires=1572949143&OSSAccessKeyId=LTAI4FehsPqAwTu18gBVbiMB&Signature=VTztzAZWwfdylYdk5Hc0bz493kA%3D");
+        }
     }
 
     public static DiffUtil.ItemCallback<Singer> DIFF_CALLBACK = new DiffUtil.ItemCallback<Singer>() {

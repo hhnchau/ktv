@@ -6,7 +6,9 @@ import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.Index;
 import android.arch.persistence.room.PrimaryKey;
 import android.databinding.BindingAdapter;
+import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.util.DiffUtil;
 import android.text.SpannableString;
@@ -20,6 +22,7 @@ import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestOptions;
 import com.google.gson.annotations.SerializedName;
 import com.vk2.touchsreentab.R;
+import com.vk2.touchsreentab.download.ImageLoaderTask;
 
 
 @Entity(tableName = "song",
@@ -38,64 +41,96 @@ public class Song {
     @PrimaryKey()
     @ColumnInfo(name = "FileName")
     @NonNull
+    @SerializedName("filename")
     private String fileName = "0";
+
     @SerializedName("songname")
     @ColumnInfo(name = "SongName")
     private String songName;
+
+    @SerializedName("wordnum")
     @ColumnInfo(name = "WordNum")
     private Integer wordNum;
+
+    @SerializedName("pycode")
     @ColumnInfo(name = "PyCode")
     private String pyCode;
+
+    @SerializedName("stroke")
     @ColumnInfo(name = "Stroke")
     private String stroke;
+
     @SerializedName("singername1")
     @ColumnInfo(name = "SingerName1")
     private String singerName1;
+
+    @SerializedName("singername2")
     @ColumnInfo(name = "SingerName2")
     private String singerName2;
+
+    @SerializedName("lang")
     @ColumnInfo(name = "Lang")
     private Integer lang;
+
+    @SerializedName("mtype")
     @ColumnInfo(name = "MType")
     private Integer mType;
+
+    @SerializedName("ytrack")
     @ColumnInfo(name = "yTrack")
     private Integer yTrack;
+
+    @SerializedName("btrack")
     @ColumnInfo(name = "bTrack")
     private Integer bTrack;
+
+    @SerializedName("yvolume")
     @ColumnInfo(name = "yVolur")
     private Integer yVolur;
+
+    @SerializedName("bvolume")
     @ColumnInfo(name = "bVolume")
     private Integer bVolume;
+
+    @SerializedName("songtypeid")
     @ColumnInfo(name = "SongTypeID")
     private Integer songTypeId;
+
+    @SerializedName("newsong")
     @ColumnInfo(name = "NewSong")
     private Integer newSong;
+
     @ColumnInfo(name = "Address")
     private Integer address;
+
+    @SerializedName("singerid1")
     @ColumnInfo(name = "SingerID1")
     private Integer singerId1;
+
+    @SerializedName("singerid2")
     @ColumnInfo(name = "SingerID2")
     private Integer singerID2;
+
     @ColumnInfo(name = "style")
     private Integer style;
+
     @ColumnInfo(name = "freq")
     private Integer freq;
+
+    @SerializedName("songnamespell")
     @ColumnInfo(name = "SongNamePinyin")
     private String songNamePinyin;
+
     @ColumnInfo(name = "Spell")
     private String spell;
+
     @ColumnInfo(name = "NamePinyin")
     private String namePinyin;
+
     @ColumnInfo(name = "Selected")
     private Integer selected;
 
-    @Ignore
-    private String videoPath;
-
     public Song() {
-    }
-
-    public Song(String songName) {
-        this.songName = songName;
     }
 
     @NonNull
@@ -283,8 +318,16 @@ public class Song {
         this.namePinyin = namePinyin;
     }
 
+    public Integer getSelected() {
+        return selected;
+    }
+
+    public void setSelected(Integer selected) {
+        this.selected = selected;
+    }
+
     @Ignore
-    private String image = "https://api.androidhive.info/images/nature/8.jpg";
+    private String image = "";
 
     public String getImage() {
         return image;
@@ -294,6 +337,9 @@ public class Song {
         this.image = image;
     }
 
+    @Ignore
+    private String videoPath;
+
     public String getVideoPath() {
         return videoPath;
     }
@@ -302,21 +348,28 @@ public class Song {
         this.videoPath = videoPath;
     }
 
-    public Integer getSelected() {
-        return selected;
-    }
-
-    public void setSelected(Integer selected) {
-        this.selected = selected;
-    }
 
     @BindingAdapter("urlSongImage")
-    public static void loadImage(ImageView view, String imageUrl) {
+    public static void loadImage(final ImageView view, String imageId) {
+        Uri uri = ImageLoaderTask.getImageUri(imageId);
         Glide.with(view.getContext())
-                .load(imageUrl)
+                .load(uri)
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .apply(RequestOptions.bitmapTransform(new RoundedCorners(4)))
                 .into(view);
+
+        if (uri.toString().contains("default.png")) {
+            new ImageLoaderTask(view.getContext(), imageId, new ImageLoaderTask.Callback() {
+                @Override
+                public void onBitmap(Bitmap bitmap) {
+                    Glide.with(view.getContext())
+                            .load(bitmap)
+                            .diskCacheStrategy(DiskCacheStrategy.ALL)
+                            .apply(RequestOptions.bitmapTransform(new RoundedCorners(4)))
+                            .into(view);
+                }
+            }).execute("http://vksinger.oss-ap-southeast-1.aliyuncs.com//1821.png?Expires=1572949143&OSSAccessKeyId=LTAI4FehsPqAwTu18gBVbiMB&Signature=VTztzAZWwfdylYdk5Hc0bz493kA%3D");
+        }
     }
 
     @BindingAdapter({"bind:string", "bind:character"})

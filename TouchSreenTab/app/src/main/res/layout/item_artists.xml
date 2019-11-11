@@ -30,7 +30,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            bind:urlSingerImage="@{singer.image}" />
+            bind:urlSingerImage="@{String.valueOf(singer.id)}" />
 
         <com.vk2.touchsreentab.view.SourceHanSansSCLight
             android:id="@+id/tvArtists"

@@ -7,6 +7,7 @@ import android.arch.lifecycle.Transformations;
 import android.arch.lifecycle.ViewModel;
 import android.arch.paging.LivePagedListBuilder;
 import android.arch.paging.PagedList;
+import android.content.Context;
 
 import com.vk2.touchsreentab.database.dao.SingerDao;
 import com.vk2.touchsreentab.database.dao.SongDao;
@@ -59,8 +60,10 @@ public class SingerVewModel extends ViewModel {
             }
         });
     }
-    public void getAllListSinger() {
-        SingerDataSourceFactory singerDataSource = new SingerDataSourceFactory();
+
+    @SuppressWarnings("unchecked")
+    public void getAllListSinger(Context context) {
+        SingerDataSourceFactory singerDataSource = new SingerDataSourceFactory(context);
         PagedList.Config pagedListConfig =
                 (new PagedList.Config.Builder()).setEnablePlaceholders(false)
                         .setInitialLoadSizeHint(10)

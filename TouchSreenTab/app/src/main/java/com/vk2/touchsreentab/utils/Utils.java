@@ -1,5 +1,7 @@
 package com.vk2.touchsreentab.utils;
 
+import com.google.gson.Gson;
+
 import java.util.concurrent.TimeUnit;
 
 public class Utils {
@@ -14,5 +16,13 @@ public class Utils {
             return minutes + ":0" + ((seconds - subSecond * 60) + 1);
         }
         return minutes + ":" + ((seconds - subSecond * 60) + 1);
+    }
+
+    public static String getDeviceId() {
+        return "1006120003601000";
+    }
+
+    public static String O2J(Object obj) {
+        return new Gson().toJson(obj);
     }
 }

@@ -1,1 +1,0 @@
-package com.vk2.touchsreentab.service;public class IServiceManager {}

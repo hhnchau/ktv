@@ -5,12 +5,35 @@ import com.vk2.touchsreentab.model.ResultSinger;
 import com.vk2.touchsreentab.model.ResultSong;
 import com.vk2.touchsreentab.model.ResultSoundCloud;
 import com.vk2.touchsreentab.model.YouTubeApiObject;
+import com.vk2.touchsreentab.model.api.SingerForm;
+import com.vk2.touchsreentab.model.api.SongForm;
+import com.vk2.touchsreentab.model.api.TokenForm;
 
 import io.reactivex.Observable;
+import retrofit2.http.Field;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.Header;
+import retrofit2.http.POST;
 import retrofit2.http.Query;
 
 public interface ApiService {
+
+    @FormUrlEncoded
+    @POST("/token")
+    Observable<TokenForm> getApiToken(@Field("deviceId") String deviceId);
+
+    @FormUrlEncoded
+    @POST("/media/song/get-hot-songs")
+    Observable<SongForm> getHostSongs(@Header("Authorization") String authorization, @Field("deviceId") String deviceId, @Field("page") int page, @Field("limit") int limit);
+
+    @FormUrlEncoded
+    @POST("/media/song/get-list-song")
+    Observable<SongForm> getListSongs(@Header("Authorization") String authorization, @Field("deviceId") String deviceId, @Field("page") int page, @Field("limit") int limit);
+
+    @FormUrlEncoded
+    @POST("/media/singer/get-hot-singers")
+    Observable<SingerForm> getHostSinger(@Header("Authorization") String authorization, @Field("deviceId") String deviceId, @Field("page") int page, @Field("limit") int limit);
 
     @GET("pxo/KTV/smartlist/getYoutubeApiKey?")
     Observable<YouTubeApiObject> getApiKeyTouTube(@Query("KTVId") String ktvId,

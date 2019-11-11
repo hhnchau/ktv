@@ -16,7 +16,6 @@ import com.vk2.touchsreentab.utils.OnSingleClickListener;
 
 
 public class SongAdapter extends PagedListAdapter<Song, SongViewHolder> {
-    private Context context;
     public SongAdapter() {
         super(Song.DIFF_CALLBACK);
     }
@@ -24,7 +23,6 @@ public class SongAdapter extends PagedListAdapter<Song, SongViewHolder> {
     @NonNull
     @Override
     public SongViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        this.context = parent.getContext();
         ItemSongsBinding binding = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()), R.layout.item_songs, parent, false);
         return new SongViewHolder(binding);
     }

@@ -7,6 +7,7 @@ import android.arch.lifecycle.Transformations;
 import android.arch.lifecycle.ViewModel;
 import android.arch.paging.LivePagedListBuilder;
 import android.arch.paging.PagedList;
+import android.content.Context;
 
 import com.vk2.touchsreentab.database.dao.SongDao;
 import com.vk2.touchsreentab.database.entity.Song;
@@ -21,17 +22,8 @@ public class SongViewModel extends ViewModel {
     private PagedList.Config config;
     public LiveData<PagedList<Song>> listSongOnline;
 
-    public LiveData<String> getProgressLoadStatus() {
-        return progressLoadStatus;
-    }
+    public LiveData<Boolean> progressLoadStatus = new MutableLiveData<>();
 
-    private LiveData<String> progressLoadStatus = new MutableLiveData<>();
-
-    public LiveData<Integer> getTotalLive() {
-        return totalLive;
-    }
-
-    private LiveData<Integer> totalLive = new MutableLiveData<>();
     private static final int LIMIT = 20;
 
     public SongViewModel() {
@@ -59,23 +51,16 @@ public class SongViewModel extends ViewModel {
     }
 
     @SuppressWarnings("unchecked")
-    public void getAllListSong() {
-        SongDataSourceFactory songDataSourceFactory = new SongDataSourceFactory();
-        PagedList.Config pagedListConfig =
-                (new PagedList.Config.Builder()).setEnablePlaceholders(false)
+    public void getAllListSong(Context context) {
+        SongDataSourceFactory songDataSourceFactory = new SongDataSourceFactory(context);
+        PagedList.Config pagedListConfig = (new PagedList.Config.Builder()).setEnablePlaceholders(false)
                         .setInitialLoadSizeHint(10)
                         .setPageSize(10).build();
         listSongOnline = new LivePagedListBuilder(songDataSourceFactory, pagedListConfig).build();
-        progressLoadStatus = Transformations.switchMap(songDataSourceFactory.getMutableLiveData(), new Function<SongDataSource, LiveData<String>>() {
+        progressLoadStatus = Transformations.switchMap(songDataSourceFactory.getMutableLiveData(), new Function<SongDataSource, LiveData<Boolean>>() {
             @Override
-            public LiveData<String> apply(SongDataSource progressLoadStatus) {
-                return progressLoadStatus.getProgressLiveStatus();
-            }
-        });
-        totalLive = Transformations.switchMap(songDataSourceFactory.getMutableLiveData(), new Function<SongDataSource, LiveData<Integer>>() {
-            @Override
-            public LiveData<Integer> apply(SongDataSource input) {
-                return input.getTotalLive();
+            public LiveData<Boolean> apply(SongDataSource progressLoadStatus) {
+                return progressLoadStatus.progressLiveStatus;
             }
         });
     }

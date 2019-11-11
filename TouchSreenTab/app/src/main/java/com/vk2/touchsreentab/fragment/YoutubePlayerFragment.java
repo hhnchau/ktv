@@ -10,7 +10,7 @@ import android.widget.Toast;
 
 import com.vk2.touchsreentab.R;
 
-public class YoutubePlayerFragment extends BaseFragment {
+public class  YoutubePlayerFragment extends BaseFragment {
     public static YoutubePlayerFragment newInstance(@NonNull Bundle bundle) {
         YoutubePlayerFragment youtubePlayerFragment = new YoutubePlayerFragment();
         //videoFragment.init(bundle);
