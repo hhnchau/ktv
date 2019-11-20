@@ -16,5 +16,6 @@
         android:contentDescription="@string/img"
         android:scaleType="fitXY"
         android:src="@drawable/album1"
+        android:background="@drawable/custom_rounded_album_image"
         bind:urlAlbumImage="@{ablum.imagePath}"/>
 </layout>
