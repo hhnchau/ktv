@@ -6,6 +6,7 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.widget.Toast;
 
+import com.vk2.touchsreentab.R;
 import com.vk2.touchsreentab.application.MyApplication;
 import com.vk2.touchsreentab.database.entity.Song;
 
@@ -36,11 +37,12 @@ public class PlaylistModelView extends ViewModel {
     }
 
     public void setValue(Context context, Song song, int type) {
-        song.setSongName("http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4");
+        if (!song.getFileName().startsWith("Y") && !song.getFileName().startsWith("S"))
+            song.setVideoPath("http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4");
         if (type == ADD)
             for (Song s : cachePlaylist) {
                 if (song != null && s.getFileName().equals(song.getFileName())) {
-                    Toast.makeText(context, "Da ton tai", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, context.getString(R.string.song_added), Toast.LENGTH_SHORT).show();
                     return;
                 }
             }

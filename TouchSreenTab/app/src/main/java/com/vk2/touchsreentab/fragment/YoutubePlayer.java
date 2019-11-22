@@ -24,7 +24,7 @@ public class YoutubePlayer extends YouTubePlayerFragment {
                 if (!b) {
                     mPlayer = youTubePlayer;
                     mPlayer.setPlayerStyle(YouTubePlayer.PlayerStyle.CHROMELESS);
-                    mPlayer.loadVideo(bundle.getString("id"));
+                    mPlayer.loadVideo(bundle.getString("url"));
                 }
             }
 

@@ -43,7 +43,7 @@ public class ExoPlayer extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         View result = inflater.inflate(R.layout.exo_player_fragment, container, false);
         mPlayer = result.findViewById(R.id.playerView);
-        VIDEO_PATH = getArguments().getString("id");
+        VIDEO_PATH = getArguments().getString("url");
         initPlayer();
         playerListener();
         return result;

@@ -348,6 +348,15 @@ public class Song {
         this.videoPath = videoPath;
     }
 
+    @BindingAdapter("urlYtImage")
+    public static void loadYtImage(ImageView view, String urlImage) {
+        Glide.with(view.getContext())
+                .load(urlImage)
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .apply(RequestOptions.bitmapTransform(new RoundedCorners(4)))
+                .into(view);
+    }
+
 
     @BindingAdapter("urlSongImage")
     public static void loadImage(final ImageView view, String imageId) {

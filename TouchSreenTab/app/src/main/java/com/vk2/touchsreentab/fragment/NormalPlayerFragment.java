@@ -40,7 +40,7 @@ public class NormalPlayerFragment extends BaseFragment implements SurfaceHolder.
         SurfaceHolder surfaceHolder = surfaceView.getHolder();
         surfaceHolder.addCallback(this);
         if (getArguments() != null) {
-            VIDEO_PATH = getArguments().getString("id");
+            VIDEO_PATH = getArguments().getString("url");
             playerListener();
         }
         return view;
