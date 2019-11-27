@@ -13,6 +13,7 @@ public class PlayerViewModel extends ViewModel {
     public static final int ACTION_BROADCAST = 2;
     public static final int ACTION_SEEK = 3;
     public static final int ACTION_VOCAL = 4;
+
     private MutableLiveData<Map<String, Object>> mPlayer = new MutableLiveData<>();
 
     public MutableLiveData<Map<String, Object>> getPlayer() {
@@ -25,4 +26,5 @@ public class PlayerViewModel extends ViewModel {
         map.put("progress", progress);
         this.mPlayer.setValue(map);
     }
+
 }

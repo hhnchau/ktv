@@ -10,7 +10,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.google.android.exoplayer2.ExoPlaybackException;
 import com.google.android.exoplayer2.ExoPlayerFactory;
 import com.google.android.exoplayer2.PlaybackParameters;
@@ -19,14 +23,17 @@ import com.google.android.exoplayer2.SimpleExoPlayer;
 import com.google.android.exoplayer2.Timeline;
 import com.google.android.exoplayer2.extractor.DefaultExtractorsFactory;
 import com.google.android.exoplayer2.source.ExtractorMediaSource;
+import com.google.android.exoplayer2.source.MediaSource;
 import com.google.android.exoplayer2.source.TrackGroupArray;
 import com.google.android.exoplayer2.trackselection.DefaultTrackSelector;
 import com.google.android.exoplayer2.trackselection.TrackSelectionArray;
 import com.google.android.exoplayer2.ui.PlayerView;
 import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory;
+import com.google.android.exoplayer2.upstream.DefaultHttpDataSourceFactory;
 import com.vk2.touchsreentab.R;
 import com.vk2.touchsreentab.activity.DualMode;
 import com.vk2.touchsreentab.model.viewmodel.PlayerViewModel;
+import com.vk2.touchsreentab.utils.MyTask;
 import com.vk2.touchsreentab.utils.Utils;
 
 import java.util.Map;
@@ -34,6 +41,7 @@ import java.util.Map;
 public class ExoPlayerFragment extends BaseFragment {
     private PlayerView mPlayer;
     private SimpleExoPlayer simpleExoPlayer;
+    private ImageView loading;
     private String VIDEO_PATH;
 
     public static ExoPlayerFragment newInstance(@NonNull Bundle bundle) {
@@ -47,11 +55,34 @@ public class ExoPlayerFragment extends BaseFragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.exo_player_fragment, container, false);
         mPlayer = view.findViewById(R.id.playerView);
+        loading = view.findViewById(R.id.loading);
+        Glide.with(loading.getContext()).asGif().load(R.raw.player_loading).into(loading);
+updateTime(view);
         if (getArguments() != null)
             VIDEO_PATH = getArguments().getString("url");
         initPlayer();
         playerListener();
         return view;
+    }
+
+
+    private void updateTime(View view){
+        final TextView time = view.findViewById(R.id.time);
+
+        MyTask task = new MyTask(1000, new MyTask.TaskCallback() {
+            @Override
+            public void task() {
+                if (getActivity() == null) return;
+                getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        if (simpleExoPlayer != null)
+                            time.setText(Utils.intToTime((int)simpleExoPlayer.getContentPosition()));
+                    }
+                });
+            }
+        });
+        task.loop();
     }
 
     private void playerListener() {
@@ -66,6 +97,8 @@ public class ExoPlayerFragment extends BaseFragment {
                 } else if (action == PlayerViewModel.ACTION_SEEK && simpleExoPlayer != null) {
                     long p = (long) stringObjectMap.get("progress");
                     simpleExoPlayer.seekTo((int) p);
+                } else if (action == PlayerViewModel.ACTION_VOCAL) {
+                    //VOCAL
                 }
             }
         });
@@ -73,24 +106,22 @@ public class ExoPlayerFragment extends BaseFragment {
 
     private void initPlayer() {
         if (getActivity() == null) return;
-        Uri uri = Uri.parse(VIDEO_PATH);
+
+
+        DefaultHttpDataSourceFactory httpDataSourceFactory = new DefaultHttpDataSourceFactory("playvideo", null, 50000, 50000, true);
+        DefaultDataSourceFactory dataSourceFactory = new DefaultDataSourceFactory(getActivity(), null, httpDataSourceFactory);
+        MediaSource mediaSource = new ExtractorMediaSource.Factory(dataSourceFactory).createMediaSource(Uri.parse(VIDEO_PATH));
+
+
         simpleExoPlayer = ExoPlayerFactory.newSimpleInstance(getActivity(), new DefaultTrackSelector());
         simpleExoPlayer.setVolume(0);
-        ExtractorMediaSource audioSource = new ExtractorMediaSource(
-                uri,
-                new DefaultDataSourceFactory(getActivity(), "ExoPlayer"),
-                new DefaultExtractorsFactory(),
-                null,
-                null
-        );
-
-        simpleExoPlayer.prepare(audioSource);
+        simpleExoPlayer.prepare(mediaSource);
         mPlayer.setPlayer(simpleExoPlayer);
         simpleExoPlayer.setPlayWhenReady(true);
         simpleExoPlayer.addListener(new Player.EventListener() {
             @Override
             public void onTimelineChanged(Timeline timeline, @Nullable Object manifest, int reason) {
-
+                simpleExoPlayer.seekTo(1);
             }
 
             @Override
@@ -105,7 +136,11 @@ public class ExoPlayerFragment extends BaseFragment {
 
             @Override
             public void onPlayerStateChanged(boolean playWhenReady, int playbackState) {
-                if (playbackState == Player.STATE_ENDED) {
+                if (playbackState == Player.STATE_READY) {
+                    Log.d("TAG", "Player ready!!!");
+                    if (getActivity() != null && loading != null)
+                        loading.setVisibility(View.GONE);
+                }else if (playbackState == Player.STATE_ENDED) {
                     if (getActivity() != null)
                         ((DualMode) getActivity()).onFinished();
                 }
@@ -123,7 +158,6 @@ public class ExoPlayerFragment extends BaseFragment {
 
             @Override
             public void onPlayerError(ExoPlaybackException error) {
-
             }
 
             @Override

@@ -492,11 +492,11 @@ public class DualMode extends BaseActivity implements PresentationHelper.Listene
         }, TIMEOUT);
     }
 
-    public void addPlayerFragment(final Fragmentez frgez, final String url) {
+    public void addPlayerFragment(final Fragmentez frgez, final String url, final String audio) {
         new Handler().post(new Runnable() {
             @Override
             public void run() {
-                Bundle bundle = getBundleId(url);
+                Bundle bundle = getBundleId(url, audio);
                 if (frgez == Fragmentez.NORMAL_PLAYER_FRAGMENT) {
                     showNormalPlayer(bundle);
                     if (preso != null && fragmentDisplayPresentation != null)
@@ -532,9 +532,10 @@ public class DualMode extends BaseActivity implements PresentationHelper.Listene
                 .commit();
     }
 
-    private Bundle getBundleId(String url) {
+    private Bundle getBundleId(String url, String audio) {
         bundle.clear();
         bundle.putString("url", url);
+        if (audio != null) bundle.putString("audio", audio);
         bundle.putString("apiKey", "AIzaSyAeUyi3q4lB21g18hUnR9NWpqU8eTDYsl8");
         return bundle;
     }
@@ -542,14 +543,14 @@ public class DualMode extends BaseActivity implements PresentationHelper.Listene
     public void onDefault() {
         isPlaying = false;
         isUpdate = false;
-        addPlayerFragment(Fragmentez.NORMAL_PLAYER_FRAGMENT, "android.resource://" + getPackageName() + "/" + R.raw.buon_khong_em);
+        addPlayerFragment(Fragmentez.NORMAL_PLAYER_FRAGMENT, "android.resource://" + getPackageName() + "/" + R.raw.buon_khong_em, null);
     }
 
     private void onPlay() {
         isPlaying = true;
         isUpdate = false;
         if (playlist != null && playlist.size() > 0)
-            addPlayerFragment(getVideoType(playlist.get(0)), playlist.get(0).getVideoPath());
+            addPlayerFragment(getVideoType(playlist.get(0)), playlist.get(0).getVideoPath(), playlist.get(0).getAudioPath());
     }
 
     public void onFinished() {
@@ -565,7 +566,7 @@ public class DualMode extends BaseActivity implements PresentationHelper.Listene
         if (song.getFileName().startsWith("Y") && song.getVideoPath().startsWith(SearchYoutubeFragment.YOUTUBE_LINK_START)) {
             song.setVideoPath(song.getFileName().substring(1));
             return Fragmentez.YOUTUBE_PLAYER_FRAGMENT;
-        }else
+        } else
             return Fragmentez.EXO_PLAYER_FRAGMENT;
     }
 }

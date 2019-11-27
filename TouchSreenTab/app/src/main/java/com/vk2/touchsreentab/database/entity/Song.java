@@ -348,6 +348,17 @@ public class Song {
         this.videoPath = videoPath;
     }
 
+    @Ignore
+    private String audioPath;
+
+    public String getAudioPath() {
+        return audioPath;
+    }
+
+    public void setAudioPath(String audioPath) {
+        this.audioPath = audioPath;
+    }
+
     @BindingAdapter("urlYtImage")
     public static void loadYtImage(ImageView view, String urlImage) {
         Glide.with(view.getContext())

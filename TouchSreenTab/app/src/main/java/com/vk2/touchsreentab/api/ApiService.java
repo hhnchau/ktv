@@ -8,6 +8,7 @@ import com.vk2.touchsreentab.model.YouTubeApiObject;
 import com.vk2.touchsreentab.model.api.SingerForm;
 import com.vk2.touchsreentab.model.api.SongForm;
 import com.vk2.touchsreentab.model.api.TokenForm;
+import com.vk2.touchsreentab.model.api.YoutubeForm;
 
 import io.reactivex.Observable;
 import retrofit2.http.Field;
@@ -16,6 +17,7 @@ import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
 import retrofit2.http.Query;
+import retrofit2.http.Url;
 
 public interface ApiService {
 
@@ -34,6 +36,10 @@ public interface ApiService {
     @FormUrlEncoded
     @POST("/media/singer/get-hot-singers")
     Observable<SingerForm> getHostSinger(@Header("Authorization") String authorization, @Field("deviceId") String deviceId, @Field("page") int page, @Field("limit") int limit);
+
+    @GET()
+    Observable<YoutubeForm> getLinkYoutube(@Url String url, @Query("link") String link);
+
 
     @GET("pxo/KTV/smartlist/getYoutubeApiKey?")
     Observable<YouTubeApiObject> getApiKeyTouTube(@Query("KTVId") String ktvId,

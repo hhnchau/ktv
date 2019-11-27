@@ -1,14 +1,18 @@
 package com.vk2.touchsreentab.api;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.text.TextUtils;
 import android.util.Log;
 
+import com.vk2.touchsreentab.database.entity.Song;
 import com.vk2.touchsreentab.model.YouTubeApiObject;
 import com.vk2.touchsreentab.model.api.SingerForm;
 import com.vk2.touchsreentab.model.api.SongForm;
 import com.vk2.touchsreentab.model.api.Token;
 import com.vk2.touchsreentab.model.api.TokenForm;
+import com.vk2.touchsreentab.model.api.Youtube;
+import com.vk2.touchsreentab.model.api.YoutubeForm;
 import com.vk2.touchsreentab.utils.SaveDataUtils;
 import com.vk2.touchsreentab.utils.Utils;
 
@@ -22,7 +26,8 @@ import io.reactivex.schedulers.Schedulers;
 
 public class ApiController {
     public static final int SUCCESS = 0;
-    public static final int EXPIRE = -100;
+    public static final int EXPIRE = -102;
+    public static final int TIMEOUT = -100;
     private static ApiController instance = null;
 
     public static ApiController getInstance() {
@@ -54,14 +59,14 @@ public class ApiController {
                                 SaveDataUtils.getInstance(context).setApiToken(token.getToken());
                                 if (callback != null) callback.reCall();
                             } else {
-                                Log.d("API Token: ", "null");
+                                Log.d("TAG Token: ", "null");
                             }
                         }
                     }
 
                     @Override
                     public void onError(Throwable e) {
-                        Log.d("API Error: ", e.toString());
+                        Log.d("TAG Error: ", e.toString());
                     }
 
                     @Override
@@ -79,7 +84,8 @@ public class ApiController {
 
                     @Override
                     public void onNext(SongForm songForm) {
-                        if (songForm != null && songForm.getErr() == EXPIRE) {
+                        if (songForm != null && (songForm.getErr() == EXPIRE || songForm.getErr() == TIMEOUT)) {
+                            Log.d("TAG-Hot-Song: ", "Expire!");
                             getApiToken(context, new FCallback() {
                                 @Override
                                 public void reCall() {
@@ -88,12 +94,13 @@ public class ApiController {
                             });
                             return;
                         }
+                        Log.d("TAG-Hot-Song: ", "Success!");
                         if (callback != null) callback.response(songForm);
                     }
 
                     @Override
                     public void onError(Throwable e) {
-                        Log.d("API Error: ", e.toString());
+                        Log.d("TAG Error: ", e.toString());
                         if (callback != null) callback.response(e);
                     }
 
@@ -113,7 +120,7 @@ public class ApiController {
 
                     @Override
                     public void onNext(SongForm songForm) {
-                        if (songForm != null && songForm.getErr() == EXPIRE) {
+                        if (songForm != null && (songForm.getErr() == EXPIRE || songForm.getErr() == TIMEOUT)) {
                             getApiToken(context, new FCallback() {
                                 @Override
                                 public void reCall() {
@@ -147,7 +154,8 @@ public class ApiController {
 
                     @Override
                     public void onNext(SingerForm singerForm) {
-                        if (singerForm != null && singerForm.getErr() == EXPIRE) {
+                        if (singerForm != null && (singerForm.getErr() == EXPIRE || singerForm.getErr() == TIMEOUT)) {
+                            Log.d("TAG-Hot-Singer: ", "Expire!");
                             getApiToken(context, new FCallback() {
                                 @Override
                                 public void reCall() {
@@ -156,13 +164,47 @@ public class ApiController {
                             });
                             return;
                         }
+                        Log.d("TAG-Hot-Singer: ", "Success!");
                         if (callback != null) callback.response(singerForm);
                     }
 
                     @Override
                     public void onError(Throwable e) {
-                        Log.d("API Error: ", e.toString());
+                        Log.d("TAG Error: ", e.toString());
                         if (callback != null) callback.response(e);
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                }));
+    }
+
+    public void getLinkYoutube(@NonNull final Song song) {
+        CompositeManager.add(Api.apiService.getLinkYoutube(Host.API_LINK_YOUTUBE, song.getVideoPath())
+                .subscribeOn(Schedulers.io())
+                .subscribeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(new DisposableObserver<YoutubeForm>() {
+
+                    @Override
+                    public void onNext(YoutubeForm youtubeForm) {
+                        if (youtubeForm != null) {
+                            Log.d("TAG LINK YT: ", "Success!");
+                            Youtube yt = youtubeForm.getData();
+                            if (yt != null) {
+                                Log.d("TAG LINK YT: ", "Update Link Success!");
+                                //song.setFileName(song.getFileName().substring(1));
+                                song.setVideoPath(yt.getLink());
+                                song.setAudioPath(yt.getAudio());
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Log.d("TAG Error: ", e.toString());
+
                     }
 
                     @Override
