@@ -43,6 +43,7 @@ public class ExoPlayerFragment extends BaseFragment {
     private SimpleExoPlayer simpleExoPlayer;
     private ImageView loading;
     private String VIDEO_PATH;
+    private PlayerViewModel playerViewModel;
 
     public static ExoPlayerFragment newInstance(@NonNull Bundle bundle) {
         ExoPlayerFragment exoFragment = new ExoPlayerFragment();
@@ -57,7 +58,7 @@ public class ExoPlayerFragment extends BaseFragment {
         mPlayer = view.findViewById(R.id.playerView);
         loading = view.findViewById(R.id.loading);
         Glide.with(loading.getContext()).asGif().load(R.raw.player_loading).into(loading);
-updateTime(view);
+        updateTime(view);
         if (getArguments() != null)
             VIDEO_PATH = getArguments().getString("url");
         initPlayer();
@@ -66,7 +67,7 @@ updateTime(view);
     }
 
 
-    private void updateTime(View view){
+    private void updateTime(View view) {
         final TextView time = view.findViewById(R.id.time);
 
         MyTask task = new MyTask(1000, new MyTask.TaskCallback() {
@@ -77,7 +78,7 @@ updateTime(view);
                     @Override
                     public void run() {
                         if (simpleExoPlayer != null)
-                            time.setText(Utils.intToTime((int)simpleExoPlayer.getContentPosition()));
+                            time.setText(Utils.intToTime((int) simpleExoPlayer.getContentPosition()));
                     }
                 });
             }
@@ -87,7 +88,7 @@ updateTime(view);
 
     private void playerListener() {
         if (getActivity() == null) return;
-        final PlayerViewModel playerViewModel = ViewModelProviders.of(getActivity()).get(PlayerViewModel.class);
+        playerViewModel = ViewModelProviders.of(getActivity()).get(PlayerViewModel.class);
         playerViewModel.getPlayer().observe(getActivity(), new Observer<Map<String, Object>>() {
             @Override
             public void onChanged(Map<String, Object> stringObjectMap) {
@@ -140,9 +141,9 @@ updateTime(view);
                     Log.d("TAG", "Player ready!!!");
                     if (getActivity() != null && loading != null)
                         loading.setVisibility(View.GONE);
-                }else if (playbackState == Player.STATE_ENDED) {
-                    if (getActivity() != null)
-                        ((DualMode) getActivity()).onFinished();
+                } else if (playbackState == Player.STATE_ENDED) {
+                    if (playerViewModel != null)
+                        playerViewModel.setFinish(PlayerViewModel.ACTION_FINISHED);
                 }
             }
 

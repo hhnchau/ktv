@@ -69,21 +69,6 @@ public class DualMode extends BaseActivity implements PresentationHelper.Listene
     private View[] arrows;
     private static final int TIMEOUT = 7000;
 
-    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
-    @Override
-    public void onWindowFocusChanged(boolean hasFocus) {
-        super.onWindowFocusChanged(hasFocus);
-        if (hasFocus) {
-            getWindow().getDecorView().setSystemUiVisibility(
-                    View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-                            | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-                            | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-                            | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-                            | View.SYSTEM_UI_FLAG_FULLSCREEN
-                            | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
-        }
-    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -126,6 +111,8 @@ public class DualMode extends BaseActivity implements PresentationHelper.Listene
                             }
                         }
                     });
+                else if (action == PlayerViewModel.ACTION_FINISHED)
+                    onFinished();
             }
         });
 
@@ -553,7 +540,7 @@ public class DualMode extends BaseActivity implements PresentationHelper.Listene
             addPlayerFragment(getVideoType(playlist.get(0)), playlist.get(0).getVideoPath(), playlist.get(0).getAudioPath());
     }
 
-    public void onFinished() {
+    private void onFinished() {
         isPlaying = false;
         isUpdate = false;
         if (playlist != null && playlist.size() > 0)

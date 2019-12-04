@@ -25,6 +25,7 @@ import java.util.Map;
 public class NormalPlayerFragment extends BaseFragment implements SurfaceHolder.Callback, MediaPlayer.OnPreparedListener {
     private MediaPlayer mPlayer;
     private String VIDEO_PATH;
+    private  PlayerViewModel playerViewModel;
 
     public static NormalPlayerFragment newInstance(@NonNull Bundle bundle) {
         NormalPlayerFragment normalFragment = new NormalPlayerFragment();
@@ -48,7 +49,7 @@ public class NormalPlayerFragment extends BaseFragment implements SurfaceHolder.
 
     private void playerListener() {
         if (getActivity() == null) return;
-        final PlayerViewModel playerViewModel = ViewModelProviders.of(getActivity()).get(PlayerViewModel.class);
+        playerViewModel = ViewModelProviders.of(getActivity()).get(PlayerViewModel.class);
         playerViewModel.getPlayer().observe(getActivity(), new Observer<Map<String, Object>>() {
             @Override
             public void onChanged(Map<String, Object> stringObjectMap) {
@@ -74,8 +75,8 @@ public class NormalPlayerFragment extends BaseFragment implements SurfaceHolder.
         mPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
             @Override
             public void onCompletion(MediaPlayer mediaPlayer) {
-                if (getActivity() != null)
-                    ((DualMode) getActivity()).onFinished();
+                if (playerViewModel != null)
+                    playerViewModel.setFinish(PlayerViewModel.ACTION_FINISHED);
             }
         });
 

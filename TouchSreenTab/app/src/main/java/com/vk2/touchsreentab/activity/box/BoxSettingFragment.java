@@ -10,14 +10,14 @@ import android.view.ViewGroup;
 
 import com.vk2.touchsreentab.R;
 
-public class BoxSettingFragment extends DialogFragment {
+public class BoxSettingFragment extends BaseFragmentBox {
 
     public static BoxSettingFragment newInstance(String data) {
-        BoxSettingFragment dialog = new BoxSettingFragment();
+        BoxSettingFragment setting = new BoxSettingFragment();
         Bundle args = new Bundle();
         args.putString("data", data);
-        dialog.setArguments(args);
-        return dialog;
+        setting.setArguments(args);
+        return setting;
     }
 
     @Nullable
