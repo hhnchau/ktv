@@ -2,6 +2,7 @@ package com.vk2.touchsreentab.fragment;
 
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -19,6 +20,7 @@ import android.widget.Toast;
 
 import com.vk2.touchsreentab.R;
 import com.vk2.touchsreentab.activity.DiskUsbActivity;
+import com.vk2.touchsreentab.activity.SettingActivity;
 import com.vk2.touchsreentab.adapter.CategoryAdapter;
 import com.vk2.touchsreentab.database.entity.Song;
 import com.vk2.touchsreentab.fragment.fragmentcontroller.Fragmentaz;
@@ -255,14 +257,13 @@ public class PageFragment extends BaseFragment implements View.OnClickListener, 
                 showPositionFocus(3);
                 break;
             case R.id.setting:
-                onFragmentChange(Fragmentez.SETTING_FRAGMENT);
+                startActivity(new Intent(getActivity(), SettingActivity.class));
                 break;
             case R.id.usb:
                 CustomDialogMessage dialogMessage = new CustomDialogMessage(getActivity(), new CustomDialogMessage.OnDialogMessageClick() {
                     @Override
                     public void onButtonOK() {
-                        Toast.makeText(getContext(), "onButtonOK", Toast.LENGTH_SHORT).show();
-                        DiskUsbActivity.showMe(getActivity());
+                        startActivity(new Intent(getActivity(), DiskUsbActivity.class));
                     }
 
                     @Override

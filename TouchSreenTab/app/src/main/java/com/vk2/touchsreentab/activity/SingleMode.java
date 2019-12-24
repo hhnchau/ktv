@@ -1,23 +1,16 @@
 package com.vk2.touchsreentab.activity;
 
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.Toast;
 
 import com.vk2.touchsreentab.R;
 import com.vk2.touchsreentab.activity.box.BoxHomeFragment;
-import com.vk2.touchsreentab.activity.box.BoxSettingFragment;
-import com.vk2.touchsreentab.fragment.ExoPlayer;
 import com.vk2.touchsreentab.fragment.ExoPlayerFragment;
-import com.vk2.touchsreentab.fragment.YoutubePlayer;
 
 public class SingleMode extends BaseActivity {
     private ExoPlayerFragment exoPlayerFragment;
@@ -30,6 +23,7 @@ public class SingleMode extends BaseActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_single);
+
         bundle = new Bundle();
         handler = new Handler();
         showExoPlayer(getBundleId("https://firebasestorage.googleapis.com/v0/b/kingpes-download.appspot.com/o/video%2Fkingpes1.mp4?alt=media&token=8c7a2ef4-f644-423b-8a7b-cf4fd79ed392"));
