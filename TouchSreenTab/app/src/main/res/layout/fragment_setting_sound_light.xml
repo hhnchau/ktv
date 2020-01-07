@@ -1,7 +1,340 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@mipmap/flag_vietnam">
+<layout>
 
-</android.support.constraint.ConstraintLayout>
+    <data>
+
+        <variable
+            name="dataBinding"
+            type="com.vk2.touchsreentab.fragment.setting.FragmentSoundLight" />
+    </data>
+
+    <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/dp_64">
+
+        <TextView
+            android:id="@+id/sound"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp_40"
+            android:layout_marginTop="@dimen/dp_32"
+            android:layout_marginEnd="@dimen/dp_40"
+            android:layout_marginBottom="@dimen/dp_48"
+            android:text="@string/sound"
+            android:textColor="@color/white"
+            android:textSize="@dimen/sp_22"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@id/box_seekbar_music"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <LinearLayout
+            android:id="@+id/box_seekbar_music"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/dp_40"
+            android:gravity="center"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toBottomOf="@id/sound">
+
+            <TextView
+                android:id="@+id/music"
+                android:layout_width="@dimen/dp_80"
+                android:layout_height="wrap_content"
+                android:text="@string/music"
+                android:textColor="@color/white"
+                android:textSize="@dimen/sp_18"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/btn_minus_music"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/dp_40"
+                    android:contentDescription="@string/img"
+                    android:src="@mipmap/minus" />
+
+                <SeekBar
+                    android:id="@+id/seekBarMusic"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:progress="@{dataBinding.progressMusic}" />
+
+                <ImageView
+                    android:id="@+id/btn_plus_music"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dp_40"
+                    android:contentDescription="@string/img"
+                    android:src="@mipmap/plus" />
+
+                <TextView
+                    android:id="@+id/tv_music_value"
+                    android:layout_width="@dimen/dp_50"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dp_16"
+                    android:layout_marginEnd="@dimen/dp_16"
+                    android:ems="3"
+                    android:gravity="center"
+                    android:text="@{String.valueOf(dataBinding.progressMusic)}"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/sp_18"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/box_seekbar_tone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/dp_40"
+            android:gravity="center"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toBottomOf="@id/box_seekbar_music">
+
+            <TextView
+                android:id="@+id/tone"
+                android:layout_width="@dimen/dp_80"
+                android:layout_height="wrap_content"
+                android:text="@string/tone"
+                android:textColor="@color/white"
+                android:textSize="@dimen/sp_18"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/btn_minus_tone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/dp_40"
+                    android:contentDescription="@string/img"
+                    android:src="@mipmap/minus" />
+
+                <SeekBar
+                    android:id="@+id/seekBarTone"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:progress="@{dataBinding.progressTone}" />
+
+                <ImageView
+                    android:id="@+id/btn_plus_tone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dp_40"
+                    android:contentDescription="@string/img"
+                    android:src="@mipmap/plus" />
+
+                <TextView
+                    android:id="@+id/tv_tone_value"
+                    android:layout_width="@dimen/dp_50"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dp_16"
+                    android:layout_marginEnd="@dimen/dp_16"
+                    android:ems="3"
+                    android:gravity="center"
+                    android:text="@{String.valueOf(dataBinding.progressTone)}"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/sp_18"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/dp_40"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toBottomOf="@id/box_seekbar_tone">
+
+            <TextView
+                android:id="@+id/tone_default"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dp_4"
+                android:layout_weight="1"
+                android:background="@{dataBinding.tone == 0 ? @color/green: @color/grey_4}"
+                android:gravity="center"
+                android:padding="@dimen/dp_8"
+                android:text="@string/txt_default"
+                android:textColor="@color/white"
+                android:textSize="@dimen/sp_16" />
+
+            <TextView
+                android:id="@+id/tone_male_voice"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dp_4"
+                android:layout_weight="1"
+                android:background="@{dataBinding.tone == 1 ? @color/green: @color/grey_4}"
+                android:gravity="center"
+                android:padding="@dimen/dp_8"
+                android:text="@string/txt_male_voice"
+                android:textColor="@color/white"
+                android:textSize="@dimen/sp_16" />
+
+            <TextView
+                android:id="@+id/tone_female_voice"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dp_4"
+                android:layout_weight="1"
+                android:background="@{dataBinding.tone == 2 ? @color/green: @color/grey_4}"
+                android:gravity="center"
+                android:padding="@dimen/dp_8"
+                android:text="@string/txt_female_voice"
+                android:textColor="@color/white"
+                android:textSize="@dimen/sp_16" />
+
+            <TextView
+                android:id="@+id/tone_treble"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dp_4"
+                android:layout_weight="1"
+                android:background="@{dataBinding.tone == 3 ? @color/green: @color/grey_4}"
+                android:gravity="center"
+                android:padding="@dimen/dp_8"
+                android:text="@string/txt_treble"
+                android:textColor="@color/white"
+                android:textSize="@dimen/sp_16" />
+
+            <TextView
+                android:id="@+id/tone_bass"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dp_4"
+                android:layout_weight="1"
+                android:background="@{dataBinding.tone == 4 ? @color/green: @color/grey_4}"
+                android:gravity="center"
+                android:padding="@dimen/dp_8"
+                android:text="@string/txt_bass"
+                android:textSize="@dimen/sp_16" />
+        </LinearLayout>
+
+
+        <android.support.constraint.Guideline
+            android:id="@+id/v"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.6" />
+
+        <TextView
+            android:id="@+id/light"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp_40"
+            android:layout_marginTop="@dimen/dp_32"
+            android:layout_marginEnd="@dimen/dp_40"
+            android:layout_marginBottom="@dimen/dp_48"
+            android:text="@string/light"
+            android:textColor="@color/white"
+            android:textSize="@dimen/sp_22"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/v"
+            app:layout_constraintVertical_bias="0" />
+
+        <LinearLayout
+            android:id="@+id/box_intelligent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/dp_24"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toStartOf="@id/box_full"
+            app:layout_constraintHorizontal_chainStyle="spread_inside"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/light">
+
+            <ImageView
+                android:id="@+id/light_intelligent_on"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dp_16"
+                android:contentDescription="@string/img"
+                android:src="@mipmap/light_intelligent_on" />
+
+            <ImageView
+                android:id="@+id/light_intelligent_off"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dp_16"
+                android:contentDescription="@string/img"
+                android:src="@mipmap/light_intelligent_off" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/box_full"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/dp_24"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toStartOf="@id/box_clearance"
+            app:layout_constraintStart_toEndOf="@id/box_intelligent"
+            app:layout_constraintTop_toBottomOf="@id/light">
+
+            <ImageView
+                android:id="@+id/light_full_on"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dp_16"
+                android:contentDescription="@string/img"
+                android:src="@mipmap/light_full_on" />
+
+            <ImageView
+                android:id="@+id/light_full_off"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dp_16"
+                android:contentDescription="@string/img"
+                android:src="@mipmap/light_full_off" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/box_clearance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/dp_24"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/box_full"
+            app:layout_constraintTop_toBottomOf="@id/light">
+
+            <ImageView
+                android:id="@+id/light_clearance_on"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dp_16"
+                android:contentDescription="@string/img"
+                android:src="@mipmap/light_clearance_on" />
+
+            <ImageView
+                android:id="@+id/light_clearance_off"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dp_16"
+                android:contentDescription="@string/img"
+                android:src="@mipmap/light_clearance_off" />
+        </LinearLayout>
+
+    </android.support.constraint.ConstraintLayout>
+</layout>

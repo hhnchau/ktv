@@ -9,6 +9,7 @@ import com.vk2.touchsreentab.R;
 import com.vk2.touchsreentab.adapter.SettingMenuAdapter;
 import com.vk2.touchsreentab.databinding.ActivitySettingBinding;
 import com.vk2.touchsreentab.fragment.setting.FragmentAdmin;
+import com.vk2.touchsreentab.fragment.setting.FragmentChangePassword;
 import com.vk2.touchsreentab.fragment.setting.FragmentGeneral;
 import com.vk2.touchsreentab.fragment.setting.FragmentLanguage;
 import com.vk2.touchsreentab.fragment.setting.FragmentMusic;
@@ -141,9 +142,17 @@ public class SettingActivity extends BaseActivity {
         }
     }
 
-    public void showFragmentSongManagement(){
+    public void showFragmentSongManagement() {
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.frame, new FragmentSongManagement())
                 .commit();
     }
+
+    public void showFragmentChangePassword() {
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.frame, new FragmentChangePassword())
+                .addToBackStack(FragmentChangePassword.class.getName())
+                .commit();
+    }
+
 }

@@ -14,7 +14,9 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
 import com.vk2.touchsreentab.R;
 import com.vk2.touchsreentab.activity.DualMode;
 import com.vk2.touchsreentab.model.viewmodel.PlayerViewModel;
@@ -25,7 +27,8 @@ import java.util.Map;
 public class NormalPlayerFragment extends BaseFragment implements SurfaceHolder.Callback, MediaPlayer.OnPreparedListener {
     private MediaPlayer mPlayer;
     private String VIDEO_PATH;
-    private  PlayerViewModel playerViewModel;
+    private PlayerViewModel playerViewModel;
+    private ImageView loading;
 
     public static NormalPlayerFragment newInstance(@NonNull Bundle bundle) {
         NormalPlayerFragment normalFragment = new NormalPlayerFragment();
@@ -37,6 +40,8 @@ public class NormalPlayerFragment extends BaseFragment implements SurfaceHolder.
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.normal_player_fragment, container, false);
+        loading = view.findViewById(R.id.loading);
+        Glide.with(loading.getContext()).asGif().load(R.raw.player_loading).into(loading);
         SurfaceView surfaceView = view.findViewById(R.id.surfaceView);
         SurfaceHolder surfaceHolder = surfaceView.getHolder();
         surfaceHolder.addCallback(this);
@@ -66,29 +71,29 @@ public class NormalPlayerFragment extends BaseFragment implements SurfaceHolder.
 
     @Override
     public void surfaceCreated(SurfaceHolder surfaceHolder) {
-        if (getActivity() == null) return;
-        if (mPlayer == null) {
-            mPlayer = new MediaPlayer();
-        }
-        mPlayer.setDisplay(surfaceHolder);
-        mPlayer.setVolume(0, 0);
-        mPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-            @Override
-            public void onCompletion(MediaPlayer mediaPlayer) {
-                if (playerViewModel != null)
-                    playerViewModel.setFinish(PlayerViewModel.ACTION_FINISHED);
-            }
-        });
-
-        try {
-            Uri uri = Uri.parse(VIDEO_PATH);
-            mPlayer.setDataSource(getActivity(), uri);
-            mPlayer.prepare();
-            mPlayer.setOnPreparedListener(this);
-            mPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+//        if (getActivity() == null) return;
+//        if (mPlayer == null) {
+//            mPlayer = new MediaPlayer();
+//        }
+//        mPlayer.setDisplay(surfaceHolder);
+//        mPlayer.setVolume(0, 0);
+//        mPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+//            @Override
+//            public void onCompletion(MediaPlayer mediaPlayer) {
+//                if (playerViewModel != null)
+//                    playerViewModel.setFinish(PlayerViewModel.ACTION_FINISHED);
+//            }
+//        });
+//
+//        try {
+//            Uri uri = Uri.parse(VIDEO_PATH);
+//            mPlayer.setDataSource(getActivity(), uri);
+//            mPlayer.prepare();
+//            mPlayer.setOnPreparedListener(this);
+//            mPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
     }
 
 
@@ -102,6 +107,8 @@ public class NormalPlayerFragment extends BaseFragment implements SurfaceHolder.
 
     @Override
     public void onPrepared(MediaPlayer mediaPlayer) {
+        if (getActivity() != null && loading != null)
+            loading.setVisibility(View.GONE);
         mediaPlayer.start();
     }
 

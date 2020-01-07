@@ -18,6 +18,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.commonsware.cwac.preso.PresentationFragment;
 import com.commonsware.cwac.preso.PresentationHelper;
@@ -35,7 +36,9 @@ import com.vk2.touchsreentab.fragment.fragmentcontroller.Fragmentez;
 import com.vk2.touchsreentab.model.viewmodel.PlayerViewModel;
 import com.vk2.touchsreentab.model.viewmodel.PlaylistModelView;
 import com.vk2.touchsreentab.utils.MyTask;
+import com.vk2.touchsreentab.utils.OnDoubleClickListener;
 import com.vk2.touchsreentab.utils.Utils;
+import com.vk2.touchsreentab.utils.YtExtractor;
 
 import java.util.List;
 import java.util.Map;
@@ -47,7 +50,7 @@ public class DualMode extends BaseActivity implements PresentationHelper.Listene
     private List<Song> playlist;
     private PageFragment pageFragment;
     private ControlFragment controlFragment;
-    private FrameLayout framePage, frameControl;
+    private FrameLayout framePlayer, framePage, frameControl;
     private PresentationHelper helper = null;
     private FragmentDisplayPresentation fragmentDisplayPresentation;
     private PresentationFragment preso;
@@ -148,6 +151,24 @@ public class DualMode extends BaseActivity implements PresentationHelper.Listene
                 myTask.loop();
             }
         });
+
+        framePlayer.setOnClickListener(new OnDoubleClickListener() {
+            @Override
+            public void onDoubleClick(View v) {
+                if (isFull) playerSmallScreen();
+                else playerFullScreen();
+                isFull = !isFull;
+            }
+
+            @Override
+            public void onSingleClick(View v) {
+                if (controlFull.getVisibility() == View.GONE)
+                    showControl();
+                else
+                    hideControlRcv();
+            }
+        });
+
     }
 
     private void initView() {
@@ -180,7 +201,7 @@ public class DualMode extends BaseActivity implements PresentationHelper.Listene
         currentDuration = findViewById(R.id.currentDuration);
         maxDuration = findViewById(R.id.maxDuration);
         seekBar = findViewById(R.id.seekBar);
-        findViewById(R.id.framePlayer).setOnClickListener(this);
+        framePlayer = findViewById(R.id.framePlayer);
         boxPlayer = findViewById(R.id.boxPlayer);
         controlPlayer = findViewById(R.id.controlPlayer);
         controlFull = findViewById(R.id.controlFull);
@@ -411,7 +432,6 @@ public class DualMode extends BaseActivity implements PresentationHelper.Listene
             case R.id.imgFun:
                 showControlRcv(1);
                 break;
-
             case R.id.imgVocal:
                 playerViewModel.setValue(PlayerViewModel.ACTION_VOCAL, 0, 0);
                 break;
@@ -549,10 +569,17 @@ public class DualMode extends BaseActivity implements PresentationHelper.Listene
             onDefault();
     }
 
-    private Fragmentez getVideoType(@NonNull Song song) {
+    private Fragmentez getVideoType(@NonNull final Song song) {
         if (song.getFileName().startsWith("Y") && song.getVideoPath().startsWith(SearchYoutubeFragment.YOUTUBE_LINK_START)) {
-            song.setVideoPath(song.getFileName().substring(1));
-            return Fragmentez.YOUTUBE_PLAYER_FRAGMENT;
+            new YtExtractor.Builder(this).setVideoId(song.getFileName().substring(1)).setListener(new YtExtractor.OnYtListener() {
+                @Override
+                public void yt(YtExtractor.Link link) {
+                    song.setVideoPath(link.getLink());
+                    song.setAudioPath(link.getAudio());
+                    onPlay();
+                }
+            }).build();
+            return Fragmentez.NORMAL_PLAYER_FRAGMENT;
         } else
             return Fragmentez.EXO_PLAYER_FRAGMENT;
     }

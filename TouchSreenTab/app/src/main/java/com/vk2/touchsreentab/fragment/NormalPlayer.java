@@ -16,7 +16,9 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
 import com.vk2.touchsreentab.R;
 import com.vk2.touchsreentab.model.viewmodel.PlayerViewModel;
 
@@ -26,6 +28,7 @@ import java.util.Map;
 public class NormalPlayer extends Fragment implements SurfaceHolder.Callback, MediaPlayer.OnPreparedListener {
     private MediaPlayer mPlayer;
     private String VIDEO_PATH;
+    private ImageView loading;
 
     public static NormalPlayer newInstance(@NonNull Bundle bundle) {
         NormalPlayer normalFragment = new NormalPlayer();
@@ -37,6 +40,8 @@ public class NormalPlayer extends Fragment implements SurfaceHolder.Callback, Me
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         View result = inflater.inflate(R.layout.normal_player_fragment, container, false);
+        loading = result.findViewById(R.id.loading);
+        Glide.with(loading.getContext()).asGif().load(R.raw.player_loading).into(loading);
         SurfaceView surfaceView = result.findViewById(R.id.surfaceView);
         SurfaceHolder surfaceHolder = surfaceView.getHolder();
         surfaceHolder.addCallback(this);
@@ -68,17 +73,17 @@ public class NormalPlayer extends Fragment implements SurfaceHolder.Callback, Me
 
     @Override
     public void surfaceCreated(SurfaceHolder surfaceHolder) {
-        mPlayer = new MediaPlayer();
-        mPlayer.setDisplay(surfaceHolder);
-        try {
-            Uri uri = Uri.parse(VIDEO_PATH);
-            mPlayer.setDataSource(getActivity(), uri);
-            mPlayer.prepare();
-            mPlayer.setOnPreparedListener(this);
-            mPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+//        mPlayer = new MediaPlayer();
+//        mPlayer.setDisplay(surfaceHolder);
+//        try {
+//            Uri uri = Uri.parse(VIDEO_PATH);
+//            mPlayer.setDataSource(getActivity(), uri);
+//            mPlayer.prepare();
+//            mPlayer.setOnPreparedListener(this);
+//            mPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
     }
 
 
@@ -107,6 +112,8 @@ public class NormalPlayer extends Fragment implements SurfaceHolder.Callback, Me
 
     @Override
     public void onPrepared(MediaPlayer mediaPlayer) {
+        if (getActivity() != null && loading != null)
+            loading.setVisibility(View.GONE);
         mediaPlayer.start();
     }
 }

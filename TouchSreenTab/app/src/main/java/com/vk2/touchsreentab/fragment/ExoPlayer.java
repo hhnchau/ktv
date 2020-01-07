@@ -74,8 +74,6 @@ public class ExoPlayer extends Fragment {
         loading = result.findViewById(R.id.loading);
         Glide.with(loading.getContext()).asGif().load(R.raw.player_loading).into(loading);
 
-       updateTime(result);
-
         String videoPath = getArguments().getString("url");
         String audioPath = null;
         if (getArguments() != null)
@@ -83,26 +81,6 @@ public class ExoPlayer extends Fragment {
         initPlayer(videoPath, audioPath);
         return result;
     }
-
-
-    private void updateTime(View view) {
-        final TextView time = view.findViewById(R.id.time);
-        MyTask task = new MyTask(1000, new MyTask.TaskCallback() {
-            @Override
-            public void task() {
-                if (getActivity() == null) return;
-                getActivity().runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        if (simpleExoPlayer != null)
-                            time.setText(Utils.intToTime((int) simpleExoPlayer.getContentPosition()));
-                    }
-                });
-            }
-        });
-        task.loop();
-    }
-
 
     private void playerListener() {
         if (getActivity() == null) return;
@@ -171,7 +149,7 @@ public class ExoPlayer extends Fragment {
         simpleExoPlayer.addListener(new Player.EventListener() {
             @Override
             public void onTimelineChanged(Timeline timeline, @Nullable Object manifest, int reason) {
-                simpleExoPlayer.seekTo(100);
+                simpleExoPlayer.seekTo(10);
             }
 
             @Override

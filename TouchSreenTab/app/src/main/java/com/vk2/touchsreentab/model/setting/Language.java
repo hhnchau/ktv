@@ -1,8 +1,13 @@
 package com.vk2.touchsreentab.model.setting;
 
-public class Language {
+import android.databinding.ObservableBoolean;
+
+public class Language implements Cloneable {
+
     private String flagName;
     private int flag;
+    public ObservableBoolean checked = new ObservableBoolean();
+
 
     public Language(String flagName, int flag) {
         this.flagName = flagName;
@@ -23,5 +28,18 @@ public class Language {
 
     public void setFlag(int flag) {
         this.flag = flag;
+    }
+
+
+    @Override
+    public Language clone() {
+        Language language;
+
+        try {
+            language = (Language) super.clone();
+        } catch (CloneNotSupportedException e) {
+            throw new RuntimeException(e);
+        }
+        return language;
     }
 }

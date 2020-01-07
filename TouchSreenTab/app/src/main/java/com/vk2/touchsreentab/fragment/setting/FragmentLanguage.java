@@ -1,6 +1,7 @@
 package com.vk2.touchsreentab.fragment.setting;
 
 import android.databinding.DataBindingUtil;
+import android.databinding.ObservableBoolean;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -17,15 +18,24 @@ import com.vk2.touchsreentab.adapter.viewholder.SettingLanguageViewHolder;
 import com.vk2.touchsreentab.databinding.FragmentSettingLanguageBinding;
 import com.vk2.touchsreentab.databinding.ItemSettingLanguageBinding;
 import com.vk2.touchsreentab.model.setting.Language;
+import com.vk2.touchsreentab.utils.SaveDataUtils;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class FragmentLanguage extends Fragment {
+public class FragmentLanguage extends Fragment implements View.OnClickListener {
+    private List<Language> languages;
+    private int posChecked;
+    private int pos;
+    public ObservableBoolean checked = new ObservableBoolean();
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         FragmentSettingLanguageBinding binding = DataBindingUtil.inflate(inflater, R.layout.fragment_setting_language, container, false);
+        binding.setDataBinding(this);
+        binding.btnNo.setOnClickListener(this);
+        binding.btnYes.setOnClickListener(this);
 
         int[] flags = {
                 R.mipmap.flag_vietnam,
@@ -48,12 +58,14 @@ public class FragmentLanguage extends Fragment {
                 getResources().getString(R.string.language_hongkong)
         };
 
-        final List<Language> languages = new ArrayList<>();
+        languages = new ArrayList<>();
         for (int i = 0; i < flags.length; i++) {
             languages.add(new Language(
                     names[i], flags[i]
             ));
         }
+
+        languages.get(SaveDataUtils.getInstance(getActivity()).getLanguageSetting()).checked.set(true);
 
         SettingAdapter<SettingLanguageViewHolder> adapter = new SettingAdapter<SettingLanguageViewHolder>() {
             @NonNull
@@ -71,8 +83,11 @@ public class FragmentLanguage extends Fragment {
                     holder.languageBinding.root.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            if (getActivity() != null)
-                                ((SettingActivity) getActivity()).updateStatus(languages.get(holder.getAdapterPosition()).getFlagName());
+                            pos = holder.getAdapterPosition();
+                            int p = removeChecked();
+                            if (!checked.get())posChecked = p;
+                            language.checked.set(true);
+                            checked.set(true);
                         }
                     });
                 }
@@ -84,11 +99,34 @@ public class FragmentLanguage extends Fragment {
             }
         };
 
-
         binding.rcv.setAdapter(adapter);
         GridLayoutManager layoutManager = new GridLayoutManager(getActivity(), 4, GridLayoutManager.VERTICAL, false);
         binding.rcv.setLayoutManager(layoutManager);
 
         return binding.getRoot();
+    }
+
+    private int removeChecked() {
+        int p = 0;
+        for (int i = 0; i < languages.size(); i++) {
+            if (languages.get(i).checked.get()) p = i;
+            languages.get(i).checked.set(false);
+        }
+        return p;
+    }
+
+    @Override
+    public void onClick(View view) {
+        if (view.getId() == R.id.btnNo) {
+            checked.set(false);
+            removeChecked();
+            languages.get(posChecked).checked.set(true);
+        } else if (view.getId() == R.id.btnYes) {
+            checked.set(false);
+            if (getActivity() != null) {
+                ((SettingActivity) getActivity()).updateStatus(languages.get(pos).getFlagName());
+                SaveDataUtils.getInstance(getActivity()).setLanguageSetting(pos);
+            }
+        }
     }
 }
