@@ -38,7 +38,7 @@ public class PlaylistModelView extends ViewModel {
 
     public void setValue(Context context, Song song, int type) {
         if (!song.getFileName().startsWith("Y") && !song.getFileName().startsWith("S"))
-            song.setVideoPath("http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4");
+            song.setVideoPath("https://manifest.googlevideo.com/api/manifest/hls_playlist/expire/1577717191/ei/Z7kJXq-gMYfcgQPOqbW4Dw/ip/2401:5f80:2001:0:b693:4b78:be4e:e3f/id/O62Vi7_VYXU.0/itag/95/source/yt_live_broadcast/requiressl/yes/ratebypass/yes/live/1/goi/160/sgoap/gir%3Dyes%3Bitag%3D140/sgovp/gir%3Dyes%3Bitag%3D136/hls_chunk_host/r1---sn-i3beln7r.googlevideo.com/playlist_type/DVR/mm/44/mn/sn-i3beln7r/ms/lva/mv/u/mvi/0/pl/36/dover/11/keepalive/yes/fexp/23842630/mt/1577695369/disable_polymer/true/sparams/expire,ei,ip,id,itag,source,requiressl,ratebypass,live,goi,sgoap,sgovp,playlist_type/sig/ALgxI2wwRgIhAMVCGQI7PGspx8k-3Kl9RZzjCzy8d860raIMHLtvcsA4AiEA7S0Cc29_gJWm6T58P7kRVvr4nhC_3KYfTfbumu5t3vQ%3D/lsparams/hls_chunk_host,mm,mn,ms,mv,mvi,pl/lsig/AHylml4wRAIge4mq-rDNPQ9CX1x_bQNHuiYMLcpfUJXZYGsXI4j09AQCICEw376Ux1m9cJL80Ji-KWjmomZX-ubDaR3KPBYzC4Ax/playlist/index.m3u8");
         if (type == ADD)
             for (Song s : cachePlaylist) {
                 if (song != null && s.getFileName().equals(song.getFileName())) {
