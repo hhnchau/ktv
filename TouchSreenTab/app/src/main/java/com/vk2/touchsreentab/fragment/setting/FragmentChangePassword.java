@@ -24,10 +24,11 @@ public class FragmentChangePassword extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         final FragmentSettingChangePasswordBinding binding = DataBindingUtil.inflate(inflater, R.layout.fragment_setting_change_password, container, false);
+        binding.sticky.setSticky(getString(R.string.txt_change_password));
         keyboardClose(binding.inputOld);
         keyboardClose(binding.inputNew);
         keyboardClose(binding.inputConfirm);
-        binding.back.setOnClickListener(new View.OnClickListener() {
+        binding.sticky.back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (getActivity() != null)

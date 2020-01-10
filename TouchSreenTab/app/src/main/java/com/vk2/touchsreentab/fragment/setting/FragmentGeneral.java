@@ -81,6 +81,8 @@ public class FragmentGeneral extends Fragment {
                                     }.build(getActivity(), getOnScreenTime());
                                     break;
                                 case 4:
+                                    if (getActivity() != null)
+                                        ((SettingActivity) getActivity()).showFragmentBroadcastManagement();
                                     break;
                                 case 5:
                                     new DialogCheckbox() {
@@ -91,10 +93,13 @@ public class FragmentGeneral extends Fragment {
                                     }.build(getActivity(), getRankingMode());
                                     break;
                                 case 6:
-                                    new DialogPassword().build(getActivity());
+                                    if (getActivity() != null)
+                                        ((SettingActivity) getActivity()).showFragmentSubtitle();
                                     break;
                                 case 7:
-                                    ((SettingActivity)getActivity()).showFragmentChangePassword();
+                                    ((SettingActivity) getActivity()).showFragmentChangePassword();
+                                    break;
+                                case 8:
                                     break;
                             }
 

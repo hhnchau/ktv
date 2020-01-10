@@ -11,6 +11,12 @@ public class General {
     public General() {
     }
 
+
+    public General(String title, String value) {
+        this.title = title;
+        this.value = value;
+    }
+
     public General(String title, int type, boolean selected) {
         this.title = title;
         this.type = type;

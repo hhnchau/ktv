@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import com.vk2.touchsreentab.R;
 import com.vk2.touchsreentab.adapter.SettingAdapter;
 import com.vk2.touchsreentab.adapter.viewholder.SettingSongManagementViewHolder;
+import com.vk2.touchsreentab.databinding.FragmentSettingSongManagementBinding;
 import com.vk2.touchsreentab.databinding.ItemSettingSongManagementBinding;
 import com.vk2.touchsreentab.databinding.LayoutRecyclerviewBinding;
 import com.vk2.touchsreentab.model.setting.SongManagement;
@@ -25,11 +26,24 @@ public class FragmentSongManagement extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        LayoutRecyclerviewBinding binding = DataBindingUtil.inflate(inflater, R.layout.layout_recyclerview, container, false);
+        FragmentSettingSongManagementBinding binding = DataBindingUtil.inflate(inflater, R.layout.fragment_setting_song_management, container, false);
+        binding.sticky.setSticky(getString(R.string.txt_song_management));
+        binding.sticky.back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (getActivity() != null)
+                    getActivity().onBackPressed();
+            }
+        });
 
         final List<SongManagement> songManagements = new ArrayList<>();
-        songManagements.add(new SongManagement(R.mipmap.ic_hdd_update,"Network"));
-
+        songManagements.add(new SongManagement(R.mipmap.ic_delete_song, getString(R.string.txt_user_delete_song)));
+        songManagements.add(new SongManagement(R.mipmap.ic_import_song, getString(R.string.txt_import_song)));
+        songManagements.add(new SongManagement(R.mipmap.ic_export_song, getString(R.string.txt_export_song)));
+        songManagements.add(new SongManagement(R.mipmap.ic_backup_song, getString(R.string.txt_backup_song)));
+        songManagements.add(new SongManagement(R.mipmap.ic_restore_song, getString(R.string.txt_restore_song)));
+        songManagements.add(new SongManagement(R.mipmap.ic_import_singer, getString(R.string.txt_import_singer)));
+        songManagements.add(new SongManagement(R.mipmap.ic_import_lyrics, getString(R.string.txt_import_lyrics)));
 
 
         SettingAdapter<SettingSongManagementViewHolder> adapter = new SettingAdapter<SettingSongManagementViewHolder>() {
@@ -62,9 +76,9 @@ public class FragmentSongManagement extends Fragment {
         };
 
 
-        binding.rcv.setAdapter(adapter);
+        binding.recyclerview.rcv.setAdapter(adapter);
         GridLayoutManager layoutManager = new GridLayoutManager(getActivity(), 2, GridLayoutManager.VERTICAL, false);
-        binding.rcv.setLayoutManager(layoutManager);
+        binding.recyclerview.rcv.setLayoutManager(layoutManager);
 
         return binding.getRoot();
     }

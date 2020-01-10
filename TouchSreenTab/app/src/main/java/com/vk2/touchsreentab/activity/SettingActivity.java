@@ -9,6 +9,8 @@ import com.vk2.touchsreentab.R;
 import com.vk2.touchsreentab.adapter.SettingMenuAdapter;
 import com.vk2.touchsreentab.databinding.ActivitySettingBinding;
 import com.vk2.touchsreentab.fragment.setting.FragmentAdmin;
+import com.vk2.touchsreentab.fragment.setting.FragmentBroadcastManagement;
+import com.vk2.touchsreentab.fragment.setting.FragmentBroadcastSongs;
 import com.vk2.touchsreentab.fragment.setting.FragmentChangePassword;
 import com.vk2.touchsreentab.fragment.setting.FragmentGeneral;
 import com.vk2.touchsreentab.fragment.setting.FragmentLanguage;
@@ -17,6 +19,7 @@ import com.vk2.touchsreentab.fragment.setting.FragmentNetwork;
 import com.vk2.touchsreentab.fragment.setting.FragmentReboot;
 import com.vk2.touchsreentab.fragment.setting.FragmentSongManagement;
 import com.vk2.touchsreentab.fragment.setting.FragmentSoundLight;
+import com.vk2.touchsreentab.fragment.setting.FragmentSubtitle;
 import com.vk2.touchsreentab.fragment.setting.FragmentSystem;
 import com.vk2.touchsreentab.model.setting.Menu;
 
@@ -145,6 +148,7 @@ public class SettingActivity extends BaseActivity {
     public void showFragmentSongManagement() {
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.frame, new FragmentSongManagement())
+                .addToBackStack(FragmentSongManagement.class.getName())
                 .commit();
     }
 
@@ -152,6 +156,27 @@ public class SettingActivity extends BaseActivity {
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.frame, new FragmentChangePassword())
                 .addToBackStack(FragmentChangePassword.class.getName())
+                .commit();
+    }
+
+    public void showFragmentBroadcastManagement() {
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.frame, new FragmentBroadcastManagement())
+                .addToBackStack(FragmentBroadcastManagement.class.getName())
+                .commit();
+    }
+
+    public void showFragmentBroadcastSongs() {
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.frame, new FragmentBroadcastSongs())
+                .addToBackStack(FragmentBroadcastSongs.class.getName())
+                .commit();
+    }
+
+    public void showFragmentSubtitle() {
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.frame, new FragmentSubtitle())
+                .addToBackStack(FragmentSubtitle.class.getName())
                 .commit();
     }
 
