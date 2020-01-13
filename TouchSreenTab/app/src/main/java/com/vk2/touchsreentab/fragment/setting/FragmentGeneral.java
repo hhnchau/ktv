@@ -97,7 +97,8 @@ public class FragmentGeneral extends Fragment {
                                         ((SettingActivity) getActivity()).showFragmentSubtitle();
                                     break;
                                 case 7:
-                                    ((SettingActivity) getActivity()).showFragmentChangePassword();
+                                    if (getActivity() != null)
+                                        ((SettingActivity) getActivity()).showFragmentMidi();
                                     break;
                                 case 8:
                                     break;

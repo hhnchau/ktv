@@ -41,6 +41,7 @@ public class SeekBarVertical extends android.support.v7.widget.AppCompatSeekBar 
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
+        performClick();
         if (!isEnabled())
             return false;
         switch (event.getAction()) {
@@ -54,5 +55,10 @@ public class SeekBarVertical extends android.support.v7.widget.AppCompatSeekBar 
                 break;
         }
         return true;
+    }
+
+    @Override
+    public boolean performClick() {
+        return super.performClick();
     }
 }

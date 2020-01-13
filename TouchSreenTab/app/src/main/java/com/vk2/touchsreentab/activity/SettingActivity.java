@@ -14,6 +14,7 @@ import com.vk2.touchsreentab.fragment.setting.FragmentBroadcastSongs;
 import com.vk2.touchsreentab.fragment.setting.FragmentChangePassword;
 import com.vk2.touchsreentab.fragment.setting.FragmentGeneral;
 import com.vk2.touchsreentab.fragment.setting.FragmentLanguage;
+import com.vk2.touchsreentab.fragment.setting.FragmentMidi;
 import com.vk2.touchsreentab.fragment.setting.FragmentMusic;
 import com.vk2.touchsreentab.fragment.setting.FragmentNetwork;
 import com.vk2.touchsreentab.fragment.setting.FragmentReboot;
@@ -177,6 +178,13 @@ public class SettingActivity extends BaseActivity {
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.frame, new FragmentSubtitle())
                 .addToBackStack(FragmentSubtitle.class.getName())
+                .commit();
+    }
+
+    public void showFragmentMidi() {
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.frame, new FragmentMidi())
+                .addToBackStack(FragmentMidi.class.getName())
                 .commit();
     }
 
