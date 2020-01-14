@@ -16,7 +16,8 @@ import com.vk2.touchsreentab.adapter.SettingAdapter;
 import com.vk2.touchsreentab.adapter.viewholder.SettingNetworkViewHolder;
 import com.vk2.touchsreentab.databinding.ItemSettingNetworkBinding;
 import com.vk2.touchsreentab.databinding.LayoutRecyclerviewBinding;
-import com.vk2.touchsreentab.model.setting.Network;
+import com.vk2.touchsreentab.model.setting.General;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,11 +29,11 @@ public class FragmentNetwork extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         LayoutRecyclerviewBinding binding = DataBindingUtil.inflate(inflater, R.layout.layout_recyclerview, container, false);
 
-        final List<Network> networks = new ArrayList<>();
-        networks.add(new Network("Network", ""));
-        networks.add(new Network("Bluetooth", ""));
-        networks.add(new Network("Wlan", ""));
-        networks.add(new Network("HotSpot", ""));
+        final List<General> generals = new ArrayList<>();
+        generals.add(new General(getString(R.string.txt_network), "Not Connected"));
+        generals.add(new General(getString(R.string.txt_bluetooth), "OFF"));
+        generals.add(new General(getString(R.string.txt_wlan), "Devitop"));
+        generals.add(new General(getString(R.string.txt_hotspot), "OFF"));
 
         SettingAdapter<SettingNetworkViewHolder> adapter = new SettingAdapter<SettingNetworkViewHolder>() {
             @NonNull
@@ -44,9 +45,9 @@ public class FragmentNetwork extends Fragment {
 
             @Override
             public void onBindViewHolder(@NonNull SettingNetworkViewHolder holder, int i) {
-                final Network network = networks.get(holder.getAdapterPosition());
-                if (network != null) {
-                    holder.networkBinding.setNetwork(network);
+                final General general = generals.get(holder.getAdapterPosition());
+                if (general != null) {
+                    holder.networkBinding.setGeneral(general);
                     holder.networkBinding.root.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
@@ -58,7 +59,7 @@ public class FragmentNetwork extends Fragment {
 
             @Override
             public int getItemCount() {
-                return networks.size();
+                return generals.size();
             }
         };
 

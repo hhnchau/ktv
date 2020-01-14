@@ -1,5 +1,7 @@
 package com.vk2.touchsreentab.utils;
 
+import android.databinding.ObservableBoolean;
+
 import com.google.gson.Gson;
 
 import java.util.concurrent.TimeUnit;
@@ -24,5 +26,11 @@ public class Utils {
 
     public static String O2J(Object obj) {
         return new Gson().toJson(obj);
+    }
+
+    public static ObservableBoolean isCloud(){
+        ObservableBoolean b = new ObservableBoolean();
+        b.set(true);
+        return b;
     }
 }

@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="dataBinding"
+            type="com.vk2.touchsreentab.activity.SettingActivity" />
+    </data>
+
+    <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/black_e">
+
+        <ImageView
+            android:id="@+id/back"
+            android:layout_width="@dimen/dp_50"
+            android:layout_height="@dimen/dp_50"
+            android:layout_margin="@dimen/dp_16"
+            android:contentDescription="@string/img"
+            android:src="@mipmap/ic_arrow_back"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/txt_setting"
+            android:textColor="@color/white"
+            android:textSize="@dimen/sp_26"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@id/back"
+            app:layout_constraintStart_toEndOf="@id/back"
+            app:layout_constraintTop_toTopOf="@id/back" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/cloud"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dp_4"
+                android:contentDescription="@string/img"
+                android:src="@mipmap/ic_setting_cloud"
+                android:visibility="@{dataBinding.cloud ? View.VISIBLE : View.GONE}" />
+
+            <ImageView
+                android:id="@+id/nas"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dp_4"
+                android:contentDescription="@string/img"
+                android:src="@mipmap/ic_setting_nas"
+                android:visibility="@{dataBinding.nas ? View.VISIBLE : View.GONE}" />
+
+            <ImageView
+                android:id="@+id/usb"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dp_4"
+                android:contentDescription="@string/img"
+                android:src="@mipmap/ic_setting_usb"
+                android:visibility="@{dataBinding.usb ? View.VISIBLE : View.GONE}" />
+
+            <ImageView
+                android:id="@+id/disk"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dp_4"
+                android:contentDescription="@string/img"
+                android:src="@mipmap/ic_setting_disk"
+                android:visibility="@{dataBinding.disk ? View.VISIBLE : View.GONE}" />
+
+            <ImageView
+                android:id="@+id/light"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dp_4"
+                android:contentDescription="@string/img"
+                android:src="@mipmap/ic_setting_light"
+                android:visibility="@{dataBinding.light ? View.VISIBLE : View.GONE}" />
+
+            <ImageView
+                android:id="@+id/bluetooth"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dp_4"
+                android:contentDescription="@string/img"
+                android:src="@mipmap/ic_setting_bluetooth"
+                android:visibility="@{dataBinding.bluetooth ? View.VISIBLE : View.GONE}" />
+
+            <ImageView
+                android:id="@+id/network"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dp_4"
+                android:contentDescription="@string/img"
+                android:src="@mipmap/ic_setting_network"
+                android:visibility="@{dataBinding.network ? View.VISIBLE : View.GONE}" />
+
+            <ImageView
+                android:id="@+id/lock"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dp_8"
+                android:contentDescription="@string/img"
+                android:src="@{dataBinding.lock ? @drawable/ic_lock_open : @drawable/ic_lock_closed}"/>
+        </LinearLayout>
+
+    </android.support.constraint.ConstraintLayout>
+
+</layout>

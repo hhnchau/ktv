@@ -11,10 +11,11 @@
         android:layout_height="match_parent"
         android:background="@color/grey_2">
 
-        <View
+        <include
+            android:id="@+id/status_bar"
+            layout="@layout/setting_status_bar"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:background="@color/black_e"
             app:layout_constraintBottom_toBottomOf="@id/v"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

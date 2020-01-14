@@ -1,13 +1,16 @@
 package com.vk2.touchsreentab.activity;
 
 import android.databinding.DataBindingUtil;
+import android.databinding.ObservableBoolean;
 import android.os.Bundle;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
+import android.view.View;
 
 import com.vk2.touchsreentab.R;
 import com.vk2.touchsreentab.adapter.SettingMenuAdapter;
 import com.vk2.touchsreentab.databinding.ActivitySettingBinding;
+import com.vk2.touchsreentab.fragment.setting.FragmentAbout;
 import com.vk2.touchsreentab.fragment.setting.FragmentAdmin;
 import com.vk2.touchsreentab.fragment.setting.FragmentBroadcastManagement;
 import com.vk2.touchsreentab.fragment.setting.FragmentBroadcastSongs;
@@ -23,6 +26,7 @@ import com.vk2.touchsreentab.fragment.setting.FragmentSoundLight;
 import com.vk2.touchsreentab.fragment.setting.FragmentSubtitle;
 import com.vk2.touchsreentab.fragment.setting.FragmentSystem;
 import com.vk2.touchsreentab.model.setting.Menu;
+import com.vk2.touchsreentab.utils.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,10 +44,26 @@ public class SettingActivity extends BaseActivity {
     private SettingMenuAdapter adapter;
     private int position;
 
+    public ObservableBoolean cloud = Utils.isCloud();
+    public ObservableBoolean nas = new ObservableBoolean();
+    public ObservableBoolean usb = new ObservableBoolean();
+    public ObservableBoolean disk = new ObservableBoolean();
+    public ObservableBoolean light = Utils.isCloud();
+    public ObservableBoolean bluetooth = Utils.isCloud();
+    public ObservableBoolean network = new ObservableBoolean();
+    public ObservableBoolean lock =Utils.isCloud();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ActivitySettingBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_setting);
+        binding.statusBar.setDataBinding(this);
+        binding.statusBar.back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
 
         int[] icons = {
                 R.mipmap.ic_language,
@@ -185,6 +205,13 @@ public class SettingActivity extends BaseActivity {
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.frame, new FragmentMidi())
                 .addToBackStack(FragmentMidi.class.getName())
+                .commit();
+    }
+
+    public void showFragmentAbout() {
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.frame, new FragmentAbout())
+                .addToBackStack(FragmentAbout.class.getName())
                 .commit();
     }
 

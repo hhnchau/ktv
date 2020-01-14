@@ -17,13 +17,10 @@ import com.vk2.touchsreentab.R;
 import com.vk2.touchsreentab.activity.SettingActivity;
 import com.vk2.touchsreentab.adapter.SettingAdapter;
 import com.vk2.touchsreentab.adapter.viewholder.SettingGeneralViewHolder;
-import com.vk2.touchsreentab.adapter.viewholder.SettingNetworkViewHolder;
 import com.vk2.touchsreentab.databinding.ItemSettingGeneralBinding;
-import com.vk2.touchsreentab.databinding.ItemSettingNetworkBinding;
 import com.vk2.touchsreentab.databinding.LayoutRecyclerviewBinding;
 import com.vk2.touchsreentab.model.setting.Checkbox;
 import com.vk2.touchsreentab.model.setting.General;
-import com.vk2.touchsreentab.model.setting.Network;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,16 +31,16 @@ public class FragmentGeneral extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         final LayoutRecyclerviewBinding binding = DataBindingUtil.inflate(inflater, R.layout.layout_recyclerview, container, false);
 
-        final List<General> networks = new ArrayList<>();
-        networks.add(new General(getString(R.string.txt_resolution_setting), General.VALUES, ""));
-        networks.add(new General(getString(R.string.txt_on_screen_time), General.VALUES, ""));
-        networks.add(new General(getString(R.string.txt_rating_switch), General.TOGGLE, true));
-        networks.add(new General(getString(R.string.txt_cloud_song_library_switch), General.TOGGLE, true));
-        networks.add(new General(getString(R.string.txt_broadcast_management), General.VALUES, ""));
-        networks.add(new General(getString(R.string.txt_ranking_mode), General.VALUES, ""));
-        networks.add(new General(getString(R.string.txt_subtitle_settings), General.VALUES, ""));
-        networks.add(new General(getString(R.string.txt_midi_settings), General.VALUES, ""));
-        networks.add(new General(getString(R.string.txt_theme), General.VALUES, ""));
+        final List<General> generals = new ArrayList<>();
+        generals.add(new General(getString(R.string.txt_resolution_setting), General.VALUES, ""));
+        generals.add(new General(getString(R.string.txt_on_screen_time), General.VALUES, ""));
+        generals.add(new General(getString(R.string.txt_rating_switch), General.TOGGLE, true));
+        generals.add(new General(getString(R.string.txt_cloud_song_library_switch), General.TOGGLE, true));
+        generals.add(new General(getString(R.string.txt_broadcast_management), General.VALUES, ""));
+        generals.add(new General(getString(R.string.txt_ranking_mode), General.VALUES, ""));
+        generals.add(new General(getString(R.string.txt_subtitle_settings), General.VALUES, ""));
+        generals.add(new General(getString(R.string.txt_midi_settings), General.VALUES, ""));
+        generals.add(new General(getString(R.string.txt_theme), General.VALUES, ""));
 
 
         SettingAdapter<SettingGeneralViewHolder> adapter = new SettingAdapter<SettingGeneralViewHolder>() {
@@ -57,7 +54,7 @@ public class FragmentGeneral extends Fragment {
 
             @Override
             public void onBindViewHolder(@NonNull final SettingGeneralViewHolder holder, final int i) {
-                General general = networks.get(holder.getAdapterPosition());
+                General general = generals.get(holder.getAdapterPosition());
                 if (general != null) {
                     holder.generalBinding.setGeneral(general);
                     holder.generalBinding.root.setOnClickListener(new View.OnClickListener() {
@@ -123,7 +120,7 @@ public class FragmentGeneral extends Fragment {
 
             @Override
             public int getItemCount() {
-                return networks.size();
+                return generals.size();
             }
         };
 

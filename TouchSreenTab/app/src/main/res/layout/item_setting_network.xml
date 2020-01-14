@@ -1,39 +1,76 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-
+        <import type="android.view.View" />
         <variable
-            name="network"
-            type="com.vk2.touchsreentab.model.setting.Network" />
+            name="general"
+            type="com.vk2.touchsreentab.model.setting.General" />
     </data>
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/root"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/dp_8"
+        android:layout_height="@dimen/dp_80"
+        android:layout_marginTop="@dimen/dp_16"
+        android:layout_marginBottom="@dimen/dp_16"
+        android:layout_marginStart="@dimen/dp_32"
+        android:layout_marginEnd="@dimen/dp_32"
         android:background="@color/grey_4"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:padding="@dimen/dp_16">
 
         <TextView
-            android:id="@+id/name"
+            android:id="@+id/title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{network.name}" />
+            android:maxLines="1"
+            android:text="@{general.title}"
+            android:textColor="@color/white"
+            android:textSize="@dimen/sp_16"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/v"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/status"
+        <android.support.constraint.Guideline
+            android:id="@+id/v"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{network.status}" />
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.6" />
 
-        <ImageView
-            android:layout_width="wrap_content"
+        <RelativeLayout
+            android:id="@+id/boxValue"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:contentDescription="@string/img"
-            android:src="@drawable/down" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/v"
+            app:layout_constraintTop_toTopOf="parent">
 
-    </LinearLayout>
+            <TextView
+                android:id="@+id/value"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:maxLines="1"
+                android:gravity="end|center"
+                android:layout_toStartOf="@id/arrow"
+                android:text="@{general.value}"
+                android:textColor="@color/white"
+                android:textSize="@dimen/sp_16" />
+
+            <ImageView
+                android:id="@+id/arrow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:contentDescription="@string/img"
+                android:src="@drawable/down" />
+        </RelativeLayout>
+
+    </android.support.constraint.ConstraintLayout>
 
 </layout>
