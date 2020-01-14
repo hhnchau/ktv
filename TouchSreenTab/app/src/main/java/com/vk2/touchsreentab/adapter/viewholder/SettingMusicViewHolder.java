@@ -1,6 +1,6 @@
 package com.vk2.touchsreentab.adapter.viewholder;
 
-import android.support.v7.widget.RecyclerView;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.vk2.touchsreentab.databinding.ItemSettingMusicBinding;
 

@@ -1,6 +1,5 @@
 package com.vk2.touchsreentab.fragment.fragmentcontroller;
-
-import android.support.v4.app.Fragment;
+import androidx.fragment.app.Fragment;
 
 public class Fragmentoz {
     private Fragmentez fzg;

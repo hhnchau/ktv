@@ -14,7 +14,7 @@
             type="com.vk2.touchsreentab.database.entity.Song" />
     </data>
 
-    <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/playList"
         android:layout_width="match_parent"
@@ -22,7 +22,7 @@
 
 
 
-        <com.vk2.touchsreentab.view.SourceHanSansSCNormal
+        <TextView
             android:id="@+id/tvNumber"
             android:layout_width="@dimen/dp_95"
             android:layout_height="@dimen/sp_95"
@@ -35,7 +35,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <com.vk2.touchsreentab.view.SourceHanSansSCLight
+        <TextView
             android:id="@+id/tvNameSong"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -51,7 +51,7 @@
             app:layout_constraintStart_toEndOf="@id/tvNumber"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <android.support.constraint.ConstraintLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/box"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -100,7 +100,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toEndOf="@id/imgLoading"/>
 
-        </android.support.constraint.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <ImageView
             android:id="@+id/imgType"
@@ -115,7 +115,7 @@
             app:layout_constraintStart_toEndOf="@id/tvNumber"
             app:layout_constraintTop_toTopOf="@id/tvNameArtistSong" />
 
-        <com.vk2.touchsreentab.view.SourceHanSansSCNormal
+        <TextView
             android:id="@+id/tvNameArtistSong"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -129,5 +129,5 @@
             app:layout_constraintStart_toEndOf="@id/imgType"
             app:layout_constraintTop_toBottomOf="@id/tvNameSong" />
 
-    </android.support.constraint.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

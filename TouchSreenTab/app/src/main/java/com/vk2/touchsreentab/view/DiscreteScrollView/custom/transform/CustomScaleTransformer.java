@@ -1,9 +1,10 @@
 package com.vk2.touchsreentab.view.DiscreteScrollView.custom.transform;
 
 import android.os.Build;
-import android.support.annotation.FloatRange;
-import android.support.annotation.RequiresApi;
 import android.view.View;
+
+import androidx.annotation.FloatRange;
+import androidx.annotation.RequiresApi;
 
 import com.yarolegovich.discretescrollview.transform.Pivot;
 

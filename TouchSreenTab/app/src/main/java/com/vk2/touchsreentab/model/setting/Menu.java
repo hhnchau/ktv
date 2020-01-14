@@ -1,7 +1,7 @@
 package com.vk2.touchsreentab.model.setting;
 
-import android.databinding.ObservableBoolean;
-import android.databinding.ObservableField;
+import androidx.databinding.ObservableBoolean;
+import androidx.databinding.ObservableField;
 
 
 public class Menu {

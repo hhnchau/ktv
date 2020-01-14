@@ -1,8 +1,7 @@
 package com.vk2.touchsreentab.fragment;
 
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-
+import androidx.annotation.NonNull;
 import com.google.android.youtube.player.YouTubeInitializationResult;
 import com.google.android.youtube.player.YouTubePlayer;
 import com.google.android.youtube.player.YouTubePlayerFragment;

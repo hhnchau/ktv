@@ -1,9 +1,9 @@
 package com.vk2.touchsreentab.fragment.fragmentcontroller;
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.vk2.touchsreentab.R;
 

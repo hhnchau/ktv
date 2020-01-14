@@ -1,9 +1,9 @@
 package com.vk2.touchsreentab.view.DiscreteScrollView.custom.adapter;
 
-import android.support.annotation.NonNull;
-import android.support.v7.widget.RecyclerView;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 import com.vk2.touchsreentab.R;
 import com.vk2.touchsreentab.view.DiscreteScrollView.CustomDiscreteScrollView;
 import com.vk2.touchsreentab.view.DiscreteScrollView.custom.CustomDiscreteScrollLayoutManager;

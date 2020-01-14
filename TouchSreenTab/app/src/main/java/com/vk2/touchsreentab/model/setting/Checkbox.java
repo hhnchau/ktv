@@ -1,6 +1,6 @@
 package com.vk2.touchsreentab.model.setting;
 
-import android.databinding.ObservableBoolean;
+import androidx.databinding.ObservableBoolean;
 
 public class Checkbox {
     public ObservableBoolean checked = new ObservableBoolean();

@@ -1,24 +1,21 @@
 package com.vk2.touchsreentab.activity;
 
-import android.arch.lifecycle.Observer;
-import android.arch.lifecycle.ViewModelProviders;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.annotation.NonNull;
-import android.support.annotation.RequiresApi;
-import android.support.constraint.ConstraintLayout;
-import android.support.constraint.ConstraintSet;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+
+import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.constraintlayout.widget.ConstraintSet;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.Display;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.commonsware.cwac.preso.PresentationFragment;
 import com.commonsware.cwac.preso.PresentationHelper;
@@ -191,7 +188,7 @@ public class DualMode extends BaseActivity implements PresentationHelper.Listene
                 findViewById(R.id.arrowFun),
         };
         controlRcv = findViewById(R.id.rcvControl);
-        controlRcv.setLayoutManager(new LinearLayoutManager(this, LinearLayout.VERTICAL, false));
+        controlRcv.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         controlAdapter = new ControlAdapter(ControlAdapter.CONTROL);
         controlAdapter.setOnItemClick(this);
         funAdapter = new ControlAdapter(ControlAdapter.FUN);

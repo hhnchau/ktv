@@ -2,10 +2,12 @@ package com.vk2.touchsreentab.fragment.setting;
 
 import android.app.Dialog;
 import android.content.Context;
-import android.databinding.DataBindingUtil;
-import android.support.annotation.NonNull;
-import android.support.v7.widget.DividerItemDecoration;
-import android.support.v7.widget.LinearLayoutManager;
+
+import androidx.annotation.NonNull;
+import androidx.databinding.DataBindingUtil;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
+
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -94,7 +96,7 @@ public abstract class DialogCheckbox {
         }
     }
 
-    private  DividerItemDecoration getDivider(Context context, LinearLayoutManager layoutManager) {
+    private DividerItemDecoration getDivider(Context context, LinearLayoutManager layoutManager) {
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(context, layoutManager.getOrientation());
         dividerItemDecoration.setDrawable(context.getResources().getDrawable(R.drawable.divider));
         return dividerItemDecoration;

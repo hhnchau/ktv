@@ -1,16 +1,18 @@
 package com.vk2.touchsreentab.fragment;
 
 import android.app.Fragment;
-import android.arch.lifecycle.LifecycleOwner;
-import android.arch.lifecycle.Observer;
-import android.arch.lifecycle.ViewModelProviders;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.app.FragmentActivity;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.FragmentActivity;
+import androidx.lifecycle.LifecycleOwner;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
+
 import android.view.LayoutInflater;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -73,17 +75,17 @@ public class NormalPlayer extends Fragment implements SurfaceHolder.Callback, Me
 
     @Override
     public void surfaceCreated(SurfaceHolder surfaceHolder) {
-//        mPlayer = new MediaPlayer();
-//        mPlayer.setDisplay(surfaceHolder);
-//        try {
-//            Uri uri = Uri.parse(VIDEO_PATH);
-//            mPlayer.setDataSource(getActivity(), uri);
-//            mPlayer.prepare();
-//            mPlayer.setOnPreparedListener(this);
-//            mPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
+        mPlayer = new MediaPlayer();
+        mPlayer.setDisplay(surfaceHolder);
+        try {
+            Uri uri = Uri.parse(VIDEO_PATH);
+            mPlayer.setDataSource(getActivity(), uri);
+            mPlayer.prepare();
+            mPlayer.setOnPreparedListener(this);
+            mPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 

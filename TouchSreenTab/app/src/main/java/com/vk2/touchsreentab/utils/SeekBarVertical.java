@@ -5,13 +5,15 @@ import android.graphics.Canvas;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 
+import androidx.appcompat.widget.AppCompatSeekBar;
+
 import static android.view.MotionEvent.ACTION_CANCEL;
 import static android.view.MotionEvent.ACTION_DOWN;
 import static android.view.MotionEvent.ACTION_MOVE;
 import static android.view.MotionEvent.ACTION_UP;
 
 
-public class SeekBarVertical extends android.support.v7.widget.AppCompatSeekBar {
+public class SeekBarVertical extends AppCompatSeekBar {
     public SeekBarVertical(Context context) {
         super(context);
     }

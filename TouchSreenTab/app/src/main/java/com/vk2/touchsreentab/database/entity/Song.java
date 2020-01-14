@@ -1,16 +1,17 @@
 package com.vk2.touchsreentab.database.entity;
 
-import android.arch.persistence.room.ColumnInfo;
-import android.arch.persistence.room.Entity;
-import android.arch.persistence.room.Ignore;
-import android.arch.persistence.room.Index;
-import android.arch.persistence.room.PrimaryKey;
-import android.databinding.BindingAdapter;
+import androidx.annotation.NonNull;
+import androidx.databinding.BindingAdapter;
+import androidx.recyclerview.widget.DiffUtil;
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.Ignore;
+import androidx.room.Index;
+import androidx.room.PrimaryKey;
+
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.net.Uri;
-import android.support.annotation.NonNull;
-import android.support.v7.util.DiffUtil;
 import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
 import android.widget.ImageView;
@@ -21,7 +22,6 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestOptions;
 import com.google.gson.annotations.SerializedName;
-import com.vk2.touchsreentab.R;
 import com.vk2.touchsreentab.download.ImageLoaderTask;
 
 

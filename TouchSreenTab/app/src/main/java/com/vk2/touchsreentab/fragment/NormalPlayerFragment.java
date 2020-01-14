@@ -1,24 +1,23 @@
 package com.vk2.touchsreentab.fragment;
 
-import android.arch.lifecycle.Observer;
-import android.arch.lifecycle.ViewModelProviders;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
 
 import com.bumptech.glide.Glide;
 import com.vk2.touchsreentab.R;
-import com.vk2.touchsreentab.activity.DualMode;
+
 import com.vk2.touchsreentab.model.viewmodel.PlayerViewModel;
 
 import java.io.IOException;
@@ -71,29 +70,29 @@ public class NormalPlayerFragment extends BaseFragment implements SurfaceHolder.
 
     @Override
     public void surfaceCreated(SurfaceHolder surfaceHolder) {
-//        if (getActivity() == null) return;
-//        if (mPlayer == null) {
-//            mPlayer = new MediaPlayer();
-//        }
-//        mPlayer.setDisplay(surfaceHolder);
-//        mPlayer.setVolume(0, 0);
-//        mPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-//            @Override
-//            public void onCompletion(MediaPlayer mediaPlayer) {
-//                if (playerViewModel != null)
-//                    playerViewModel.setFinish(PlayerViewModel.ACTION_FINISHED);
-//            }
-//        });
-//
-//        try {
-//            Uri uri = Uri.parse(VIDEO_PATH);
-//            mPlayer.setDataSource(getActivity(), uri);
-//            mPlayer.prepare();
-//            mPlayer.setOnPreparedListener(this);
-//            mPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
+        if (getActivity() == null) return;
+        if (mPlayer == null) {
+            mPlayer = new MediaPlayer();
+        }
+        mPlayer.setDisplay(surfaceHolder);
+        mPlayer.setVolume(0, 0);
+        mPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mediaPlayer) {
+                if (playerViewModel != null)
+                    playerViewModel.setFinish(PlayerViewModel.ACTION_FINISHED);
+            }
+        });
+
+        try {
+            Uri uri = Uri.parse(VIDEO_PATH);
+            mPlayer.setDataSource(getActivity(), uri);
+            mPlayer.prepare();
+            mPlayer.setOnPreparedListener(this);
+            mPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 

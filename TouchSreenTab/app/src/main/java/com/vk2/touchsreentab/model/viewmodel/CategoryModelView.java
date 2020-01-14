@@ -1,12 +1,10 @@
 package com.vk2.touchsreentab.model.viewmodel;
 
-import android.arch.lifecycle.MutableLiveData;
-import android.arch.lifecycle.ViewModel;
+import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.ViewModel;
 
 import com.vk2.touchsreentab.application.MyApplication;
 import com.vk2.touchsreentab.model.Category;
-
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;

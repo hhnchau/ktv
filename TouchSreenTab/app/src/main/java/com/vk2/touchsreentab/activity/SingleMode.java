@@ -2,12 +2,11 @@ package com.vk2.touchsreentab.activity;
 
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import android.view.View;
-
 import com.vk2.touchsreentab.R;
 import com.vk2.touchsreentab.activity.box.BoxHomeFragment;
 import com.vk2.touchsreentab.fragment.ExoPlayerFragment;

@@ -3,14 +3,15 @@ package com.vk2.touchsreentab.view.DiscreteScrollView;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.support.annotation.IntRange;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
 
+
+import androidx.annotation.IntRange;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.vk2.touchsreentab.view.DiscreteScrollView.custom.CustomDSVOrientation;
 import com.vk2.touchsreentab.view.DiscreteScrollView.custom.CustomDiscreteScrollLayoutManager;

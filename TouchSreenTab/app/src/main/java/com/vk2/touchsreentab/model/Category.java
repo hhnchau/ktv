@@ -1,7 +1,7 @@
 package com.vk2.touchsreentab.model;
 
-import android.arch.persistence.room.ColumnInfo;
-import android.arch.persistence.room.Ignore;
+import androidx.room.ColumnInfo;
+import androidx.room.Ignore;
 
 public class Category implements Comparable, Cloneable  {
     @ColumnInfo(name = "SongTypeID")

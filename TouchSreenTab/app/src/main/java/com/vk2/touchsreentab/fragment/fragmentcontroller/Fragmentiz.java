@@ -1,7 +1,6 @@
 package com.vk2.touchsreentab.fragment.fragmentcontroller;
 
-import android.support.v4.app.Fragment;
-
+import androidx.fragment.app.Fragment;
 import com.vk2.touchsreentab.fragment.ArtistFragment;
 import com.vk2.touchsreentab.fragment.ControlFragment;
 import com.vk2.touchsreentab.fragment.DownloadFragment;

@@ -2,7 +2,7 @@ package com.vk2.touchsreentab.fragment.setting;
 
 import android.app.Dialog;
 import android.content.Context;
-import android.databinding.DataBindingUtil;
+import androidx.databinding.DataBindingUtil;
 import android.os.Handler;
 import android.text.Editable;
 import android.view.Gravity;

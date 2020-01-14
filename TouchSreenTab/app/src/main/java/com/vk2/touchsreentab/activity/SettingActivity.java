@@ -1,10 +1,11 @@
 package com.vk2.touchsreentab.activity;
 
-import android.databinding.DataBindingUtil;
-import android.databinding.ObservableBoolean;
+import androidx.databinding.DataBindingUtil;
+import androidx.databinding.ObservableBoolean;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
+
 import android.os.Bundle;
-import android.support.v7.widget.DividerItemDecoration;
-import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
 
 import com.vk2.touchsreentab.R;

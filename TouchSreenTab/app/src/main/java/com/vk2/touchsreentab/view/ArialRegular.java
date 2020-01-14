@@ -4,9 +4,11 @@ import android.content.Context;
 import android.graphics.Typeface;
 import android.util.AttributeSet;
 
+import androidx.appcompat.widget.AppCompatTextView;
+
 import com.vk2.touchsreentab.utils.FontUtils;
 
-public class ArialRegular extends android.support.v7.widget.AppCompatTextView {
+public class ArialRegular extends AppCompatTextView {
 
     public ArialRegular(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);

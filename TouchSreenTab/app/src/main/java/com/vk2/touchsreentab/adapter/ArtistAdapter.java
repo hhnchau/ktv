@@ -1,12 +1,11 @@
 package com.vk2.touchsreentab.adapter;
 
-import android.arch.paging.PagedListAdapter;
-import android.databinding.DataBindingUtil;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
+import androidx.databinding.DataBindingUtil;
+import androidx.paging.PagedListAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import com.vk2.touchsreentab.R;
 import com.vk2.touchsreentab.adapter.viewholder.ArtistViewHolder;
 import com.vk2.touchsreentab.database.entity.Singer;

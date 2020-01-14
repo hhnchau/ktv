@@ -1,6 +1,6 @@
 package com.vk2.touchsreentab.utils;
 
-import android.databinding.ObservableBoolean;
+import androidx.databinding.ObservableBoolean;
 
 import com.google.gson.Gson;
 

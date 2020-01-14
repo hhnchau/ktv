@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
 
@@ -8,9 +9,9 @@
             type="com.vk2.touchsreentab.fragment.setting.FragmentMidi" />
     </data>
 
-    <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_height="match_parent"
+        android:layout_width="match_parent">
 
         <include
             android:id="@+id/sticky"
@@ -18,8 +19,8 @@
 
         <TextView
             android:id="@+id/t1"
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
             android:text="@string/txt_background_video"
             android:textColor="@color/white"
             android:textSize="@dimen/sp_16"
@@ -29,8 +30,8 @@
 
         <TextView
             android:id="@+id/t2"
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
             android:text="@string/txt_lyrics_color"
             android:textColor="@color/white"
             android:textSize="@dimen/sp_16"
@@ -40,8 +41,8 @@
 
         <TextView
             android:id="@+id/t3"
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
             android:text="@string/txt_lyric_font_size"
             android:textColor="@color/white"
             android:textSize="@dimen/sp_16"
@@ -49,26 +50,26 @@
             app:layout_constraintStart_toStartOf="@id/v1"
             app:layout_constraintTop_toTopOf="@id/seekbar" />
 
-        <android.support.constraint.Guideline
+        <androidx.constraintlayout.widget.Guideline
             android:id="@+id/v"
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
             android:orientation="vertical"
             app:layout_constraintGuide_percent="0.2" />
 
-        <android.support.constraint.Guideline
+        <androidx.constraintlayout.widget.Guideline
             android:id="@+id/v1"
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
             android:orientation="vertical"
             app:layout_constraintGuide_percent="0.07" />
 
         <ToggleButton
+            android:background="@drawable/toggle_selector"
             android:id="@+id/toggle"
-            android:layout_width="@dimen/dp_40"
             android:layout_height="@dimen/dp_20"
             android:layout_marginTop="@dimen/dp_48"
-            android:background="@drawable/toggle_selector"
+            android:layout_width="@dimen/dp_40"
             android:padding="@dimen/dp_16"
             android:text=""
             android:textOff=""
@@ -78,13 +79,13 @@
 
 
         <ImageView
-            android:id="@+id/color_grey"
-            android:layout_width="@dimen/dp_35"
-            android:layout_height="@dimen/dp_35"
-            android:layout_marginTop="@dimen/dp_48"
-            android:layout_marginEnd="@dimen/dp_16"
             android:background="@drawable/circle_grey"
             android:contentDescription="@string/img"
+            android:id="@+id/color_grey"
+            android:layout_height="@dimen/dp_35"
+            android:layout_marginEnd="@dimen/dp_16"
+            android:layout_marginTop="@dimen/dp_48"
+            android:layout_width="@dimen/dp_35"
             android:padding="@dimen/dp_8"
             android:src="@{dataBinding.colors == dataBinding.GREY ? @drawable/ic_checked_black: null}"
             app:layout_constraintEnd_toStartOf="@id/color_white"
@@ -94,12 +95,12 @@
             app:layout_constraintTop_toBottomOf="@id/toggle" />
 
         <ImageView
-            android:id="@+id/color_white"
-            android:layout_width="@dimen/dp_35"
-            android:layout_height="@dimen/dp_35"
-            android:layout_margin="@dimen/dp_16"
             android:background="@drawable/circle_white"
             android:contentDescription="@string/img"
+            android:id="@+id/color_white"
+            android:layout_height="@dimen/dp_35"
+            android:layout_margin="@dimen/dp_16"
+            android:layout_width="@dimen/dp_35"
             android:padding="@dimen/dp_8"
             android:src="@{dataBinding.colors == dataBinding.WHITE ? @drawable/ic_checked_black: null}"
             app:layout_constraintBottom_toBottomOf="@id/color_grey"
@@ -108,12 +109,12 @@
             app:layout_constraintTop_toTopOf="@id/color_grey" />
 
         <ImageView
-            android:id="@+id/color_yellow"
-            android:layout_width="@dimen/dp_35"
-            android:layout_height="@dimen/dp_35"
-            android:layout_margin="@dimen/dp_16"
             android:background="@drawable/circle_yellow"
             android:contentDescription="@string/img"
+            android:id="@+id/color_yellow"
+            android:layout_height="@dimen/dp_35"
+            android:layout_margin="@dimen/dp_16"
+            android:layout_width="@dimen/dp_35"
             android:padding="@dimen/dp_8"
             android:src="@{dataBinding.colors == dataBinding.YELLOW ? @drawable/ic_checked_black: null}"
             app:layout_constraintBottom_toBottomOf="@id/color_grey"
@@ -122,12 +123,12 @@
             app:layout_constraintTop_toTopOf="@id/color_grey" />
 
         <ImageView
-            android:id="@+id/color_red"
-            android:layout_width="@dimen/dp_35"
-            android:layout_height="@dimen/dp_35"
-            android:layout_margin="@dimen/dp_16"
             android:background="@drawable/circle_red"
             android:contentDescription="@string/img"
+            android:id="@+id/color_red"
+            android:layout_height="@dimen/dp_35"
+            android:layout_margin="@dimen/dp_16"
+            android:layout_width="@dimen/dp_35"
             android:padding="@dimen/dp_8"
             android:src="@{dataBinding.colors == dataBinding.RED ? @drawable/ic_checked_black: null}"
             app:layout_constraintBottom_toBottomOf="@id/color_grey"
@@ -136,12 +137,12 @@
             app:layout_constraintTop_toTopOf="@id/color_grey" />
 
         <ImageView
-            android:id="@+id/color_green"
-            android:layout_width="@dimen/dp_35"
-            android:layout_height="@dimen/dp_35"
-            android:layout_margin="@dimen/dp_16"
             android:background="@drawable/circle_green"
             android:contentDescription="@string/img"
+            android:id="@+id/color_green"
+            android:layout_height="@dimen/dp_35"
+            android:layout_margin="@dimen/dp_16"
+            android:layout_width="@dimen/dp_35"
             android:padding="@dimen/dp_8"
             android:src="@{dataBinding.colors == dataBinding.GREEN ? @drawable/ic_checked_black: null}"
             app:layout_constraintBottom_toBottomOf="@id/color_grey"
@@ -152,82 +153,82 @@
 
         <LinearLayout
             android:id="@+id/discrete"
-            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
             android:layout_marginEnd="@dimen/dp_16"
             android:layout_marginStart="@dimen/dp_16"
+            android:layout_width="0dp"
+            android:orientation="horizontal"
             app:layout_constraintBottom_toBottomOf="@id/seekbar"
             app:layout_constraintEnd_toEndOf="@id/seekbar"
             app:layout_constraintStart_toStartOf="@id/seekbar"
             app:layout_constraintTop_toTopOf="@id/seekbar">
 
             <ImageView
-                android:layout_width="0dp"
+                android:contentDescription="@string/img"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:contentDescription="@string/img"
+                android:layout_width="0dp"
                 android:scaleType="fitStart"
                 android:src="@drawable/tickmark" />
 
             <ImageView
-                android:layout_width="0dp"
+                android:contentDescription="@string/img"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:contentDescription="@string/img"
+                android:layout_width="0dp"
                 android:scaleType="fitStart"
                 android:src="@drawable/tickmark" />
 
             <ImageView
-                android:layout_width="0dp"
+                android:contentDescription="@string/img"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:contentDescription="@string/img"
+                android:layout_width="0dp"
                 android:scaleType="fitStart"
                 android:src="@drawable/tickmark" />
 
             <ImageView
-                android:layout_width="0dp"
+                android:contentDescription="@string/img"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:contentDescription="@string/img"
+                android:layout_width="0dp"
                 android:scaleType="fitEnd"
                 android:src="@drawable/tickmark" />
 
             <ImageView
-                android:layout_width="0dp"
+                android:contentDescription="@string/img"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:contentDescription="@string/img"
+                android:layout_width="0dp"
                 android:scaleType="fitEnd"
                 android:src="@drawable/tickmark" />
 
             <ImageView
-                android:layout_width="0dp"
+                android:contentDescription="@string/img"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:contentDescription="@string/img"
+                android:layout_width="0dp"
                 android:scaleType="fitEnd"
                 android:src="@drawable/tickmark" />
 
         </LinearLayout>
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:contentDescription="@string/img"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
             android:src="@drawable/tickmark"
-            app:layout_constraintStart_toStartOf="@id/seekbar"
+            app:layout_constraintBottom_toBottomOf="@id/seekbar"
             app:layout_constraintEnd_toEndOf="@id/seekbar"
-            app:layout_constraintTop_toTopOf="@id/seekbar"
-            app:layout_constraintBottom_toBottomOf="@id/seekbar" />
+            app:layout_constraintStart_toStartOf="@id/seekbar"
+            app:layout_constraintTop_toTopOf="@id/seekbar" />
 
         <SeekBar
             android:id="@+id/seekbar"
-            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dp_60"
             android:layout_marginEnd="@dimen/dp_80"
+            android:layout_marginTop="@dimen/dp_60"
+            android:layout_width="0dp"
             android:max="6"
             android:progress="@{dataBinding.seek}"
             android:progressDrawable="@drawable/seekbar_drawable_line"
@@ -237,55 +238,55 @@
             app:layout_constraintTop_toBottomOf="@id/color_grey" />
 
         <ImageView
-            android:id="@+id/btn_minus"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:contentDescription="@string/img"
+            android:id="@+id/btn_minus"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
             android:src="@mipmap/minus"
-            app:layout_constraintTop_toTopOf="@id/seekbar"
             app:layout_constraintBottom_toBottomOf="@id/seekbar"
             app:layout_constraintEnd_toStartOf="@id/seekbar"
-            app:layout_constraintStart_toStartOf="@id/v"/>
+            app:layout_constraintStart_toStartOf="@id/v"
+            app:layout_constraintTop_toTopOf="@id/seekbar" />
 
         <ImageView
-            android:id="@+id/btn_plus"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:contentDescription="@string/img"
+            android:id="@+id/btn_plus"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
             android:src="@mipmap/plus"
-            app:layout_constraintTop_toTopOf="@id/seekbar"
             app:layout_constraintBottom_toBottomOf="@id/seekbar"
-            app:layout_constraintStart_toEndOf="@id/seekbar"/>
+            app:layout_constraintStart_toEndOf="@id/seekbar"
+            app:layout_constraintTop_toTopOf="@id/seekbar" />
 
         <TextView
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="A"
-            android:textSize="@dimen/sp_14"
-            android:textColor="@color/white"
             android:layout_marginStart="@dimen/dp_12"
+            android:layout_width="wrap_content"
+            android:text="A"
+            android:textColor="@color/white"
+            android:textSize="@dimen/sp_14"
             app:layout_constraintBottom_toTopOf="@id/seekbar"
             app:layout_constraintStart_toStartOf="@id/seekbar" />
 
         <TextView
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="A"
-            android:textSize="@dimen/sp_22"
-            android:textColor="@color/white"
             android:layout_marginEnd="@dimen/dp_12"
+            android:layout_width="wrap_content"
+            android:text="A"
+            android:textColor="@color/white"
+            android:textSize="@dimen/sp_22"
             app:layout_constraintBottom_toTopOf="@id/seekbar"
             app:layout_constraintEnd_toEndOf="@id/seekbar" />
 
         <TextView
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
             android:text="@string/txt_standard"
             android:textColor="@color/white"
             android:textSize="@dimen/sp_20"
-            app:layout_constraintTop_toBottomOf="@id/seekbar"
+            app:layout_constraintEnd_toEndOf="@id/seekbar"
             app:layout_constraintStart_toStartOf="@id/seekbar"
-            app:layout_constraintEnd_toEndOf="@id/seekbar"/>
+            app:layout_constraintTop_toBottomOf="@id/seekbar" />
 
-    </android.support.constraint.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
