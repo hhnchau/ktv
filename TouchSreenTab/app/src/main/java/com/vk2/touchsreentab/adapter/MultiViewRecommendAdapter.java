@@ -16,15 +16,23 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import com.vk2.touchsreentab.R;
+import com.vk2.touchsreentab.adapter.viewholder.CategoryRecyclerViewHolder;
 import com.vk2.touchsreentab.adapter.viewholder.SingerRecyclerViewHolder;
 import com.vk2.touchsreentab.adapter.viewholder.SongViewHolder;
 import com.vk2.touchsreentab.database.entity.Singer;
 import com.vk2.touchsreentab.database.entity.Song;
+import com.vk2.touchsreentab.databinding.ItemCategoryRecyclerviewBinding;
 import com.vk2.touchsreentab.databinding.ItemSingerRecyclerviewBinding;
 import com.vk2.touchsreentab.databinding.ItemSongsBinding;
-import com.vk2.touchsreentab.model.Ablum;
+import com.vk2.touchsreentab.model.api.Album;
+import com.vk2.touchsreentab.model.viewmodel.AlbumViewModel;
 import com.vk2.touchsreentab.model.viewmodel.SingerVewModel;
+import com.vk2.touchsreentab.utils.CarouselTransformer;
 import com.vk2.touchsreentab.utils.OnSingleClickListener;
+import com.yarolegovich.discretescrollview.DSVOrientation;
+import com.yarolegovich.discretescrollview.InfiniteScrollAdapter;
+import com.yarolegovich.discretescrollview.transform.Pivot;
+import com.yarolegovich.discretescrollview.transform.ScaleTransformer;
 
 
 public class MultiViewRecommendAdapter extends PagedListAdapter<Song, RecyclerView.ViewHolder> {
@@ -38,10 +46,10 @@ public class MultiViewRecommendAdapter extends PagedListAdapter<Song, RecyclerVi
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         this.context = viewGroup.getContext();
-//        if (i == 0) {
-//            ItemCategoryRecyclerviewBinding binding = DataBindingUtil.inflate(LayoutInflater.from(viewGroup.getContext()), R.layout.item_category_recyclerview, viewGroup, false);
-//            return new CategoryRecyclerViewHolder(binding);
-//        } else
+        if (i == 0) {
+            ItemCategoryRecyclerviewBinding binding = DataBindingUtil.inflate(LayoutInflater.from(viewGroup.getContext()), R.layout.item_category_recyclerview, viewGroup, false);
+            return new CategoryRecyclerViewHolder(binding);
+        } else
             if (i == 1) {
             ItemSingerRecyclerviewBinding binding = DataBindingUtil.inflate(LayoutInflater.from(viewGroup.getContext()), R.layout.item_singer_recyclerview, viewGroup, false);
             return new SingerRecyclerViewHolder(binding);
@@ -55,38 +63,35 @@ public class MultiViewRecommendAdapter extends PagedListAdapter<Song, RecyclerVi
     public void onBindViewHolder(@NonNull final RecyclerView.ViewHolder viewHolder, int i) {
         final Song song = getItem(i);
         if (song == null) return;
-//        tạm đóng để đổi sang dùng CustomDiscreteScrollView hiển thị album
-//
-//        if (i == 0) {
-//
-//            final AblumAdapter ablumAdapter = new AblumAdapter();
-//            final InfiniteScrollAdapter InfiniteScrollAdapter = com.yarolegovich.discretescrollview.InfiniteScrollAdapter.wrap(ablumAdapter);
-//            ((CategoryRecyclerViewHolder) viewHolder).recyclerViewBinding.rcvItem.setAdapter(InfiniteScrollAdapter);
-//            ((CategoryRecyclerViewHolder) viewHolder).recyclerViewBinding.rcvItem.setItemTransformer(new ScaleTransformer.Builder()
-//                    .setMaxScale(1.3f)
-//                    .setPivotX(Pivot.X.CENTER)
-//                    .build());
-//            ((CategoryRecyclerViewHolder) viewHolder).recyclerViewBinding.rcvItem.setSlideOnFlingThreshold(5000);
-//            ((CategoryRecyclerViewHolder) viewHolder).recyclerViewBinding.rcvItem.setOrientation(DSVOrientation.HORIZONTAL);
-//            ((CategoryRecyclerViewHolder) viewHolder).recyclerViewBinding.rcvItem.setOffscreenItems(2);
-//            ((CategoryRecyclerViewHolder) viewHolder).recyclerViewBinding.rcvItem.setItemTransitionTimeMillis(150);
-//            ((CategoryRecyclerViewHolder) viewHolder).recyclerViewBinding.rcvItem.setOverScrollEnabled(false);
-//            AblumViewModel ablumViewModel = ViewModelProviders.of((FragmentActivity) context).get(AblumViewModel.class);
-//            ablumViewModel.getAllListAblum();
-//            ablumViewModel.listAblumOnline.observe((FragmentActivity) context, new Observer<PagedList<Ablum>>() {
-//                @Override
-//                public void onChanged(@Nullable PagedList<Ablum> ablums) {
-//                    ablumAdapter.submitList(ablums);
-//                }
-//            });
-//
-//            ablumAdapter.setOnItemClick(new AblumAdapter.OnItemClick() {
-//                @Override
-//                public void onItemClick(Ablum ablum) {
-//                    if (onItemClick != null) onItemClick.onBannerClick(ablum);
-//                }
-//            });
-//        } else
+
+        if (i == 0) {
+
+            final AlbumAdapter albumAdapter = new AlbumAdapter();
+            final InfiniteScrollAdapter InfiniteScrollAdapter = com.yarolegovich.discretescrollview.InfiniteScrollAdapter.wrap(albumAdapter);
+            ((CategoryRecyclerViewHolder) viewHolder).recyclerViewBinding.rcvItem.setAdapter(InfiniteScrollAdapter);
+            ((CategoryRecyclerViewHolder) viewHolder).recyclerViewBinding.rcvItem.setItemTransformer(new CarouselTransformer.Builder().build());
+            ((CategoryRecyclerViewHolder) viewHolder).recyclerViewBinding.rcvItem.setSlideOnFlingThreshold(5000);
+            ((CategoryRecyclerViewHolder) viewHolder).recyclerViewBinding.rcvItem.setOrientation(DSVOrientation.HORIZONTAL);
+            ((CategoryRecyclerViewHolder) viewHolder).recyclerViewBinding.rcvItem.setOffscreenItems(2);
+            ((CategoryRecyclerViewHolder) viewHolder).recyclerViewBinding.rcvItem.setItemTransitionTimeMillis(150);
+            ((CategoryRecyclerViewHolder) viewHolder).recyclerViewBinding.rcvItem.setOverScrollEnabled(false);
+
+            AlbumViewModel albumViewModel = ViewModelProviders.of((FragmentActivity) context).get(AlbumViewModel.class);
+            albumViewModel.getHotAlbums(context);
+            albumViewModel.listAlbumOnline.observe((FragmentActivity) context, new Observer<PagedList<Album>>() {
+                @Override
+                public void onChanged(@Nullable PagedList<Album> albums) {
+                    albumAdapter.submitList(albums);
+                }
+            });
+
+            albumAdapter.setOnItemClick(new AlbumAdapter.OnItemClick() {
+                @Override
+                public void onItemClick(Album album) {
+                    if (onItemClick != null) onItemClick.onBannerClick(album);
+                }
+            });
+        } else
             if (i == 1) {
             final ArtistAdapter artistAdapter = new ArtistAdapter();
             ((SingerRecyclerViewHolder) viewHolder).recyclerViewBinding.rcvItem.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false));
@@ -142,7 +147,7 @@ public class MultiViewRecommendAdapter extends PagedListAdapter<Song, RecyclerVi
     }
 
     public interface OnItemClick {
-        void onBannerClick(Ablum album);
+        void onBannerClick(Album album);
 
         void onImageSinger(Singer singer);
 

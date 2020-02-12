@@ -8,6 +8,7 @@ import androidx.annotation.NonNull;
 
 import com.vk2.touchsreentab.database.entity.Song;
 import com.vk2.touchsreentab.model.YouTubeApiObject;
+import com.vk2.touchsreentab.model.api.AlbumForm;
 import com.vk2.touchsreentab.model.api.SingerForm;
 import com.vk2.touchsreentab.model.api.SongForm;
 import com.vk2.touchsreentab.model.api.Token;
@@ -60,14 +61,14 @@ public class ApiController {
                                 SaveDataUtils.getInstance(context).setApiToken(token.getToken());
                                 if (callback != null) callback.reCall();
                             } else {
-                                Log.d("TAG Token: ", "null");
+                                Log.d("API Token: ", "null");
                             }
                         }
                     }
 
                     @Override
                     public void onError(Throwable e) {
-                        Log.d("TAG Error: ", e.toString());
+                        Log.d("API Error: ", e.toString());
                     }
 
                     @Override
@@ -86,7 +87,7 @@ public class ApiController {
                     @Override
                     public void onNext(SongForm songForm) {
                         if (songForm != null && (songForm.getErr() == EXPIRE || songForm.getErr() == TIMEOUT)) {
-                            Log.d("TAG-Hot-Song: ", "Expire!");
+                            Log.d("API-Hot-Song: ", "Expire!");
                             getApiToken(context, new FCallback() {
                                 @Override
                                 public void reCall() {
@@ -95,13 +96,13 @@ public class ApiController {
                             });
                             return;
                         }
-                        Log.d("TAG-Hot-Song: ", "Success!");
+                        Log.d("API-Hot-Song: ", "Success!");
                         if (callback != null) callback.response(songForm);
                     }
 
                     @Override
                     public void onError(Throwable e) {
-                        Log.d("TAG Error: ", e.toString());
+                        Log.d("API Error: ", e.toString());
                         if (callback != null) callback.response(e);
                     }
 
@@ -156,7 +157,7 @@ public class ApiController {
                     @Override
                     public void onNext(SingerForm singerForm) {
                         if (singerForm != null && (singerForm.getErr() == EXPIRE || singerForm.getErr() == TIMEOUT)) {
-                            Log.d("TAG-Hot-Singer: ", "Expire!");
+                            Log.d("API-Hot-Singer: ", "Expire!");
                             getApiToken(context, new FCallback() {
                                 @Override
                                 public void reCall() {
@@ -165,13 +166,49 @@ public class ApiController {
                             });
                             return;
                         }
-                        Log.d("TAG-Hot-Singer: ", "Success!");
+                        Log.d("API-Hot-Singer: ", "Success!");
                         if (callback != null) callback.response(singerForm);
                     }
 
                     @Override
                     public void onError(Throwable e) {
-                        Log.d("TAG Error: ", e.toString());
+                        Log.d("API Error: ", e.toString());
+                        if (callback != null) callback.response(e);
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                }));
+    }
+
+    @SuppressWarnings("unchecked")
+    public void getHotAlbums(final Context context, final int page, final int limit, final Callback callback) {
+        CompositeManager.add(Api.apiService.getListAlbums(SaveDataUtils.getInstance(context).getApiToken(), Utils.getDeviceId(), page, limit)
+                .subscribeOn(Schedulers.io())
+                .subscribeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(new DisposableObserver<AlbumForm>() {
+
+                    @Override
+                    public void onNext(AlbumForm albumForm) {
+                        if (albumForm != null && (albumForm.getErr() == EXPIRE || albumForm.getErr() == TIMEOUT)) {
+                            Log.d("API-Hot-Album: ", "Expire!");
+                            getApiToken(context, new FCallback() {
+                                @Override
+                                public void reCall() {
+                                    getHotSongs(context, page, limit, callback);
+                                }
+                            });
+                            return;
+                        }
+                        Log.d("API-Hot-Album: ", "Success!");
+                        if (callback != null) callback.response(albumForm);
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Log.d("API Error: ", e.toString());
                         if (callback != null) callback.response(e);
                     }
 
@@ -191,10 +228,10 @@ public class ApiController {
                     @Override
                     public void onNext(YoutubeForm youtubeForm) {
                         if (youtubeForm != null) {
-                            Log.d("TAG LINK YT: ", "Success!");
+                            Log.d("API LINK YT: ", "Success!");
                             Youtube yt = youtubeForm.getData();
                             if (yt != null) {
-                                Log.d("TAG LINK YT: ", "Update Link Success!");
+                                Log.d("API LINK YT: ", "Update Link Success!");
                                 //song.setFileName(song.getFileName().substring(1));
                                 song.setVideoPath(yt.getLink());
                                 song.setAudioPath(yt.getAudio());
@@ -204,7 +241,7 @@ public class ApiController {
 
                     @Override
                     public void onError(Throwable e) {
-                        Log.d("TAG Error: ", e.toString());
+                        Log.d("API Error: ", e.toString());
 
                     }
 

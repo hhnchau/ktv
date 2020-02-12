@@ -13,7 +13,7 @@ import com.vk2.touchsreentab.R;
 import com.vk2.touchsreentab.database.entity.Song;
 import com.vk2.touchsreentab.fragment.fragmentcontroller.Fragmentcz;
 import com.vk2.touchsreentab.fragment.fragmentcontroller.Fragmentez;
-import com.vk2.touchsreentab.model.Ablum;
+import com.vk2.touchsreentab.model.api.Album;
 import com.vk2.touchsreentab.model.PageControl;
 import com.vk2.touchsreentab.model.viewmodel.PageControlViewModel;
 import com.vk2.touchsreentab.model.viewmodel.PlaylistModelView;
@@ -135,8 +135,8 @@ public abstract class BaseFragment extends Fragment {
         dialog.show();
     }
 
-    protected void handleBanner(Ablum album) {
-        Toast.makeText(getActivity(), "Xu ly Album", Toast.LENGTH_SHORT).show();
+    protected void handleBanner(Album album) {
+        Toast.makeText(getActivity(), "Xu ly Album" + album.getName(), Toast.LENGTH_SHORT).show();
     }
 
     protected void updatePlaylist(Song song, int type) {

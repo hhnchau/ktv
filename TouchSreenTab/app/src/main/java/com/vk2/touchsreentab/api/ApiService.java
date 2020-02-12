@@ -1,10 +1,11 @@
 package com.vk2.touchsreentab.api;
 
-import com.vk2.touchsreentab.model.ResultAblum;
+import com.vk2.touchsreentab.model.ResultAlbum;
 import com.vk2.touchsreentab.model.ResultSinger;
 import com.vk2.touchsreentab.model.ResultSong;
 import com.vk2.touchsreentab.model.ResultSoundCloud;
 import com.vk2.touchsreentab.model.YouTubeApiObject;
+import com.vk2.touchsreentab.model.api.AlbumForm;
 import com.vk2.touchsreentab.model.api.SingerForm;
 import com.vk2.touchsreentab.model.api.SongForm;
 import com.vk2.touchsreentab.model.api.TokenForm;
@@ -37,9 +38,14 @@ public interface ApiService {
     @POST("/media/singer/get-hot-singers")
     Observable<SingerForm> getHostSinger(@Header("Authorization") String authorization, @Field("deviceId") String deviceId, @Field("page") int page, @Field("limit") int limit);
 
+    @FormUrlEncoded
+    @POST("media/album/get-list-album")
+    Observable<AlbumForm> getListAlbums(@Header("Authorization") String authorization, @Field("deviceId") String deviceId, @Field("page") int page, @Field("limit") int limit);
+
+
+
     @GET()
     Observable<YoutubeForm> getLinkYoutube(@Url String url, @Query("link") String link);
-
 
     @GET("pxo/KTV/smartlist/getYoutubeApiKey?")
     Observable<YouTubeApiObject> getApiKeyTouTube(@Query("KTVId") String ktvId,
@@ -62,6 +68,5 @@ public interface ApiService {
     @GET("media/singer/getHotSingers")
     Observable<ResultSinger> getListSingers(@Query("page") int page, @Query("limit") int limit);
 
-    @GET("media/album/getListAlbum")
-    Observable<ResultAblum> getListAblums(@Query("page") int page, @Query("limit") int limit);
+
 }
