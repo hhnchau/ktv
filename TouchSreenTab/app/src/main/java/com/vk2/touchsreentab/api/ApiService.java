@@ -6,9 +6,11 @@ import com.vk2.touchsreentab.model.ResultSong;
 import com.vk2.touchsreentab.model.ResultSoundCloud;
 import com.vk2.touchsreentab.model.YouTubeApiObject;
 import com.vk2.touchsreentab.model.api.AlbumForm;
+import com.vk2.touchsreentab.model.api.KeyForm;
 import com.vk2.touchsreentab.model.api.SingerForm;
 import com.vk2.touchsreentab.model.api.SongForm;
 import com.vk2.touchsreentab.model.api.TokenForm;
+import com.vk2.touchsreentab.model.api.UrlForm;
 import com.vk2.touchsreentab.model.api.YoutubeForm;
 
 import io.reactivex.Observable;
@@ -42,10 +44,22 @@ public interface ApiService {
     @POST("media/album/get-list-album")
     Observable<AlbumForm> getListAlbums(@Header("Authorization") String authorization, @Field("deviceId") String deviceId, @Field("page") int page, @Field("limit") int limit);
 
+    @FormUrlEncoded
+    @POST("media/youtube/get-youtube-key")
+    Observable<KeyForm> getYoutubeKey(@Header("Authorization") String authorization, @Field("deviceId") String deviceId);
 
+    @FormUrlEncoded
+    @POST("media/youtube/get-soundcloud-key")
+    Observable<KeyForm> getSoundCloudKey(@Header("Authorization") String authorization, @Field("deviceId") String deviceId);
 
     @GET()
     Observable<YoutubeForm> getLinkYoutube(@Url String url, @Query("link") String link);
+
+    @FormUrlEncoded
+    @POST("media/singerImage/get-singer-image")
+    Observable<UrlForm> getUrlSinger(@Field("fileId") String fileId);
+
+
 
     @GET("pxo/KTV/smartlist/getYoutubeApiKey?")
     Observable<YouTubeApiObject> getApiKeyTouTube(@Query("KTVId") String ktvId,
@@ -61,6 +75,8 @@ public interface ApiService {
                                              @Query("limit") String limit,
                                              @Query("linked_partitioning") String linked_partitioning,
                                              @Query("offset") String offset);
+
+
 
     @GET("media/song/getHotSongs")
     Observable<ResultSong> getListSongs(@Query("page") int page, @Query("limit") int limit);

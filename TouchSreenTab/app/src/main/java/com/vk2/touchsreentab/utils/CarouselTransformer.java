@@ -15,10 +15,14 @@ public class CarouselTransformer implements DiscreteScrollItemTransformer {
     private static final float SCALE_X_SUB_1 = 1.2f;
     private static final float SCALE_Y_SUB_1 = 0.9f;
 
+    private static final float SCALE_X_SUB_2 = 1.1f;
+    private static final float SCALE_Y_SUB_2 = 0.8f;
+
     private Pivot pivotX;
     private Pivot pivotY;
     private float minScale;
     private float maxMinDiff;
+    private boolean front, behind;
 
     public CarouselTransformer() {
         pivotX = Pivot.X.CENTER.create();
@@ -32,23 +36,49 @@ public class CarouselTransformer implements DiscreteScrollItemTransformer {
         pivotX.setOn(item);
         pivotY.setOn(item);
 
-        if (position == 0){
+        if (position == 0) {
+
+            front = true;
+            behind = true;
+
             item.setScaleX(SCALE_X_CENTER);
             item.setScaleY(SCALE_Y_CENTER);
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                 item.setZ(SCALE_Y_CENTER);
             }
-        }else if (position < 0){
-            item.setScaleX(SCALE_X_SUB_1);
-            item.setScaleY(SCALE_Y_SUB_1);
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                item.setZ(SCALE_Y_SUB_1);
+        } else if (position < 0) {
+            if (front) {
+
+                front = false;
+
+                item.setScaleX(SCALE_X_SUB_1);
+                item.setScaleY(SCALE_Y_SUB_1);
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    item.setZ(SCALE_Y_SUB_1);
+                }
+            } else {
+                item.setScaleX(SCALE_X_SUB_2);
+                item.setScaleY(SCALE_Y_SUB_2);
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    item.setZ(SCALE_Y_SUB_2);
+                }
             }
-        }else if (position > 0){
-            item.setScaleX(SCALE_X_SUB_1);
-            item.setScaleY(SCALE_Y_SUB_1);
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                item.setZ(SCALE_Y_SUB_1);
+        } else if (position > 0) {
+            if (behind) {
+
+                behind = false;
+
+                item.setScaleX(SCALE_X_SUB_1);
+                item.setScaleY(SCALE_Y_SUB_1);
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    item.setZ(SCALE_Y_SUB_1);
+                }
+            } else {
+                item.setScaleX(SCALE_X_SUB_2);
+                item.setScaleY(SCALE_Y_SUB_2);
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    item.setZ(SCALE_Y_SUB_2);
+                }
             }
         }
 

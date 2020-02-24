@@ -17,7 +17,7 @@
         app:layout_constraintTop_toTopOf="parent"
         android:visibility="visible"
         />
-    <androidx.core.widget.SlidingPaneLayout
+    <androidx.slidingpanelayout.widget.SlidingPaneLayout
         android:id="@+id/sliding_pane_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -104,5 +104,5 @@
                 android:layout_centerVertical="true"
                 />
         </RelativeLayout>
-    </androidx.core.widget.SlidingPaneLayout>
+    </androidx.slidingpanelayout.widget.SlidingPaneLayout>
 </LinearLayout>

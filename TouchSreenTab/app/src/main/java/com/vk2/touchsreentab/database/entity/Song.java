@@ -13,6 +13,7 @@ import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.net.Uri;
 import android.text.SpannableString;
+import android.text.TextUtils;
 import android.text.style.ForegroundColorSpan;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -22,7 +23,10 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestOptions;
 import com.google.gson.annotations.SerializedName;
+import com.vk2.touchsreentab.api.ApiController;
+import com.vk2.touchsreentab.api.Callback;
 import com.vk2.touchsreentab.download.ImageLoaderTask;
+import com.vk2.touchsreentab.model.api.UrlForm;
 
 
 @Entity(tableName = "song",
@@ -370,8 +374,8 @@ public class Song {
 
 
     @BindingAdapter("urlSongImage")
-    public static void loadImage(final ImageView view, String imageId) {
-        Uri uri = ImageLoaderTask.getImageUri(imageId);
+    public static void loadImage(final ImageView view, final String fileId) {
+        Uri uri = ImageLoaderTask.getImageUri(fileId);
         Glide.with(view.getContext())
                 .load(uri)
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
@@ -379,16 +383,27 @@ public class Song {
                 .into(view);
 
         if (uri.toString().contains("default.png")) {
-            new ImageLoaderTask(view.getContext(), imageId, new ImageLoaderTask.Callback() {
+            ApiController.getInstance().getUrlSinger(view.getContext(), fileId, new Callback() {
                 @Override
-                public void onBitmap(Bitmap bitmap) {
-                    Glide.with(view.getContext())
-                            .load(bitmap)
-                            .diskCacheStrategy(DiskCacheStrategy.ALL)
-                            .apply(RequestOptions.bitmapTransform(new RoundedCorners(4)))
-                            .into(view);
+                public void response(Object obj) {
+                    UrlForm urlForm = (UrlForm) obj;
+                    if (urlForm != null && urlForm.getErr() == 0) {
+                        String url = urlForm.getData().getUrl();
+                        if (url != null && !TextUtils.isEmpty(url)) {
+                            new ImageLoaderTask(view.getContext(), fileId, new ImageLoaderTask.Callback() {
+                                @Override
+                                public void onBitmap(Bitmap bitmap) {
+                                    Glide.with(view.getContext())
+                                            .load(bitmap)
+                                            .diskCacheStrategy(DiskCacheStrategy.ALL)
+                                            .apply(RequestOptions.bitmapTransform(new RoundedCorners(4)))
+                                            .into(view);
+                                }
+                            }).execute(url);
+                        }
+                    }
                 }
-            }).execute("http://vksinger.oss-ap-southeast-1.aliyuncs.com//1821.png?Expires=1572949143&OSSAccessKeyId=LTAI4FehsPqAwTu18gBVbiMB&Signature=VTztzAZWwfdylYdk5Hc0bz493kA%3D");
+            });
         }
     }
 

@@ -9,10 +9,12 @@ import androidx.annotation.NonNull;
 import com.vk2.touchsreentab.database.entity.Song;
 import com.vk2.touchsreentab.model.YouTubeApiObject;
 import com.vk2.touchsreentab.model.api.AlbumForm;
+import com.vk2.touchsreentab.model.api.KeyForm;
 import com.vk2.touchsreentab.model.api.SingerForm;
 import com.vk2.touchsreentab.model.api.SongForm;
 import com.vk2.touchsreentab.model.api.Token;
 import com.vk2.touchsreentab.model.api.TokenForm;
+import com.vk2.touchsreentab.model.api.UrlForm;
 import com.vk2.touchsreentab.model.api.Youtube;
 import com.vk2.touchsreentab.model.api.YoutubeForm;
 import com.vk2.touchsreentab.utils.SaveDataUtils;
@@ -161,7 +163,7 @@ public class ApiController {
                             getApiToken(context, new FCallback() {
                                 @Override
                                 public void reCall() {
-                                    getHotSongs(context, page, limit, callback);
+                                    getHotSingers(context, page, limit, callback);
                                 }
                             });
                             return;
@@ -197,13 +199,85 @@ public class ApiController {
                             getApiToken(context, new FCallback() {
                                 @Override
                                 public void reCall() {
-                                    getHotSongs(context, page, limit, callback);
+                                    getHotAlbums(context, page, limit, callback);
                                 }
                             });
                             return;
                         }
                         Log.d("API-Hot-Album: ", "Success!");
                         if (callback != null) callback.response(albumForm);
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Log.d("API Error: ", e.toString());
+                        if (callback != null) callback.response(e);
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                }));
+    }
+
+    @SuppressWarnings("unchecked")
+    public void getYoutubeKey(final Context context, final Callback callback) {
+        CompositeManager.add(Api.apiService.getYoutubeKey(SaveDataUtils.getInstance(context).getApiToken(), Utils.getDeviceId())
+                .subscribeOn(Schedulers.io())
+                .subscribeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(new DisposableObserver<KeyForm>() {
+
+                    @Override
+                    public void onNext(KeyForm keyForm) {
+                        if (keyForm != null && (keyForm.getErr() == EXPIRE || keyForm.getErr() == TIMEOUT)) {
+                            Log.d("API GetYoutubeKey: ", "Expire!");
+                            getApiToken(context, new FCallback() {
+                                @Override
+                                public void reCall() {
+                                    getYoutubeKey(context, callback);
+                                }
+                            });
+                            return;
+                        }
+                        Log.d("API GetYoutubeKey: ", "Success!");
+                        if (callback != null) callback.response(keyForm);
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Log.d("API Error: ", e.toString());
+                        if (callback != null) callback.response(e);
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                }));
+    }
+
+    @SuppressWarnings("unchecked")
+    public void getSoundCloudKey(final Context context, final Callback callback) {
+        CompositeManager.add(Api.apiService.getSoundCloudKey(SaveDataUtils.getInstance(context).getApiToken(), Utils.getDeviceId())
+                .subscribeOn(Schedulers.io())
+                .subscribeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(new DisposableObserver<KeyForm>() {
+
+                    @Override
+                    public void onNext(KeyForm keyForm) {
+                        if (keyForm != null && (keyForm.getErr() == EXPIRE || keyForm.getErr() == TIMEOUT)) {
+                            Log.d("API GetSoundCloudKey: ", "Expire!");
+                            getApiToken(context, new FCallback() {
+                                @Override
+                                public void reCall() {
+                                    getSoundCloudKey(context, callback);
+                                }
+                            });
+                            return;
+                        }
+                        Log.d("API GetSoundCloudKey: ", "Success!");
+                        if (callback != null) callback.response(keyForm);
                     }
 
                     @Override
@@ -251,6 +325,44 @@ public class ApiController {
                     }
                 }));
     }
+
+    @SuppressWarnings("unchecked")
+    public void getUrlSinger(final Context context, final String fileId, final Callback callback) {
+        CompositeManager.add(Api.apiService.getUrlSinger(fileId)
+                .subscribeOn(Schedulers.io())
+                .subscribeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(new DisposableObserver<UrlForm>() {
+
+                    @Override
+                    public void onNext(UrlForm urlForm) {
+                        if (urlForm != null && (urlForm.getErr() == EXPIRE || urlForm.getErr() == TIMEOUT)) {
+                            Log.d("API GetSoundCloudKey: ", "Expire!");
+                            getApiToken(context, new FCallback() {
+                                @Override
+                                public void reCall() {
+                                    getUrlSinger(context, fileId, callback);
+                                }
+                            });
+                            return;
+                        }
+                        Log.d("API GetSoundCloudKey: ", "Success!");
+                        if (callback != null) callback.response(urlForm);
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Log.d("API Error: ", e.toString());
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                }));
+    }
+
+
+
 
     public void getKeyApiYouTube(final Context context, int quota) {
 

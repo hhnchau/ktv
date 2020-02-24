@@ -74,7 +74,7 @@ public class MultiViewRecommendAdapter extends PagedListAdapter<Song, RecyclerVi
             ((CategoryRecyclerViewHolder) viewHolder).recyclerViewBinding.rcvItem.setOrientation(DSVOrientation.HORIZONTAL);
             ((CategoryRecyclerViewHolder) viewHolder).recyclerViewBinding.rcvItem.setOffscreenItems(2);
             ((CategoryRecyclerViewHolder) viewHolder).recyclerViewBinding.rcvItem.setItemTransitionTimeMillis(150);
-            ((CategoryRecyclerViewHolder) viewHolder).recyclerViewBinding.rcvItem.setOverScrollEnabled(false);
+            ((CategoryRecyclerViewHolder) viewHolder).recyclerViewBinding.rcvItem.setOverScrollEnabled(true);
 
             AlbumViewModel albumViewModel = ViewModelProviders.of((FragmentActivity) context).get(AlbumViewModel.class);
             albumViewModel.getHotAlbums(context);
