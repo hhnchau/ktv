@@ -7,6 +7,7 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 
 import com.vk2.touchsreentab.database.entity.Song;
+import com.vk2.touchsreentab.download.FileTask;
 import com.vk2.touchsreentab.model.YouTubeApiObject;
 import com.vk2.touchsreentab.model.api.AlbumForm;
 import com.vk2.touchsreentab.model.api.KeyForm;
@@ -15,6 +16,8 @@ import com.vk2.touchsreentab.model.api.SongForm;
 import com.vk2.touchsreentab.model.api.Token;
 import com.vk2.touchsreentab.model.api.TokenForm;
 import com.vk2.touchsreentab.model.api.UrlForm;
+import com.vk2.touchsreentab.model.api.VerDetailForm;
+import com.vk2.touchsreentab.model.api.VerForm;
 import com.vk2.touchsreentab.model.api.Youtube;
 import com.vk2.touchsreentab.model.api.YoutubeForm;
 import com.vk2.touchsreentab.utils.SaveDataUtils;
@@ -27,6 +30,8 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.observers.DisposableObserver;
 import io.reactivex.schedulers.Schedulers;
+import okhttp3.ResponseBody;
+import retrofit2.Response;
 
 public class ApiController {
     public static final int SUCCESS = 0;
@@ -360,6 +365,145 @@ public class ApiController {
                     }
                 }));
     }
+
+    @SuppressWarnings("unchecked")
+    public void getLatestTableSong(final Context context, final Callback callback) {
+        CompositeManager.add(Api.apiService.getLatestTableSong(SaveDataUtils.getInstance(context).getApiToken(), Utils.getDeviceId())
+                .subscribeOn(Schedulers.io())
+                .subscribeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(new DisposableObserver<UrlForm>() {
+
+                    @Override
+                    public void onNext(UrlForm urlForm) {
+                        if (urlForm != null && (urlForm.getErr() == EXPIRE || urlForm.getErr() == TIMEOUT)) {
+                            Log.d("API LatestTableSong: ", "Expire!");
+                            getApiToken(context, new FCallback() {
+                                @Override
+                                public void reCall() {
+                                    getLatestTableSong(context, callback);
+                                }
+                            });
+                            return;
+                        }
+                        Log.d("API LatestTableSong: ", "Success!");
+                        if (callback != null) callback.response(urlForm);
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Log.d("API Error: ", e.toString());
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                }));
+    }
+
+    @SuppressWarnings("unchecked")
+    public void downloadDB(String url, final Callback callback) {
+        CompositeManager.add(Api.apiService.downloadDB(url)
+                .subscribeOn(Schedulers.io())
+                .subscribeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(new DisposableObserver<Response<ResponseBody>>() {
+
+                    @Override
+                    public void onNext(Response<ResponseBody> responseBodyResponse) {
+                        if (responseBodyResponse != null) {
+                            if (callback != null) callback.response(responseBodyResponse.body());
+                        } else if (callback != null) callback.response(null);
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Log.d("API Error: ", e.toString());
+                        if (callback != null) callback.response(null);
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                }));
+    }
+
+    @SuppressWarnings("unchecked")
+    public void getListVer(final Context context, final String lastUpdateVer, final Callback callback) {
+        CompositeManager.add(Api.apiService.getListVer(SaveDataUtils.getInstance(context).getApiToken(), Utils.getDeviceId(), lastUpdateVer)
+                .subscribeOn(Schedulers.io())
+                .subscribeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(new DisposableObserver<VerForm>() {
+
+                    @Override
+                    public void onNext(VerForm verForm) {
+                        if (verForm != null && (verForm.getErr() == EXPIRE || verForm.getErr() == TIMEOUT)) {
+                            Log.d("API getListVer: ", "Expire!");
+                            getApiToken(context, new FCallback() {
+                                @Override
+                                public void reCall() {
+                                    getListVer(context,lastUpdateVer, callback);
+                                }
+                            });
+                            return;
+                        }
+                        Log.d("API getListVer: ", "Success!");
+                        if (callback != null) callback.response(verForm);
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Log.d("API Error: ", e.toString());
+                        if (callback != null) callback.response(null);
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                }));
+    }
+
+    @SuppressWarnings("unchecked")
+    public void getByVer(final Context context, final String ver, final Callback callback) {
+        CompositeManager.add(Api.apiService.getByVer(SaveDataUtils.getInstance(context).getApiToken(), Utils.getDeviceId(), ver)
+                .subscribeOn(Schedulers.io())
+                .subscribeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(new DisposableObserver<VerDetailForm>() {
+
+                    @Override
+                    public void onNext(VerDetailForm verDetailForm) {
+                        if (verDetailForm != null && (verDetailForm.getErr() == EXPIRE || verDetailForm.getErr() == TIMEOUT)) {
+                            Log.d("API getByVer: ", "Expire!");
+                            getApiToken(context, new FCallback() {
+                                @Override
+                                public void reCall() {
+                                    getByVer(context, ver, callback);
+                                }
+                            });
+                            return;
+                        }
+                        Log.d("API getByVer: ", "Success!");
+                        if (callback != null) callback.response(verDetailForm);
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Log.d("API Error: ", e.toString());
+                        if (callback != null) callback.response(null);
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                }));
+    }
+
+
+
+
+
 
 
 

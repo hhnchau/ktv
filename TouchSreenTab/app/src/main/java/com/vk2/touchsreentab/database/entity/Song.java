@@ -29,8 +29,8 @@ import com.vk2.touchsreentab.download.ImageLoaderTask;
 import com.vk2.touchsreentab.model.api.UrlForm;
 
 
-@Entity(tableName = "song",
-        indices = {@Index(name = "idx_SongName", value = "SongName"),
+@Entity(tableName = "song"
+        , indices = {@Index(name = "idx_SongName", value = "SongName"),
                 @Index(name = "idx_filename", value = "FileName"),
                 @Index(name = "idx_lang", value = "Lang"),
                 @Index(name = "idx_pycode", value = "PyCode"),
@@ -39,8 +39,8 @@ import com.vk2.touchsreentab.model.api.UrlForm;
                 @Index(name = "idx_song_singerid1", value = "SingerID1"),
                 @Index(name = "idx_song_singerid2", value = "SingerID2"),
                 @Index(name = "idx_stroke", value = "Stroke"),
-                @Index(name = "idx_wordnum", value = "WordNum"),
-        })
+                @Index(name = "idx_wordnum", value = "WordNum"),}
+        )
 public class Song {
     @PrimaryKey()
     @ColumnInfo(name = "FileName")

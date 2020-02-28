@@ -11,15 +11,20 @@ import com.vk2.touchsreentab.model.api.SingerForm;
 import com.vk2.touchsreentab.model.api.SongForm;
 import com.vk2.touchsreentab.model.api.TokenForm;
 import com.vk2.touchsreentab.model.api.UrlForm;
+import com.vk2.touchsreentab.model.api.VerDetailForm;
+import com.vk2.touchsreentab.model.api.VerForm;
 import com.vk2.touchsreentab.model.api.YoutubeForm;
 
 import io.reactivex.Observable;
+import okhttp3.ResponseBody;
+import retrofit2.Response;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
 import retrofit2.http.Query;
+import retrofit2.http.Streaming;
 import retrofit2.http.Url;
 
 public interface ApiService {
@@ -58,6 +63,29 @@ public interface ApiService {
     @FormUrlEncoded
     @POST("media/singerImage/get-singer-image")
     Observable<UrlForm> getUrlSinger(@Field("fileId") String fileId);
+
+    @FormUrlEncoded
+    @POST("media/songVersion/get-latest-table-song")
+    Observable<UrlForm> getLatestTableSong(@Header("Authorization") String authorization, @Field("deviceId") String deviceId);
+
+    @GET()
+    Observable<Response<ResponseBody>> downloadDB(@Url String url);
+
+    @FormUrlEncoded
+    @POST("media/songVersion/get-list-vers-song")
+    Observable<VerForm> getListVer(@Header("Authorization") String authorization, @Field("deviceId") String deviceId, @Field("lastUpdateVer") String lastUpdateVer);
+
+    @FormUrlEncoded
+    @POST("media/songVersion/get-by-ver")
+    Observable<VerDetailForm> getByVer(@Header("Authorization") String authorization, @Field("deviceId") String deviceId, @Field("ver") String ver);
+
+
+
+
+
+
+
+
 
 
 
