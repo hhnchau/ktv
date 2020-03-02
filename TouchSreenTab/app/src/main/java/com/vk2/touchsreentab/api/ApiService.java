@@ -7,7 +7,9 @@ import com.vk2.touchsreentab.model.ResultSoundCloud;
 import com.vk2.touchsreentab.model.YouTubeApiObject;
 import com.vk2.touchsreentab.model.api.AlbumForm;
 import com.vk2.touchsreentab.model.api.KeyForm;
+import com.vk2.touchsreentab.model.api.SingerDetailForm;
 import com.vk2.touchsreentab.model.api.SingerForm;
+import com.vk2.touchsreentab.model.api.SongDetailForm;
 import com.vk2.touchsreentab.model.api.SongForm;
 import com.vk2.touchsreentab.model.api.TokenForm;
 import com.vk2.touchsreentab.model.api.UrlForm;
@@ -42,8 +44,16 @@ public interface ApiService {
     Observable<SongForm> getListSongs(@Header("Authorization") String authorization, @Field("deviceId") String deviceId, @Field("page") int page, @Field("limit") int limit);
 
     @FormUrlEncoded
+    @POST("media/song/get-by-id")
+    Observable<SongDetailForm> getSongById(@Header("Authorization") String authorization, @Field("deviceId") String deviceId, @Field("id") int fileName);
+
+    @FormUrlEncoded
     @POST("/media/singer/get-hot-singers")
     Observable<SingerForm> getHostSinger(@Header("Authorization") String authorization, @Field("deviceId") String deviceId, @Field("page") int page, @Field("limit") int limit);
+
+    @FormUrlEncoded
+    @POST("media/singer/get-by-id")
+    Observable<SingerDetailForm> getSingerById(@Header("Authorization") String authorization, @Field("deviceId") String deviceId, @Field("singerId") int singerId);
 
     @FormUrlEncoded
     @POST("media/album/get-list-album")
@@ -79,8 +89,12 @@ public interface ApiService {
     @POST("media/songVersion/get-by-ver")
     Observable<VerDetailForm> getByVer(@Header("Authorization") String authorization, @Field("deviceId") String deviceId, @Field("ver") String ver);
 
+    @FormUrlEncoded
+    @POST("media/song/get-download-song")
+    Observable<UrlForm> getDownloadSong(@Header("Authorization") String authorization, @Field("deviceId") String deviceId, @Field("id") int fileName);
 
-
+    @GET()
+    Observable<Response<ResponseBody>> downloadSong(@Url String url);
 
 
 

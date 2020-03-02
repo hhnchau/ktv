@@ -11,7 +11,9 @@ import com.vk2.touchsreentab.download.FileTask;
 import com.vk2.touchsreentab.model.YouTubeApiObject;
 import com.vk2.touchsreentab.model.api.AlbumForm;
 import com.vk2.touchsreentab.model.api.KeyForm;
+import com.vk2.touchsreentab.model.api.SingerDetailForm;
 import com.vk2.touchsreentab.model.api.SingerForm;
+import com.vk2.touchsreentab.model.api.SongDetailForm;
 import com.vk2.touchsreentab.model.api.SongForm;
 import com.vk2.touchsreentab.model.api.Token;
 import com.vk2.touchsreentab.model.api.TokenForm;
@@ -485,6 +487,141 @@ public class ApiController {
                         }
                         Log.d("API getByVer: ", "Success!");
                         if (callback != null) callback.response(verDetailForm);
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Log.d("API Error: ", e.toString());
+                        if (callback != null) callback.response(null);
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                }));
+    }
+
+    @SuppressWarnings("unchecked")
+    public void getSongById(final Context context, final int fileName, final Callback callback){
+        CompositeManager.add(Api.apiService.getSongById(SaveDataUtils.getInstance(context).getApiToken(), Utils.getDeviceId(), fileName)
+                .subscribeOn(Schedulers.io())
+                .subscribeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(new DisposableObserver<SongDetailForm>() {
+
+                    @Override
+                    public void onNext(SongDetailForm songDetailForm) {
+                        if (songDetailForm != null && (songDetailForm.getErr() == EXPIRE || songDetailForm.getErr() == TIMEOUT)) {
+                            Log.d("API getSongById: ", "Expire!");
+                            getApiToken(context, new FCallback() {
+                                @Override
+                                public void reCall() {
+                                    getSongById(context, fileName, callback);
+                                }
+                            });
+                            return;
+                        }
+                        Log.d("API getSongById: ", "Success!");
+                        if (callback != null) callback.response(songDetailForm);
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Log.d("API Error: ", e.toString());
+                        if (callback != null) callback.response(null);
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                }));
+    }
+
+    @SuppressWarnings("unchecked")
+    public void getSingerById(final Context context, final int singerId, final Callback callback){
+        CompositeManager.add(Api.apiService.getSingerById(SaveDataUtils.getInstance(context).getApiToken(), Utils.getDeviceId(), singerId)
+                .subscribeOn(Schedulers.io())
+                .subscribeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(new DisposableObserver<SingerDetailForm>() {
+
+                    @Override
+                    public void onNext(SingerDetailForm singerDetailForm) {
+                        if (singerDetailForm != null && (singerDetailForm.getErr() == EXPIRE || singerDetailForm.getErr() == TIMEOUT)) {
+                            Log.d("API getSingerById: ", "Expire!");
+                            getApiToken(context, new FCallback() {
+                                @Override
+                                public void reCall() {
+                                    getSingerById(context, singerId, callback);
+                                }
+                            });
+                            return;
+                        }
+                        Log.d("API getSingerById: ", "Success!");
+                        if (callback != null) callback.response(singerDetailForm);
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Log.d("API Error: ", e.toString());
+                        if (callback != null) callback.response(null);
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                }));
+    }
+
+    @SuppressWarnings("unchecked")
+    public void getSongDownload(final Context context, final int fileName, final Callback callback){
+        CompositeManager.add(Api.apiService.getDownloadSong(SaveDataUtils.getInstance(context).getApiToken(), Utils.getDeviceId(), fileName)
+                .subscribeOn(Schedulers.io())
+                .subscribeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(new DisposableObserver<UrlForm>() {
+
+                    @Override
+                    public void onNext(UrlForm urlForm) {
+                        if (urlForm != null && (urlForm.getErr() == EXPIRE || urlForm.getErr() == TIMEOUT)) {
+                            Log.d("API getSongDownload: ", "Expire!");
+                            getApiToken(context, new FCallback() {
+                                @Override
+                                public void reCall() {
+                                    getSongDownload(context, fileName, callback);
+                                }
+                            });
+                            return;
+                        }
+                        Log.d("API getSongDownload: ", "Success!");
+                        if (callback != null) callback.response(urlForm);
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Log.d("API Error: ", e.toString());
+                        if (callback != null) callback.response(null);
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                }));
+    }
+
+    @SuppressWarnings("unchecked")
+    public void downloadSong(String url, final Callback callback){
+        CompositeManager.add(Api.apiService.downloadSong(url)
+                .subscribeOn(Schedulers.io())
+                .subscribeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(new DisposableObserver<Response<ResponseBody>>() {
+
+                    @Override
+                    public void onNext(Response<ResponseBody> responseBodyResponse) {
+                        if (responseBodyResponse != null) {
+                            if (callback != null) callback.response(responseBodyResponse.body());
+                        } else if (callback != null) callback.response(null);
                     }
 
                     @Override
