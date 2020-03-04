@@ -1,7 +1,7 @@
 package com.vk2.touchsreentab.utils;
 
+import android.net.Uri;
 import android.os.Environment;
-import android.util.Log;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -16,12 +16,11 @@ import okhttp3.ResponseBody;
 public class FileUtils {
 
 
-    public static File getPathFile(String fileName, String folder) {
-        File dir = new File(Environment.getExternalStoragePublicDirectory(folder).toString());
-        File file = new File(dir, fileName);
+    public static String getPathFile(String fileName, String folder) {
+        File file = new File(Environment.getExternalStoragePublicDirectory(folder)+"/"+fileName);
         if (!file.exists())
             return null;
-        return file;
+        return String.valueOf(Uri.fromFile(file));
     }
 
     public static boolean checkExistFile(String fileName, String folderName) {

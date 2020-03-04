@@ -1,6 +1,8 @@
 package com.vk2.touchsreentab.activity;
 
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
 
 import androidx.annotation.NonNull;
@@ -16,6 +18,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.commonsware.cwac.preso.PresentationFragment;
 import com.commonsware.cwac.preso.PresentationHelper;
@@ -32,11 +35,15 @@ import com.vk2.touchsreentab.fragment.YoutubePlayerFragment;
 import com.vk2.touchsreentab.fragment.fragmentcontroller.Fragmentez;
 import com.vk2.touchsreentab.model.viewmodel.PlayerViewModel;
 import com.vk2.touchsreentab.model.viewmodel.PlaylistModelView;
+import com.vk2.touchsreentab.utils.Constants;
+import com.vk2.touchsreentab.utils.FileUtils;
 import com.vk2.touchsreentab.utils.MyTask;
 import com.vk2.touchsreentab.utils.OnDoubleClickListener;
 import com.vk2.touchsreentab.utils.Utils;
 import com.vk2.touchsreentab.utils.YtExtractor;
 
+import java.io.File;
+import java.io.FileReader;
 import java.util.List;
 import java.util.Map;
 
@@ -547,7 +554,11 @@ public class DualMode extends BaseActivity implements PresentationHelper.Listene
     public void onDefault() {
         isPlaying = false;
         isUpdate = false;
-        addPlayerFragment(Fragmentez.NORMAL_PLAYER_FRAGMENT, "android.resource://" + getPackageName() + "/" + R.raw.buon_khong_em, null);
+        String videoUrl= FileUtils.getPathFile("143177.mp4", Constants.SONG_FOLDER);
+        if (videoUrl == null){
+            Toast.makeText(this, "Video ko ton tai", Toast.LENGTH_SHORT).show();
+        }
+        addPlayerFragment(Fragmentez.NORMAL_PLAYER_FRAGMENT, videoUrl, null);
     }
 
     private void onPlay() {

@@ -2,6 +2,8 @@ package com.vk2.touchsreentab.download;
 import android.os.AsyncTask;
 import android.os.Environment;
 
+import com.vk2.touchsreentab.utils.Constants;
+
 import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -28,17 +30,17 @@ public class FileLoaderTask extends AsyncTask<String, Void, String> {
             connection.setRequestMethod(REQUEST_METHOD);
             connection.setReadTimeout(READ_TIMEOUT);
             connection.setConnectTimeout(CONNECTION_TIMEOUT);
-            connection.setRequestProperty ("Authorization", "FS F8kyw8cqfMVLX5Bk9y8G4vDVxEcanAMH:1573703676767:QL02jywEnRLsGSi5JrEhEPVN5gw=");
+            connection.setRequestProperty ("Authorization", "FS gupRSJpU4bTPM9t6vvaKj4r2jaFypWqM:1583137753676:HALJhRKW9JMxIJUJmKgFV1rBvoE=");
             connection.setRequestProperty ("Content-Type", "application/json");
             connection.connect();
 
-            File dir = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MOVIES) + "Song_Folder");
+            File dir = new File(Environment.getExternalStoragePublicDirectory(Constants.SONG_FOLDER).toString());
             boolean success = true;
             if (!dir.exists())
                 success = dir.mkdir();
 
             if (success) {
-                File file = new File(dir, "fileName1" + ".mp4");
+                File file = new File(dir, "143177" + ".mp4");
                 //path = imageFile.getAbsolutePath();
                 int count;
                 int lengthOfFile = connection.getContentLength();

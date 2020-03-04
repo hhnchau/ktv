@@ -8,6 +8,7 @@ import android.os.Environment;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.vk2.touchsreentab.utils.Constants;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -54,7 +55,7 @@ public class ImageLoaderTask extends AsyncTask<String, Void, Bitmap> {
 
     private void saveImage(Bitmap bitmap) {
         //String path = null;
-        File dir = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES) + "Singer_Folder");
+        File dir = new File(Environment.getExternalStoragePublicDirectory(Constants.SINGER_FOLDER).toString());
         boolean success = true;
         if (!dir.exists())
             success = dir.mkdir();
@@ -75,13 +76,13 @@ public class ImageLoaderTask extends AsyncTask<String, Void, Bitmap> {
     }
 
     public String getImagePath(String fileName) {
-        File dir = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES) + "Singer_Folder");
+        File dir = new File(Environment.getExternalStoragePublicDirectory(Constants.SINGER_FOLDER).toString());
         File file = new File(dir, fileName + ".png");
         return file.getAbsolutePath();
     }
 
     public static Uri getImageUri(String fileName) {
-        File dir = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES) + "Singer_Folder");
+        File dir = new File(Environment.getExternalStoragePublicDirectory(Constants.SINGER_FOLDER).toString());
         File file = new File(dir, fileName + ".png");
         if (!file.exists())
             file = new File(dir, "default.png");
